@@ -1420,7 +1420,7 @@ Transform:
   m_GameObject: {fileID: 548336756}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.99, y: -0.38, z: 0.66}
+  m_LocalPosition: {x: 0.57, y: -0.38, z: -0.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1488,7 +1488,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.32
-  m_Speed: 0
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1521,7 +1521,7 @@ MonoBehaviour:
   knockBackDistance: 0
   knockBackTimer: 0
   idleTime: {x: 0, y: 0}
-  speedMove: 0
+  speedMove: 1.5
   nameCharactor: 
   hp: 20
   whatIsTarget:
@@ -1533,7 +1533,6 @@ MonoBehaviour:
   attackCheck: {fileID: 609220275}
   attackRadius: 0
   attackCountdown: 2
-  lastTimeAttack: 0
   target: {fileID: 746482772}
 --- !u!1 &563649045
 GameObject:
@@ -1869,14 +1868,15 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 64
-  seeCheck: {fileID: 746482775}
+  seeCheck: {fileID: 2062475449}
   seeRadius: 1.33
   damage: 2
   attackCheck: {fileID: 283408505}
   attackRadius: 0.4
   attackCountdown: 2
-  lastTimeAttack: 0
-  target: {fileID: 1068000842}
+  canAttackBus: 0
+  busTarget: {fileID: 1068000842}
+  heroTarget: {fileID: 0}
 --- !u!54 &746482773
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1942,6 +1942,7 @@ Transform:
   m_Children:
   - {fileID: 1479735986}
   - {fileID: 283408505}
+  - {fileID: 2062475449}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &746482776
@@ -2831,7 +2832,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -2918,7 +2919,7 @@ Transform:
   m_GameObject: {fileID: 1068000842}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -4.38, y: -0.2, z: -0.52}
+  m_LocalPosition: {x: -4.38, y: 0.259, z: -0.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3581,10 +3582,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1479735984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 553f32d2804c74741b564763d7264573, type: 3}
+  m_Script: {fileID: 11500000, guid: f2fa95cc5a51d674d991c169d967e1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombie: {fileID: 746482772}
+  CanPrind: 0
+  timmer: 0
+  Endtimmer: 0
 --- !u!1 &1511358374
 GameObject:
   m_ObjectHideFlags: 0
@@ -5255,6 +5258,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 45.1, y: 0, z: 0}
+--- !u!1 &2062475448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2062475449}
+  m_Layer: 7
+  m_Name: SeeCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2062475449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062475448}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.706, z: 1.182}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 746482775}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2068110756
 GameObject:
   m_ObjectHideFlags: 0
@@ -8082,8 +8116,8 @@ SceneRoots:
   - {fileID: 2042369989}
   - {fileID: 1750675612}
   - {fileID: 1642618042}
+  - {fileID: 1563630040}
   - {fileID: 746482775}
   - {fileID: 548336757}
   - {fileID: 1068000847}
   - {fileID: 924308552}
-  - {fileID: 1563630040}
