@@ -22,7 +22,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected float knockBackTimer;
 
     [Header("Idle Info")]
-    [SerializeField] protected float idleTime;
+    [SerializeField] protected Vector2 idleTime;
 
     [Header("Move Info")]
     [SerializeField] protected float speedMove;
@@ -36,11 +36,16 @@ public class Character : MonoBehaviour
     [Header("Layer Target")]
     [SerializeField] protected LayerMask whatIsTarget;
 
+    [Header("See Info")]
+    [SerializeField] protected Transform seeCheck;
+    [SerializeField] protected float seeRadius;
+
     [Header("Attack Info")]
     [SerializeField] protected int damage;
     [SerializeField] protected Transform attackCheck;
     [SerializeField] protected float attackRadius;
     [SerializeField] protected float attackCountdown = 2f;
+    protected float lastTimeAttack;
 
 
     #region Base Unity
@@ -72,7 +77,7 @@ public class Character : MonoBehaviour
 
     protected virtual void Update()
     {
-        if(Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.E))
             OnDrawGizmos();
     }
 
@@ -80,11 +85,23 @@ public class Character : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.attackCheck.position, attackRadius);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(this.seeCheck.position, seeRadius);
     }
 
     #endregion
 
     #region Combat
+    public bool CanAttackCoundown()
+    {
+        if (Time.time > lastTimeAttack + attackCountdown)
+            return true;
+
+        return false;
+    }
+
+    public void ResetLastTimeAttack() => lastTimeAttack = Time.time;
+
     public virtual void Attack()
     {
 
@@ -140,7 +157,7 @@ public class Character : MonoBehaviour
 
     public virtual void OnInit()
     {
-
+        lastTimeAttack = Time.time;
     }
     public virtual void OnDesPawn()
     {
@@ -155,4 +172,6 @@ public class Character : MonoBehaviour
             animator.SetTrigger(currentAnimName);
         }
     }
+
+    public float GetIdleTime() => Random.Range(idleTime.x, idleTime.y);
 }

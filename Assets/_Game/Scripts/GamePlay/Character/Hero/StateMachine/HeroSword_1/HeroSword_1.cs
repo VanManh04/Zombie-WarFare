@@ -1,20 +1,14 @@
-﻿using System.Collections;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero : Character
+public class HeroSword_1 : Hero
 {
-    protected IState_Hero currentState;
-
-    [SerializeField] private Character target;
-    public Character Target => target;
-
     #region Base Unity
-
     protected override void OnValidate()
     {
         base.OnValidate();
     }
-
     protected override void Awake()
     {
         base.Awake();
@@ -34,7 +28,6 @@ public class Hero : Character
     {
         base.OnDrawGizmos();
     }
-
     #endregion
 
     #region Combat
@@ -51,27 +44,21 @@ public class Hero : Character
     protected override void OnDeath()
     {
         base.OnDeath();
+        ChangeAnim("Death");
+        capsuleCollider.enabled = false;
     }
+
     #endregion
 
     public override void OnInit()
     {
         base.OnInit();
+        ChangeState(new HeroSword_1_RutKiemState());
+        ChangeAnim("RutKiem");
     }
 
     public override void OnDesPawn()
     {
         base.OnDesPawn();
-    }
-
-    public void ChangeState(IState_Hero _newState)
-    {
-        if (currentState != null)
-            currentState.OnExit(this);
-
-        currentState = _newState;
-
-        if (currentState != null)
-            currentState.OnEnter(this);
     }
 }

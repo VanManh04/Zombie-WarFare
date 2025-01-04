@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class IdleState : IState_Hero
+public class HeroSword_1_IdleState : IState_Hero
 {
     public void OnEnter(Hero hero)
     {

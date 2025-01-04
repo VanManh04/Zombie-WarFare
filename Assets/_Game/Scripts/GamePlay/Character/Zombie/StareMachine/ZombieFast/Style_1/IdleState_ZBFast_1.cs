@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class IdleState_ZBNormal_1 : IState_Zombie
+public class IdleState_ZBFast_1 : IState_Zombie
 {
     float randomTime;
     float timmer;
@@ -12,7 +12,7 @@ public class IdleState_ZBNormal_1 : IState_Zombie
 
         if (randomTime < 0)
             return;
-        randomTime = Random.Range(0, 5);
+        randomTime = zombie.GetIdleTime();
     }
 
     public void OnExecute(Zombie zombie)
@@ -20,7 +20,7 @@ public class IdleState_ZBNormal_1 : IState_Zombie
         //Debug.Log("Execute: Idle");
         timmer += Time.deltaTime;
         if(timmer >= randomTime)
-            zombie.ChangeState(new PatrolState_ZBNormal_1());
+            zombie.ChangeState(new PatrolState_ZBFast_1());
     }
 
     public void OnExit(Zombie zombie)

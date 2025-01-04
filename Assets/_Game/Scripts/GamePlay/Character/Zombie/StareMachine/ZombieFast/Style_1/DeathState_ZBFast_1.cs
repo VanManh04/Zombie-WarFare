@@ -1,21 +1,19 @@
 ﻿using System.Collections;
 using UnityEngine;
-public class AttackState_ZBNormal_1 : IState_Zombie
+public class DeathState_ZBFast_1 : IState_Zombie
 {
     public void OnEnter(Zombie zombie)
     {
-        //Debug.Log("Enter: Attack");
-        
-        zombie.Attack();
+        //Debug.Log("Enter: Death");
     }
 
     public void OnExecute(Zombie zombie)
     {
-       //Debug.Log("Execute: Attack");
+        //Debug.Log("Execute: Death");
     }
 
     public void OnExit(Zombie zombie)
     {
-        //Debug.Log("Exit: Attack");
+        //Debug.Log("Exit: Idle");
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class ZombieNormal_1 : Zombie
+public class ZombieFast_1 : Zombie
 {
     #region Base Unity
 
@@ -40,7 +40,25 @@ public class ZombieNormal_1 : Zombie
     public override void Attack()
     {
         base.Attack();
+        ChangeAnim("Attack");
+        StartCoroutine(IEDoDamageAnimation());
     }
+
+    private IEnumerator IEDoDamageAnimation()
+    {
+        yield return new WaitForSeconds(0.166f);
+        if (CanAttackBus)
+            DoDamageBus();
+        else
+            DoDamageHero();
+
+        yield return new WaitForSeconds(0.433f);
+        if (CanAttackBus)
+            DoDamageBus();
+        else
+            DoDamageHero();
+    }
+
 
     public override void OnHit(float damage)
     {
@@ -57,7 +75,7 @@ public class ZombieNormal_1 : Zombie
     public override void OnInit()
     {
         base.OnInit();
-        ChangeState(new IdleState_ZBNormal_1());
+        ChangeState(new IdleState_ZBFast_1());
     }
 
     public override void OnDesPawn()

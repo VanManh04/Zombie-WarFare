@@ -83,7 +83,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AC_ZombieNormal
+  m_Name: AC_ZombieFast
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Idle
@@ -149,7 +149,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 37e6af8636979e04086967e3bd667606, type: 2}
+  m_Motion: {fileID: 7400000, guid: fc9a62f9b1354f342bacfbbe077c503e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -269,7 +269,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 110, z: 0}
+  m_AnyStatePosition: {x: 30, y: 110, z: 0}
   m_EntryPosition: {x: 40, y: -50, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
