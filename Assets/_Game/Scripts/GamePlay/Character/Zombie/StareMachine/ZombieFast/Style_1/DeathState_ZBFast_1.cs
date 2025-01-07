@@ -5,6 +5,7 @@ public class DeathState_ZBFast_1 : IState_Zombie
     public void OnEnter(Zombie zombie)
     {
         //Debug.Log("Enter: Death");
+        Debug.Log("State");
     }
 
     public void OnExecute(Zombie zombie)

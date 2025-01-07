@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HeroSword_1 : Hero
@@ -36,6 +34,29 @@ public class HeroSword_1 : Hero
         base.Attack();
     }
 
+    public override void AttackSkillIndex(int _skillIndex)
+    {
+        base.AttackSkillIndex(_skillIndex);
+        if (_skillIndex == 1)
+        {
+            //Chem 1 hit END: 1.496
+            ChangeAnim("Attack1");
+            Invoke(nameof(DoDamageZombie), 0.597f);
+        }
+        else if (_skillIndex == 2)
+        {
+            ChangeAnim("Attack2");
+            //da thang END: 1.199
+            Invoke(nameof(DoDamageZombie), 0.498f);
+        }
+        else
+        {
+            ChangeAnim("Attack3");
+            //da xoay nguoi END: 1.731
+            Invoke(nameof(DoDamageZombie), 0.6988f);
+        }
+    }
+
     public override void OnHit(float damage)
     {
         base.OnHit(damage);
@@ -53,8 +74,9 @@ public class HeroSword_1 : Hero
     public override void OnInit()
     {
         base.OnInit();
-        ChangeState(new HeroSword_1_RutKiemState());
+        capsuleCollider.enabled = true;
         ChangeAnim("RutKiem");
+        ChangeState(new HeroSword_1_RutKiemState());
     }
 
     public override void OnDesPawn()

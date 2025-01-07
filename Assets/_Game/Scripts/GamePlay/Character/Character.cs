@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected string nameCharactor;
     [SerializeField] protected float hp;
     protected bool IsNoDamage;
-    protected bool IsDeath => hp <= 0;
+    public bool IsDeath => hp <= 0;
 
     [Header("Layer Target")]
     [SerializeField] protected LayerMask whatIsTarget;
@@ -107,6 +107,25 @@ public class Character : MonoBehaviour
 
     }
 
+    public virtual void CheckTargetDeath()
+    {
+
+    }
+    public virtual void AttackSkillIndex(int _skillIndex)
+    {
+
+    }
+
+    //check co charactor trong attack
+    public virtual bool HaveCharater_InAttackRadius()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(attackCheck.position, attackRadius, whatIsTarget);
+        if (hitColliders.Length > 0)
+            return true;
+        else
+            return false;
+    }
+
     public virtual void OnHit(float damage)
     {
         //print(gameObject.name + "nhan : " + damage);
@@ -155,6 +174,28 @@ public class Character : MonoBehaviour
     }
     #endregion
 
+    #region Move
+
+    public virtual void OnMoveToPoint(Vector3 _point)
+    {
+        ChangeAnim("Move");
+        nav_Agent.isStopped = false; 
+
+        if (nav_Agent.destination != _point)
+        {
+            nav_Agent.SetDestination(_point);
+        }
+    }
+
+    public virtual void OnStopMove()
+    {
+        ChangeAnim("Idle");
+        nav_Agent.velocity = Vector3.zero;
+        nav_Agent.isStopped = true;
+    }
+
+    #endregion
+
     public virtual void OnInit()
     {
         lastTimeAttack = Time.time;
@@ -174,4 +215,22 @@ public class Character : MonoBehaviour
     }
 
     public float GetIdleTime() => Random.Range(idleTime.x, idleTime.y);
+
+    public IEnumerator IEMoveAndRotationToTarget(Vector3 _targetPoint, Quaternion _targetRot, float time)
+    {
+        float timeCount = 0;
+        Vector3 startPoint = transform.position;
+        Quaternion startRot = transform.rotation;
+
+        ChangeAnim("Move");
+        while (timeCount < time)
+        {
+            //loop theo thoi gian
+            timeCount += Time.deltaTime;
+            transform.position = Vector3.Lerp(startPoint, _targetPoint, timeCount / time);
+            transform.rotation = Quaternion.Lerp(startRot, _targetRot, timeCount / time);
+            yield return null;
+        }
+        ChangeAnim("Idle");
+    }
 }

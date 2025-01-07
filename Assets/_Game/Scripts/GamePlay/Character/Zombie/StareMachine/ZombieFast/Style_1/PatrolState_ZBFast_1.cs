@@ -32,7 +32,7 @@
 
                 zombie.CheckDirX_SetHeroTarget();
 
-                if (zombie.GetAllHero_InAttackRadius().Length > 0)
+                if (zombie.HaveCharater_InAttackRadius())
                 {
                     if (zombie.CanAttackCoundown())
                         zombie.ChangeState(new AttackState_ZBFast_1());

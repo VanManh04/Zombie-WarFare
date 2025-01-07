@@ -4,6 +4,7 @@ public class Zombie : Character
 {
     protected IState_Zombie currentState;
 
+    [Header("Target")]
     [SerializeField] private bool canAttackBus;
     public bool CanAttackBus => canAttackBus;
 
@@ -32,9 +33,6 @@ public class Zombie : Character
     protected override void Update()
     {
         base.Update();
-
-        if (Input.GetKeyUp(KeyCode.S))
-            GetSetHero_InSeeRadius();
     }
 
     protected override void OnDrawGizmos()
@@ -50,21 +48,27 @@ public class Zombie : Character
         base.Attack();
     }
 
+    public override void CheckTargetDeath()
+    {
+        base.CheckTargetDeath();
+        if (heroTarget != null)
+            if (heroTarget.IsDeath)
+                heroTarget = null;
+    }
+
     public void CheckAndSetCanAttackBus()
     {
         if (Vector3.Distance(busTarget.transform.position, attackCheck.transform.position) < attackRadius)
-        {
             canAttackBus = true;
-        }
     }
 
     public void CheckDirX_SetHeroTarget()
     {
-        if (heroTarget.transform.position.x < transform.position.x)
+        if (heroTarget.transform.position.x > transform.position.x)
             heroTarget = null;
     }
 
-    //get tat ca charactor trong attack
+    //get tat ca hero trong tam thay va set target
     public void GetSetHero_InSeeRadius()
     {
         Collider[] hitColliders = Physics.OverlapSphere(seeCheck.position, seeRadius, whatIsTarget);
@@ -94,14 +98,9 @@ public class Zombie : Character
         else
             heroTarget = null;
     }
-
-    //get tat ca charactor trong attack
-    public Collider[] GetAllHero_InAttackRadius()
+    public override bool HaveCharater_InAttackRadius()
     {
-        //Collider[] hitColliders = Physics.OverlapSphere(seeCheck.position, seeRadius, whatIsTarget);
-        Collider[] hitColliders = Physics.OverlapSphere(attackCheck.position, attackRadius, whatIsTarget);
-
-        return hitColliders;
+        return base.HaveCharater_InAttackRadius();
     }
 
     public void DoDamageHero()
@@ -146,18 +145,14 @@ public class Zombie : Character
 
     #region Move
 
-    public void OnMoveToPoint(Vector3 _point)
+    public override void OnMoveToPoint(Vector3 _point)
     {
-        ChangeAnim("Walk");
-        nav_Agent.isStopped = false;
-        nav_Agent.SetDestination(_point);
+        base.OnMoveToPoint(_point);
     }
 
-    public void OnStopMove()
+    public override void OnStopMove()
     {
-        ChangeAnim("Idle");
-        nav_Agent.velocity = Vector3.zero;
-        nav_Agent.isStopped = true;
+        base.OnStopMove();
     }
 
     #endregion
@@ -165,24 +160,6 @@ public class Zombie : Character
     #region ChangeState
     public void ChangeState(IState_Zombie _newState)
     {
-        if (currentState != null)
-            currentState.OnExit(this);
-
-        currentState = _newState;
-
-        if (currentState != null)
-            currentState.OnEnter(this);
-    }
-
-    public void ChangeStateDelay(IState_Zombie _newState, float _timer)
-    {
-        StartCoroutine(IEChangeStateDelay(_newState, _timer));
-    }
-
-    public IEnumerator IEChangeStateDelay(IState_Zombie _newState, float _timer)
-    {
-        yield return new WaitForSeconds(_timer);
-
         if (currentState != null)
             currentState.OnExit(this);
 
