@@ -1,4 +1,4 @@
-﻿public class Hero_GunAKM : Hero
+﻿public class Hero_GunAKM : Hero_GunCombat
 {
 
     #region Base Unity

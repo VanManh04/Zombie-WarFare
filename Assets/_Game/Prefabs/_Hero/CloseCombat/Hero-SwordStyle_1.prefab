@@ -1097,10 +1097,9 @@ MonoBehaviour:
   attackCheck: {fileID: 4010242797892660138}
   attackRadius: 0.75
   attackCountdown: 2
+  zombieTarget: {fileID: 0}
   canPaveTheWay: 0
   paveTheWayTarget: {fileID: 0}
-  zombieTarget: {fileID: 0}
-  weapon: {fileID: 0}
 --- !u!1 &3443291195213114556
 GameObject:
   m_ObjectHideFlags: 0

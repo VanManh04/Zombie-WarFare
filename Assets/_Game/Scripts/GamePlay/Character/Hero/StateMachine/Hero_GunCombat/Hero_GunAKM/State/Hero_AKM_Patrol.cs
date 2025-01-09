@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero_AKM_Shoot : IState_Hero
+public class Hero_AKM_Patrol : IState_HeroGunCombat
 {
-    public void OnEnter(Hero hero)
+    public void OnEnter(Hero_GunCombat hero_GunCombat)
     {
         throw new System.NotImplementedException();
     }
 
-    public void OnExecute(Hero hero)
+    public void OnExecute(Hero_GunCombat hero_GunCombat)
     {
         throw new System.NotImplementedException();
     }
 
-    public void OnExit(Hero hero)
+    public void OnExit(Hero_GunCombat hero_GunCombat)
     {
         throw new System.NotImplementedException();
     }

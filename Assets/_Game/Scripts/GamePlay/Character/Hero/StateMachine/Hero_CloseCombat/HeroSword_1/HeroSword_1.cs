@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HeroSword_1 : Hero
+public class HeroSword_1 : Hero_CloseCombat
 {
     #region Base Unity
     protected override void OnValidate()
