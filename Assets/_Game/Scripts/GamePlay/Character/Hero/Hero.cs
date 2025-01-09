@@ -13,6 +13,10 @@ public class Hero : Character
     public GameObject PaveTheWayTarget => paveTheWayTarget;
     public Zombie ZombieTarget => zombieTarget;
 
+    [Header("Weapon - Gun")]
+    private WeaponBase weaponBase;
+    public WeaponBase WeaponBase => weaponBase;
+
     #region Base Unity
 
     protected override void OnValidate()
