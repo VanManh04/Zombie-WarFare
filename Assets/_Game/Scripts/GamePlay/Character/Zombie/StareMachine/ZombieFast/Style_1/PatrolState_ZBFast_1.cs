@@ -3,6 +3,7 @@
     public void OnEnter(Zombie zombie)
     {
         //Debug.Log("Enter: Patrol");
+        zombie.OnMoveToPoint(zombie.BusTarget.transform.position);
     }
 
     public void OnExecute(Zombie zombie)
@@ -20,24 +21,15 @@
         {
             zombie.CheckAndSetCanAttackBus();
 
-            if (zombie.HeroTarget == null)
+            if (zombie.HaveCharater_InAttackRadius())
             {
-                zombie.GetSetHero_InSeeRadius();
-
-                zombie.OnMoveToPoint(zombie.BusTarget.transform.position);
-            }
-            else
-            {
-                zombie.OnMoveToPoint(zombie.HeroTarget.transform.position);
-
-                zombie.CheckDirX_SetHeroTarget();
-
-                if (zombie.HaveCharater_InAttackRadius())
+                if (zombie.CanAttackCoundown())
                 {
-                    if (zombie.CanAttackCoundown())
-                        zombie.ChangeState(new AttackState_ZBFast_1());
-                    else
-                        zombie.ChangeState(new AttackCoundownState_ZBFast_1());
+                    zombie.ChangeState(new AttackState_ZBFast_1());
+                }
+                else
+                {
+                    zombie.ChangeState(new AttackCoundownState_ZBFast_1());
                 }
             }
         }
@@ -48,4 +40,42 @@
         //Debug.Log("Exit: Patrol");
         zombie.OnStopMove();
     }
+
+    /*Use See
+     * if (zombie.CanAttackBus)
+        {
+            if (zombie.CanAttackCoundown())
+                zombie.ChangeState(new AttackState_ZBFast_1());
+            else
+                zombie.ChangeState(new AttackCoundownState_ZBFast_1());
+        }
+        else
+{
+    zombie.CheckAndSetCanAttackBus();
+
+    if (zombie.HeroTarget == null)
+    {
+        zombie.GetSetHero_InSeeRadius();
+
+        zombie.OnMoveToPoint(zombie.BusTarget.transform.position);
+    }
+    else
+    {
+        zombie.OnMoveToPoint(zombie.HeroTarget.transform.position);
+
+        zombie.CheckDirX_SetHeroTarget();
+
+        if (zombie.HaveCharater_InAttackRadius())
+        {
+            if (zombie.CanAttackCoundown())
+            {
+                zombie.ChangeState(new AttackState_ZBFast_1());
+            }
+            else
+            {
+                zombie.ChangeState(new AttackCoundownState_ZBFast_1());
+            }
+        }
+    }
+}*/
 }

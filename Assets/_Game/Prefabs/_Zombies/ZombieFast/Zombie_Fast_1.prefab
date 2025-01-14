@@ -182,7 +182,7 @@ Transform:
   m_GameObject: {fileID: 300123374576834493}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.208, z: 0.555}
+  m_LocalPosition: {x: 0, y: -0.021000028, z: 0.555}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -772,9 +772,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.23575824
-  m_Height: 1.794381
+  m_Height: 1.8094839
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8778071, z: -0.028749183}
+  m_Center: {x: 0, y: -0.3441016, z: -0.028749168}
 --- !u!54 &5031301174555567086
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -798,7 +798,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -825,12 +825,10 @@ MonoBehaviour:
   idleTime: {x: 1, y: 3}
   speedMove: 1.5
   nameCharactor: Zombie_Normal_Style1
-  hp: 10
+  hp: 100
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 64
-  seeCheck: {fileID: 7725003477793612570}
-  seeRadius: 1.33
   damage: 5
   attackCheck: {fileID: 3802727114138904280}
   attackRadius: 0.4
@@ -857,7 +855,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.8
-  m_BaseOffset: 0
+  m_BaseOffset: 1.23
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!1 &2310749833521060584
@@ -902,7 +900,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1015763657105965671}
   - component: {fileID: 8904400281979815517}
-  - component: {fileID: 5342892285053041056}
   m_Layer: 0
   m_Name: Zombie1
   m_TagString: Untagged
@@ -919,7 +916,7 @@ Transform:
   m_GameObject: {fileID: 2610197787520959020}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.229, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -961,21 +958,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5342892285053041056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2610197787520959020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2fa95cc5a51d674d991c169d967e1ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanPrind: 0
-  timmer: 0
-  Endtimmer: 0
 --- !u!1 &2636855183966661050
 GameObject:
   m_ObjectHideFlags: 0
@@ -2320,7 +2302,7 @@ Transform:
   m_GameObject: {fileID: 5900972235471409748}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.706, z: 1.182}
+  m_LocalPosition: {x: 0, y: -0.523, z: 1.182}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

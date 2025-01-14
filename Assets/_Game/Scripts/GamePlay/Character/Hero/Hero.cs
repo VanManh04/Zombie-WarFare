@@ -2,8 +2,18 @@
 
 public class Hero : Character
 {
+
+    [Header("See Info")]
+    [SerializeField] protected Transform seeCheck;
+    [SerializeField] protected float seeRadius;
+
+    [Header("PaveTheWay")]
+    [SerializeField] protected LayerMask whatIsTheWay;
+    [SerializeField] protected GameObject paveTheWayTarget;
+    public GameObject PaveTheWayTarget => paveTheWayTarget;
+
     [Header("Target")]
-    [SerializeField] private Zombie zombieTarget;
+    [SerializeField] protected Zombie zombieTarget;
     public Zombie ZombieTarget => zombieTarget;
 
     #region Base Unity
@@ -31,6 +41,8 @@ public class Hero : Character
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(this.seeCheck.position, seeRadius);
     }
 
     #endregion
@@ -62,7 +74,7 @@ public class Hero : Character
 
     public virtual void CheckDirX_SetZombieTarget()
     {
-        if (zombieTarget.transform.position.x < transform.position.x)
+        if (zombieTarget!=null && zombieTarget.transform.position.x < transform.position.x)
             zombieTarget = null;
     }
 
@@ -102,6 +114,14 @@ public class Hero : Character
         return base.HaveCharater_InAttackRadius();
     }
 
+    public override bool HaveCharaterTarget_InAttackRadius()
+    {
+        if (Vector3.Distance(attackCheck.transform.position, zombieTarget.transform.position) < attackRadius)
+            return true;
+        else
+            return false;
+    }
+
     public virtual void DoDamageZombie()
     {
 
@@ -109,8 +129,9 @@ public class Hero : Character
 
     public virtual void DoDamageBus()
     {
-       
+
     }
+
     public override void OnHit(float damage)
     {
         base.OnHit(damage);
@@ -119,7 +140,10 @@ public class Hero : Character
     protected override void OnDeath()
     {
         base.OnDeath();
+        ChangeAnim(Constants.ANIM_DEATH);
+        capsuleCollider.enabled = false;
     }
+
     #endregion
 
     #region Move
@@ -137,10 +161,22 @@ public class Hero : Character
     public override void OnInit()
     {
         base.OnInit();
+        capsuleCollider.enabled = true;
     }
 
     public override void OnDesPawn()
     {
         base.OnDesPawn();
+    }
+
+    public bool CanSeeTheWay()
+    {
+        //Collider[] hitColliders = Physics.OverlapSphere(seeCheck.position, seeRadius, whatIsTheWay);
+
+        //if (hitColliders.Length > 0)
+        if (Vector3.Distance(seeCheck.transform.position, paveTheWayTarget.transform.position) < seeRadius)
+            return true;
+
+        return false;
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider),typeof(NavMeshAgent))]
 public class Character : MonoBehaviour
 {
     [SerializeField] private bool CanFindComponent_Auto = true;
@@ -35,10 +36,6 @@ public class Character : MonoBehaviour
 
     [Header("Layer Target")]
     [SerializeField] protected LayerMask whatIsTarget;
-
-    [Header("See Info")]
-    [SerializeField] protected Transform seeCheck;
-    [SerializeField] protected float seeRadius;
 
     [Header("Attack Info")]
     [SerializeField] protected int damage;
@@ -85,8 +82,6 @@ public class Character : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.attackCheck.position, attackRadius);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(this.seeCheck.position, seeRadius);
     }
 
     #endregion
@@ -116,7 +111,7 @@ public class Character : MonoBehaviour
 
     }
 
-    //check co charactor trong attack
+    //check co charactor nao trong attack
     public virtual bool HaveCharater_InAttackRadius()
     {
         Collider[] hitColliders = Physics.OverlapSphere(attackCheck.position, attackRadius, whatIsTarget);
@@ -124,6 +119,11 @@ public class Character : MonoBehaviour
             return true;
         else
             return false;
+    }
+    //check co charactor target trong attack
+    public virtual bool HaveCharaterTarget_InAttackRadius()
+    {
+        return false;
     }
 
     public virtual void OnHit(float damage)
@@ -172,13 +172,18 @@ public class Character : MonoBehaviour
         //TODO:....
         //gameObject.SetActive(false);
     }
+
+    public virtual void ChangeDeathAnim()
+    {
+        ChangeAnim(Constants.ANIM_DEATH);
+    }
     #endregion
 
     #region Move
 
     public virtual void OnMoveToPoint(Vector3 _point)
     {
-        ChangeAnim("Move");
+        ChangeAnim(Constants.ANIM_MOVE);
         nav_Agent.isStopped = false; 
 
         if (nav_Agent.destination != _point)
@@ -189,7 +194,7 @@ public class Character : MonoBehaviour
 
     public virtual void OnStopMove()
     {
-        ChangeAnim("Idle");
+        ChangeAnim(Constants.ANIM_IDLE);
         nav_Agent.velocity = Vector3.zero;
         nav_Agent.isStopped = true;
     }
@@ -204,7 +209,7 @@ public class Character : MonoBehaviour
     {
 
     }
-    protected void ChangeAnim(string _name)
+    protected virtual void ChangeAnim(string _name)
     {
         if (currentAnimName != _name)
         {
@@ -222,7 +227,7 @@ public class Character : MonoBehaviour
         Vector3 startPoint = transform.position;
         Quaternion startRot = transform.rotation;
 
-        ChangeAnim("Move");
+        ChangeAnim(Constants.ANIM_MOVE);
         while (timeCount < time)
         {
             //loop theo thoi gian
@@ -231,6 +236,50 @@ public class Character : MonoBehaviour
             transform.rotation = Quaternion.Lerp(startRot, _targetRot, timeCount / time);
             yield return null;
         }
-        ChangeAnim("Idle");
+        ChangeAnim(Constants.ANIM_IDLE);
+    }
+
+    public void RotationToTarget (Transform _target)
+    {
+        Vector3 directionToTarget = (_target.position - transform.position).normalized;
+        Quaternion targetRot = Quaternion.LookRotation(directionToTarget);
+
+        transform.rotation = targetRot;
+    }
+
+    public IEnumerator IERotationToTarget(Transform _target, float time)
+    {
+        float timeCount = 0;
+        Quaternion startRot = transform.rotation;
+        Vector3 directionToTarget = (_target.position - transform.position).normalized; 
+        Quaternion _targetRot = Quaternion.LookRotation(directionToTarget);
+
+        ChangeAnim(Constants.ANIM_MOVE);
+        while (timeCount < time)
+        {
+            //loop theo thoi gian
+            timeCount += Time.deltaTime;
+            transform.rotation = Quaternion.Lerp(startRot, _targetRot, timeCount / time);
+            yield return null;
+        }
+        ChangeAnim(Constants.ANIM_IDLE);
+    }
+
+    public Vector3 GetRandomPointInCapsule()
+    {
+        Transform capsuleTransform = capsuleCollider.transform;
+        Vector3 center = capsuleTransform.TransformPoint(capsuleCollider.center);
+        float radius = capsuleCollider.radius;
+        float halfHeight = Mathf.Max(0, capsuleCollider.height / 2f - radius); 
+        Vector3 up = capsuleTransform.up; 
+
+        Vector3 pointA = center + up * halfHeight;
+        Vector3 pointB = center - up * halfHeight;
+
+        Vector3 randomPointOnLine = Vector3.Lerp(pointA, pointB, Random.Range(0f, 1f));
+
+        Vector3 randomOffset = Random.insideUnitSphere * radius;
+
+        return randomPointOnLine + randomOffset;
     }
 }

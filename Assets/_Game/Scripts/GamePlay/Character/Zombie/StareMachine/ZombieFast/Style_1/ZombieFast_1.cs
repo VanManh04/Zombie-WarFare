@@ -68,9 +68,8 @@ public class ZombieFast_1 : Zombie
     protected override void OnDeath()
     {
         base.OnDeath();
-        ChangeAnim("Death");
-        ChangeState(new DeathState_ZBFast_1());
         capsuleCollider.enabled = false;
+        ChangeState(new DeathState_ZBFast_1());
     }
 
     #endregion

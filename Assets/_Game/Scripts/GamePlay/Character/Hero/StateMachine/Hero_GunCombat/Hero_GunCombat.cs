@@ -7,8 +7,10 @@ public class Hero_GunCombat : Hero
 
 
     [Header("Weapon - Gun")]
-    private WeaponBase weaponBase;
+    [SerializeField] protected WeaponBase weaponBase;
     public WeaponBase WeaponBase => weaponBase;
+
+    [SerializeField] protected int amountOneCombatDefault;
 
     #region Base Unity
 
@@ -46,6 +48,22 @@ public class Hero_GunCombat : Hero
     public override void Attack()
     {
         base.Attack();
+    }
+
+    public virtual void Reload()
+    {
+        ChangeAnim(Constants.ANIM_RELOAD);
+        //reload gun
+    }
+
+    public virtual bool OutOfAmmo()
+    {
+        return weaponBase.OutOfAmmo();
+    }
+
+    public override void GetSetZombie_InSeeRadius()
+    {
+        base.GetSetZombie_InSeeRadius();
     }
 
     public override void CheckTargetDeath()
@@ -89,6 +107,15 @@ public class Hero_GunCombat : Hero
     {
         base.OnStopMove();
     }
+    #endregion
+
+    #region Wait Target
+
+    public void WaitTarget_anim()
+    {
+        ChangeAnim(Constants.ANIM_WAITTARGET);
+    }
+
     #endregion
 
     #region State

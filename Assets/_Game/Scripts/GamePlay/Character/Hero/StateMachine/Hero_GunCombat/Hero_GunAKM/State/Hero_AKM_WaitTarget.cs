@@ -1,25 +1,25 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Hero_AKM_Idle : IState_HeroGunCombat
+
+public class Hero_AKM_WaitTarget : IState_HeroGunCombat
 {
-    float time;
     public void OnEnter(Hero_GunCombat hero_GunCombat)
     {
+        hero_GunCombat.WaitTarget_anim();
         hero_GunCombat.OnStopMove();
-
-        if (time >= 0)
-            time = hero_GunCombat.GetIdleTime();
     }
 
     public void OnExecute(Hero_GunCombat hero_GunCombat)
     {
-        time -= Time.deltaTime;
-        if (time <= 0)
+        hero_GunCombat.GetSetZombie_InSeeRadius();
+        if (hero_GunCombat.ZombieTarget != null)
+        {
             hero_GunCombat.ChangeState(new Hero_AKM_Patrol());
+        }
     }
 
     public void OnExit(Hero_GunCombat hero_GunCombat)
     {
-        time = -1;
+        
     }
 }

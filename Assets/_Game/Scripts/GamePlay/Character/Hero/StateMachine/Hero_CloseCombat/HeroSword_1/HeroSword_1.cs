@@ -65,8 +65,6 @@ public class HeroSword_1 : Hero_CloseCombat
     protected override void OnDeath()
     {
         base.OnDeath();
-        ChangeAnim("Death");
-        capsuleCollider.enabled = false;
     }
 
     #endregion
@@ -74,7 +72,6 @@ public class HeroSword_1 : Hero_CloseCombat
     public override void OnInit()
     {
         base.OnInit();
-        capsuleCollider.enabled = true;
         ChangeAnim("RutKiem");
         ChangeState(new HeroSword_1_RutKiemState());
     }

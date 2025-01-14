@@ -1091,15 +1091,18 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
-  seeCheck: {fileID: 7218479268278010156}
-  seeRadius: 5
   damage: 2
   attackCheck: {fileID: 4010242797892660138}
   attackRadius: 0.75
   attackCountdown: 2
+  seeCheck: {fileID: 7218479268278010156}
+  seeRadius: 5
+  whatIsTheWay:
+    serializedVersion: 2
+    m_Bits: 0
+  paveTheWayTarget: {fileID: 0}
   zombieTarget: {fileID: 0}
   canPaveTheWay: 0
-  paveTheWayTarget: {fileID: 0}
 --- !u!1 &3443291195213114556
 GameObject:
   m_ObjectHideFlags: 0

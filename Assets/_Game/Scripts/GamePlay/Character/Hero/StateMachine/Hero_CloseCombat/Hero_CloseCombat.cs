@@ -4,11 +4,8 @@ public class Hero_CloseCombat : Hero
 {
     protected IState_HeroCloseCombat currentState;
 
-    [SerializeField] private bool canPaveTheWay;
+    [SerializeField] protected bool canPaveTheWay;
     public bool CanPaveTheWay => canPaveTheWay;
-
-    [SerializeField] private GameObject paveTheWayTarget;
-    public GameObject PaveTheWayTarget => paveTheWayTarget;
 
     #region Base Unity
 

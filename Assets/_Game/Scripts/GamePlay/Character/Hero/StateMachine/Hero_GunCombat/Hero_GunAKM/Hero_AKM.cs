@@ -1,6 +1,5 @@
-﻿public class Hero_GunAKM : Hero_GunCombat
+﻿public class Hero_AKM : Hero_GunCombat
 {
-
     #region Base Unity
     protected override void OnValidate()
     {
@@ -32,6 +31,19 @@
     public override void Attack()
     {
         base.Attack();
+        ChangeAnim(Constants.ANIM_SHOOT);
+        //weapon
+        weaponBase.SetUpTarget(zombieTarget.transform);
+        weaponBase.Shoot(.35f);
+    }
+
+    public override void Reload()
+    {
+        base.Reload();
+        ChangeAnim(Constants.ANIM_RELOAD);
+        //weapon
+
+        weaponBase.Reload();
     }
 
     public override void OnHit(float damage)
@@ -42,6 +54,7 @@
     protected override void OnDeath()
     {
         base.OnDeath();
+        ChangeState(new Hero_AKM_Death());
     }
     #endregion
 
@@ -53,5 +66,9 @@
     public override void OnInit()
     {
         base.OnInit();
+        //setup amount gun
+        this.weaponBase.SetUpAmountAnDamage(amountOneCombatDefault,damage);
+        this.ChangeState(new Hero_AKM_Idle());
+        ChangeAnim(Constants.ANIM_IDLE);
     }
 }

@@ -6,16 +6,16 @@ public class Hero_AKM_Death : IState_HeroGunCombat
 {
     public void OnEnter(Hero_GunCombat hero_GunCombat)
     {
-        throw new System.NotImplementedException();
+
     }
 
     public void OnExecute(Hero_GunCombat hero_GunCombat)
     {
-        throw new System.NotImplementedException();
+
     }
 
     public void OnExit(Hero_GunCombat hero_GunCombat)
     {
-        throw new System.NotImplementedException();
+
     }
 }
