@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CasingBullet : MonoBehaviour
+public class CasingBullet : GameUnit
 {
     [SerializeField] Rigidbody rb;
     [SerializeField] Vector3 force;
@@ -15,6 +13,7 @@ public class CasingBullet : MonoBehaviour
     public void OnInit()
     {
         AddForceCasing();
+        Invoke(nameof(OnDesPawn), 2f);
     }
 
     private void AddForceCasing()
@@ -25,15 +24,16 @@ public class CasingBullet : MonoBehaviour
     public void OnDesPawn()
     {
         //Destroy(gameObject);
+        SimplePool.Despawn(this);
     }
 
     void Start()
     {
-        rb.AddForce(force);
+
     }
 
     void Update()
     {
-        
+
     }
 }

@@ -89,13 +89,15 @@ public class WeaponBase : MonoBehaviour
         for (int i = 0; i < amountDefault; i++)
         {
             amount--;
-            Projectile projectile = Instantiate(projectilePrefab, projecttilepoint.position, projecttilepoint.rotation);
+            //Projectile projectile = Instantiate(projectilePrefab, projecttilepoint.position, projecttilepoint.rotation);
+            Projectile projectile = SimplePool.Spawn<Projectile>(PoolType.Projectile, projecttilepoint.position, projecttilepoint.rotation);
             projectile.OnInit(posTarget.position,damage);
 
             yield return new WaitForSeconds(timeInstanceCasingBulletPrefab);
 
             // todo spawn catsing bullet
-            CasingBullet casingBullet = Instantiate(casingBulletPrefab, casingBulletPoint.position, Quaternion.identity);
+            //CasingBullet casingBullet = Instantiate(casingBulletPrefab, casingBulletPoint.position, Quaternion.identity);
+            CasingBullet casingBullet = SimplePool.Spawn<CasingBullet>(PoolType.CasingBullet, casingBulletPoint.position, Quaternion.identity);
             casingBullet.OnInit();
 
             yield return new WaitForSeconds(speedShootOneBullet - timeInstanceCasingBulletPrefab);

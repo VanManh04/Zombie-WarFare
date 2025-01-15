@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : GameUnit
 {
     [SerializeField] private float speedBullet;
     [SerializeField] private int damage;
@@ -13,6 +13,8 @@ public class Projectile : MonoBehaviour
 
     public void OnInit(Vector3 _posTarget, int _damage)
     {
+        Invoke(nameof(OnDesPawn), 5f);
+
         damage = _damage;
 
         posTarget = GetRandomPointAroundTarget(_posTarget, .4f);
@@ -27,7 +29,8 @@ public class Projectile : MonoBehaviour
 
     public void OnDesPawn()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        SimplePool.Despawn(this);
     }
 
     void Update()
