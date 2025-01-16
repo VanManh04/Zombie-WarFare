@@ -7,8 +7,15 @@
 
     public void OnExecute(Zombie zombie)
     {
+        if (!zombie.HaveHowmTownOrCharacterInAttackCheck())
+        {
+            zombie.ChangeState(new AttackCoundownState_ZBFast_1());
+            return;
+        }
+
         if (zombie.CanAttackBus)
         {
+
             if (zombie.CanAttackCoundown())
                 zombie.ChangeState(new AttackState_ZBFast_1());
         }

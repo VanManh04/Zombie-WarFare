@@ -48,13 +48,13 @@ public class ZombieFast_1 : Zombie
     {
         yield return new WaitForSeconds(0.166f);
         if (CanAttackBus)
-            DoDamageBus();
+            DoDamage_HomeTownTarget();
         else
             DoDamageHero();
 
         yield return new WaitForSeconds(0.433f);
         if (CanAttackBus)
-            DoDamageBus();
+            DoDamage_HomeTownTarget();
         else
             DoDamageHero();
     }

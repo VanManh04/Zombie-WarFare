@@ -2,15 +2,16 @@
 
 public class Hero : Character
 {
-
     [Header("See Info")]
     [SerializeField] protected Transform seeCheck;
     [SerializeField] protected float seeRadius;
 
-    [Header("PaveTheWay")]
-    [SerializeField] protected LayerMask whatIsTheWay;
-    [SerializeField] protected GameObject paveTheWayTarget;
-    public GameObject PaveTheWayTarget => paveTheWayTarget;
+    [Header("Barrier")]
+    [SerializeField] protected LayerMask whatIsBarrier;
+    [SerializeField] protected Barrier isBarrier;
+    [SerializeField] protected bool canAttackBarrier;
+    public bool CanAttackBarrier => canAttackBarrier;
+    public Barrier IsBarrier => isBarrier;
 
     [Header("Target")]
     [SerializeField] protected Zombie zombieTarget;
@@ -74,7 +75,7 @@ public class Hero : Character
 
     public virtual void CheckDirX_SetZombieTarget()
     {
-        if (zombieTarget!=null && zombieTarget.transform.position.x < transform.position.x)
+        if (zombieTarget != null && zombieTarget.transform.position.x < transform.position.x)
             zombieTarget = null;
     }
 
@@ -114,8 +115,23 @@ public class Hero : Character
         return base.HaveCharater_InAttackRadius();
     }
 
+    public override bool HaveHowmTownOrCharacterInAttackCheck()
+    {
+        bool haveCharacter = HaveCharater_InAttackRadius();
+        bool haveBarrier;
+
+        Collider[] hitColliders = Physics.OverlapSphere(attackCheck.position, attackRadius, whatIsBarrier);
+        if (hitColliders.Length > 0)
+            haveBarrier = true;
+        else
+            haveBarrier = false;
+
+        return haveCharacter || haveBarrier;
+    }
+
     public override bool HaveCharaterTarget_InAttackRadius()
     {
+
         if (Vector3.Distance(attackCheck.transform.position, zombieTarget.transform.position) < attackRadius)
             return true;
         else
@@ -127,9 +143,11 @@ public class Hero : Character
 
     }
 
-    public virtual void DoDamageBus()
+    public override void DoDamage_HomeTownTarget()
     {
-
+        base.DoDamage_HomeTownTarget();
+        if (isBarrier != null && isBarrier.gameObject.activeSelf)
+            isBarrier.OnHit(damage);
     }
 
     public override void OnHit(float damage)
@@ -156,6 +174,22 @@ public class Hero : Character
     {
         base.OnStopMove();
     }
+
+    public override void OnMoveToHomeTownTarget()
+    {
+        base.OnMoveToHomeTownTarget();
+
+        ChangeAnim(Constants.ANIM_MOVE);
+        nav_Agent.isStopped = false;
+
+        Vector3 _point = transform.position;
+        _point.x = isBarrier.transform.position.x;
+
+        if (nav_Agent.destination != _point)
+        {
+            nav_Agent.SetDestination(_point);
+        }
+    }
     #endregion
 
     public override void OnInit()
@@ -169,14 +203,28 @@ public class Hero : Character
         base.OnDesPawn();
     }
 
-    public bool CanSeeTheWay()
+    public bool SeeBarrier()
     {
         //Collider[] hitColliders = Physics.OverlapSphere(seeCheck.position, seeRadius, whatIsTheWay);
 
         //if (hitColliders.Length > 0)
-        if (Vector3.Distance(seeCheck.transform.position, paveTheWayTarget.transform.position) < seeRadius)
+        Vector3 pointBarrier = seeCheck.position;
+        pointBarrier.x = IsBarrier.transform.position.x;
+
+        if (Vector3.Distance(seeCheck.transform.position, pointBarrier) < seeRadius)
             return true;
 
         return false;
+    }
+
+    public void CheckCanAttackBarrier()
+    {
+        Vector3 pointBarrier = attackCheck.position;
+        pointBarrier.x = IsBarrier.transform.position.x;
+
+        if (Vector3.Distance(attackCheck.position, pointBarrier) < attackRadius)
+        {
+            canAttackBarrier = true;
+        }
     }
 }

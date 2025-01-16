@@ -7,6 +7,8 @@ TagManager:
   - Hero
   - Zombie
   - Obstacle
+  - Barrier
+  - Bus
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - Zombie
   - 
   - Bus
-  - TheWay
+  - Barrier
   - 
   - 
   - 

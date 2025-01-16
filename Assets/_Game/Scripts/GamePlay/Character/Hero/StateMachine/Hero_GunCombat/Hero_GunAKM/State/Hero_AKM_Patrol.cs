@@ -6,7 +6,7 @@ public class Hero_AKM_Patrol : IState_HeroGunCombat
     float timer;
     public void OnEnter(Hero_GunCombat hero_GunCombat)
     {
-        hero_GunCombat.OnMoveToPoint(hero_GunCombat.PaveTheWayTarget.transform.position);
+        hero_GunCombat.OnMoveToPoint(hero_GunCombat.IsBarrier.transform.position);
         ReadyMoveForwatAndAttack = false;
         timer = .8f;
     }
@@ -17,7 +17,7 @@ public class Hero_AKM_Patrol : IState_HeroGunCombat
         {
             
             hero_GunCombat.GetSetZombie_InSeeRadius();
-            if (hero_GunCombat.CanSeeTheWay())
+            if (hero_GunCombat.SeeBarrier())
             {
                 hero_GunCombat.ChangeState(new Hero_AKM_WaitTarget());
             }

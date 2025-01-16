@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class HeroSword_1 : Hero_CloseCombat
 {
     #region Base Unity
@@ -42,19 +40,26 @@ public class HeroSword_1 : Hero_CloseCombat
             //Chem 1 hit END: 1.496
             ChangeAnim("Attack1");
             Invoke(nameof(DoDamageZombie), 0.597f);
+            if (canAttackBarrier)
+                DoDamage_HomeTownTarget();
         }
         else if (_skillIndex == 2)
         {
             ChangeAnim("Attack2");
             //da thang END: 1.199
             Invoke(nameof(DoDamageZombie), 0.498f);
+            if (canAttackBarrier)
+                DoDamage_HomeTownTarget();
         }
         else
         {
             ChangeAnim("Attack3");
             //da xoay nguoi END: 1.731
             Invoke(nameof(DoDamageZombie), 0.6988f);
+            if (canAttackBarrier)
+                DoDamage_HomeTownTarget();
         }
+
     }
 
     public override void OnHit(float damage)

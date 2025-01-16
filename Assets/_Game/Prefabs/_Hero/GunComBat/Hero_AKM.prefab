@@ -10388,10 +10388,11 @@ MonoBehaviour:
   attackCountdown: 2
   seeCheck: {fileID: 6204253178716226127}
   seeRadius: 4
-  whatIsTheWay:
+  whatIsBarrier:
     serializedVersion: 2
-    m_Bits: 1024
-  paveTheWayTarget: {fileID: 0}
+    m_Bits: 0
+  isBarrier: {fileID: 0}
+  canAttackBarrier: 0
   zombieTarget: {fileID: 0}
   weaponBase: {fileID: 7553350274241128070}
   amountOneCombatDefault: 10

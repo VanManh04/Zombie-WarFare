@@ -1,16 +1,16 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 public class Zombie : Character
 {
     protected IState_Zombie currentState;
 
     [Header("Target")]
+    [SerializeField] private LayerMask whatIsBus;
     [SerializeField] private bool canAttackBus;
     public bool CanAttackBus => canAttackBus;
 
-    [SerializeField] private GameObject busTarget;
+    [SerializeField] private Bus busTarget;
     [SerializeField] private Hero heroTarget;
-    public GameObject BusTarget => busTarget;
+    public Bus BusTarget => busTarget;
     public Hero HeroTarget => heroTarget;
 
     #region Base Unity
@@ -103,6 +103,20 @@ public class Zombie : Character
         return base.HaveCharater_InAttackRadius();
     }
 
+    public override bool HaveHowmTownOrCharacterInAttackCheck()
+    {
+        bool haveCharacter = HaveCharater_InAttackRadius();
+        bool haveBus;
+
+        Collider[] hitColliders = Physics.OverlapSphere(attackCheck.transform.position, attackRadius, whatIsBus);
+        if (hitColliders.Length > 0)
+            haveBus = true;
+        else
+            haveBus = false;
+
+        return haveCharacter || haveBus;
+    }
+
     public void DoDamageHero()
     {
         Collider[] hitColliders = Physics.OverlapSphere(attackCheck.position, attackRadius, whatIsTarget);
@@ -123,12 +137,14 @@ public class Zombie : Character
             }
     }
 
-    public void DoDamageBus()
+    public override void DoDamage_HomeTownTarget()
     {
-        if (busTarget != null)
+        base.DoDamage_HomeTownTarget();
+        if (busTarget != null && busTarget.gameObject.activeSelf)
         {
             //Todo: DODamage
-            print("DoDamage Bus");
+            //print("DoDamage Bus");
+            busTarget.OnHit(this.damage);
         }
     }
 
@@ -145,7 +161,7 @@ public class Zombie : Character
 
     #region Move
 
-    
+
 
     public override void OnMoveToPoint(Vector3 _point)
     {

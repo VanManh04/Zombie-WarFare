@@ -833,6 +833,9 @@ MonoBehaviour:
   attackCheck: {fileID: 3802727114138904280}
   attackRadius: 0.4
   attackCountdown: 2
+  whatIsBus:
+    serializedVersion: 2
+    m_Bits: 0
   canAttackBus: 0
   busTarget: {fileID: 0}
   heroTarget: {fileID: 0}

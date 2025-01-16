@@ -12,10 +12,15 @@
         //TODO: check attack
         if (zombie.CanAttackBus)
         {
-            if (zombie.CanAttackCoundown())
-                zombie.ChangeState(new AttackState_ZBFast_1());
+            if (zombie.HaveHowmTownOrCharacterInAttackCheck())
+            {
+                if (zombie.CanAttackCoundown())
+                    zombie.ChangeState(new AttackState_ZBFast_1());
+                else
+                    zombie.ChangeState(new AttackCoundownState_ZBFast_1());
+            }
             else
-                zombie.ChangeState(new AttackCoundownState_ZBFast_1());
+                zombie.ChangeState(new IdleState_ZBFast_1());
         }
         else
         {

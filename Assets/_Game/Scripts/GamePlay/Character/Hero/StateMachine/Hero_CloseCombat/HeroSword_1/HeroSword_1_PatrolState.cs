@@ -11,12 +11,32 @@ public class HeroSword_1_PatrolState : IState_HeroCloseCombat
 
     public void OnExecute(Hero_CloseCombat hero_CloseCombat)
     {
-        //Debug.Log(Vector3.Distance(hero.transform.position, hero.ZombieTarget.transform.position));
+        if (hero_CloseCombat.CanAttackBarrier)
+        {
+            if (hero_CloseCombat.HaveHowmTownOrCharacterInAttackCheck())
+            {
+                int randomSkill = Random.Range(1, 4);
+
+                if (randomSkill == 1)
+                    hero_CloseCombat.ChangeState(new HeroSword_1_Attack_1_State());
+                else if (randomSkill == 2)
+                    hero_CloseCombat.ChangeState(new HeroSword_1_Attack_2_State());
+                else
+                    hero_CloseCombat.ChangeState(new HeroSword_1_Attack_3_State());
+            }
+            else
+            {
+                hero_CloseCombat.ChangeState(new HeroSword_1_IdleState());
+            }
+            return;
+        }
+
 
         if (hero_CloseCombat.ZombieTarget == null)
         {
             hero_CloseCombat.GetSetZombie_InSeeRadius();
-            hero_CloseCombat.OnMoveToPoint(hero_CloseCombat.PaveTheWayTarget.transform.position);
+            hero_CloseCombat.OnMoveToHomeTownTarget();
+            hero_CloseCombat.CheckCanAttackBarrier();
         }
         else
         {

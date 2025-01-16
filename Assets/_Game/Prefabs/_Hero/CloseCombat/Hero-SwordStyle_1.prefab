@@ -1097,12 +1097,12 @@ MonoBehaviour:
   attackCountdown: 2
   seeCheck: {fileID: 7218479268278010156}
   seeRadius: 5
-  whatIsTheWay:
+  whatIsBarrier:
     serializedVersion: 2
     m_Bits: 0
-  paveTheWayTarget: {fileID: 0}
+  isBarrier: {fileID: 0}
+  canAttackBarrier: 0
   zombieTarget: {fileID: 0}
-  canPaveTheWay: 0
 --- !u!1 &3443291195213114556
 GameObject:
   m_ObjectHideFlags: 0

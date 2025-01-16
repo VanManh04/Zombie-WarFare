@@ -4,9 +4,6 @@ public class Hero_CloseCombat : Hero
 {
     protected IState_HeroCloseCombat currentState;
 
-    [SerializeField] protected bool canPaveTheWay;
-    public bool CanPaveTheWay => canPaveTheWay;
-
     #region Base Unity
 
     protected override void OnValidate()
@@ -58,8 +55,8 @@ public class Hero_CloseCombat : Hero
     public override void CheckAndSetCanAttackBus()
     {
         base.CheckAndSetCanAttackBus();
-        if (Vector3.Distance(paveTheWayTarget.transform.position, attackCheck.transform.position) < attackRadius)
-            canPaveTheWay = true;
+        if (Vector3.Distance(isBarrier.transform.position, attackCheck.transform.position) < attackRadius)
+            canAttackBarrier = true;
     }
 
     public override void CheckDirX_SetZombieTarget()
@@ -78,7 +75,9 @@ public class Hero_CloseCombat : Hero
         Collider[] hitColliders = Physics.OverlapSphere(attackCheck.position, attackRadius, whatIsTarget);
 
         if (hitColliders.Length <= 0)
-            Debug.Log("Null Zombie In AttackRange");
+        {
+            //Debug.Log("Null Zombie In AttackRange");
+        }
         else
             foreach (var hit in hitColliders)
             {
@@ -93,14 +92,11 @@ public class Hero_CloseCombat : Hero
             }
     }
 
-    public override void DoDamageBus()
+    public override void DoDamage_HomeTownTarget()
     {
-        if (paveTheWayTarget != null)
-        {
-            //Todo: DODamage
-            print("DoDamage paveTheWayTarget");
-        }
+        base.DoDamage_HomeTownTarget();
     }
+
     public override void OnHit(float damage)
     {
         base.OnHit(damage);

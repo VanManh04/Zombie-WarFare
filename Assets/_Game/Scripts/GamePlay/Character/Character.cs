@@ -44,7 +44,6 @@ public class Character : MonoBehaviour
     [SerializeField] protected float attackCountdown = 2f;
     protected float lastTimeAttack;
 
-
     #region Base Unity
 
     protected virtual void OnValidate()
@@ -126,6 +125,16 @@ public class Character : MonoBehaviour
         return false;
     }
 
+    public virtual bool HaveHowmTownOrCharacterInAttackCheck()
+    {
+        return false;
+    }
+
+    public virtual void DoDamage_HomeTownTarget()
+    {
+
+    }
+
     public virtual void OnHit(float damage)
     {
         //print(gameObject.name + "nhan : " + damage);
@@ -197,6 +206,11 @@ public class Character : MonoBehaviour
         ChangeAnim(Constants.ANIM_IDLE);
         nav_Agent.velocity = Vector3.zero;
         nav_Agent.isStopped = true;
+    }
+
+    public virtual void OnMoveToHomeTownTarget()
+    {
+
     }
 
     #endregion
