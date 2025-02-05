@@ -208,13 +208,17 @@ public class Hero : Character
         //Collider[] hitColliders = Physics.OverlapSphere(seeCheck.position, seeRadius, whatIsTheWay);
 
         //if (hitColliders.Length > 0)
+        if (isBarrier == null)
+            return false;
+
         Vector3 pointBarrier = seeCheck.position;
         pointBarrier.x = IsBarrier.transform.position.x;
 
         if (Vector3.Distance(seeCheck.transform.position, pointBarrier) < seeRadius)
             return true;
-
         return false;
+
+
     }
 
     public void CheckCanAttackBarrier()

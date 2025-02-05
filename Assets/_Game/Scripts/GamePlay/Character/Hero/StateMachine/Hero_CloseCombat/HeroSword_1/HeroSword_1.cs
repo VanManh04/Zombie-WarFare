@@ -69,6 +69,7 @@ public class HeroSword_1 : Hero_CloseCombat
 
     protected override void OnDeath()
     {
+        ChangeState(new HeroSword_1_DeathState());
         base.OnDeath();
     }
 

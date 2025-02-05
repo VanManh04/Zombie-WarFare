@@ -569,7 +569,7 @@ Transform:
   m_GameObject: {fileID: 1596196661909180174}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.61}
+  m_LocalPosition: {x: 0, y: 0.554, z: 2.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -727,7 +727,7 @@ Transform:
   m_GameObject: {fileID: 2062252080273461621}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.56, z: 0.826}
+  m_LocalPosition: {x: 0, y: 1.1140001, z: 0.826}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -983,7 +983,7 @@ Transform:
   m_GameObject: {fileID: 3028757890467759469}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.32, y: -0.3666665, z: -2.06}
+  m_LocalPosition: {x: -3.32, y: -0.99, z: -1.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1041,7 +1041,7 @@ CapsuleCollider:
   m_Radius: 0.19898526
   m_Height: 1.8659416
   m_Direction: 1
-  m_Center: {x: 3.464071e-17, y: 0.36634392, z: -0.010250121}
+  m_Center: {x: 3.464071e-17, y: 0.94, z: -0.010250121}
 --- !u!195 &1829682200403859435
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1051,7 +1051,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3028757890467759469}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.32
+  m_Radius: 0.1
   m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -1061,7 +1061,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.25
-  m_BaseOffset: 0.55
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &724254676215318300
@@ -1084,7 +1084,7 @@ MonoBehaviour:
   nav_Agent: {fileID: 1829682200403859435}
   knockBackDistance: 0
   knockBackTimer: 0
-  idleTime: {x: 0, y: 0}
+  idleTime: 0
   speedMove: 1.5
   nameCharactor: 
   hp: 20
@@ -1099,7 +1099,7 @@ MonoBehaviour:
   seeRadius: 5
   whatIsBarrier:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   isBarrier: {fileID: 0}
   canAttackBarrier: 0
   zombieTarget: {fileID: 0}
@@ -1708,7 +1708,7 @@ Transform:
   m_GameObject: {fileID: 6149501435370880439}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.564, z: 0}
+  m_LocalPosition: {x: 0, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

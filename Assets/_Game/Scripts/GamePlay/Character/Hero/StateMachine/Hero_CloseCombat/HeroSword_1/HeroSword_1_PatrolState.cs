@@ -40,7 +40,10 @@ public class HeroSword_1_PatrolState : IState_HeroCloseCombat
         }
         else
         {
-            if (MoveAndRotationTarget == true)
+            hero_CloseCombat.CheckDirX_SetZombieTarget();
+            if (hero_CloseCombat.ZombieTarget == null)
+                return;
+            if (MoveAndRotationTarget)
             {
                 timmer -= Time.deltaTime;
                 if (timmer <= 0)
@@ -59,7 +62,7 @@ public class HeroSword_1_PatrolState : IState_HeroCloseCombat
                 return;
             }
 
-            if (Vector3.Distance(hero_CloseCombat.transform.position, hero_CloseCombat.ZombieTarget.transform.position) <= 2)
+            if (Vector3.Distance(hero_CloseCombat.transform.position, hero_CloseCombat.ZombieTarget.transform.position) <= 1)
             {
                 MoveAndRotationTarget = true;
                 hero_CloseCombat.OnStopMove();

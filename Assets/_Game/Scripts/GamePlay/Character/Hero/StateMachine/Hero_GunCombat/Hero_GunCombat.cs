@@ -119,7 +119,7 @@ public class Hero_GunCombat : Hero
     #endregion
 
     #region State
-    public void ChangeState(IState_HeroGunCombat _newState)
+    public virtual void ChangeState(IState_HeroGunCombat _newState)
     {
         if (currentState != null)
             currentState.OnExit(this);

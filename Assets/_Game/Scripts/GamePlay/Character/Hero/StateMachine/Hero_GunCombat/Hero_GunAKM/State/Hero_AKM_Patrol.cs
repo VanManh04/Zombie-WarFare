@@ -15,7 +15,7 @@ public class Hero_AKM_Patrol : IState_HeroGunCombat
     {
         if (hero_GunCombat.ZombieTarget == null)
         {
-            
+
             hero_GunCombat.GetSetZombie_InSeeRadius();
             if (hero_GunCombat.SeeBarrier())
             {
@@ -54,7 +54,7 @@ public class Hero_AKM_Patrol : IState_HeroGunCombat
                 {
                     //Debug.Log("IE");
                     ReadyMoveForwatAndAttack = true;
-                    hero_GunCombat.StartCoroutine(hero_GunCombat.IERotationToTarget(hero_GunCombat.ZombieTarget.transform, timer-.3f));
+                    hero_GunCombat.StartCoroutine(hero_GunCombat.IERotationToTarget(hero_GunCombat.ZombieTarget.transform, timer - .3f));
                 }
             }
         }

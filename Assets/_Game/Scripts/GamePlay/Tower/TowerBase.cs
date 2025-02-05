@@ -34,6 +34,7 @@ public class TowerBase : MonoBehaviour
     protected virtual void OnDeath()
     {
         print("Death: "+gameObject.name);
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        this.gameObject.SetActive(false);
     }
 }

@@ -36,11 +36,11 @@ public class ZombieFast_1 : Zombie
     #endregion
 
     #region Combat
-
+    
     public override void Attack()
     {
         base.Attack();
-        ChangeAnim("Attack");
+        ChangeAnim(Constants.ANIM_ATTACK);
         StartCoroutine(IEDoDamageAnimation());
     }
 
@@ -67,18 +67,17 @@ public class ZombieFast_1 : Zombie
 
     protected override void OnDeath()
     {
-        base.OnDeath();
-        capsuleCollider.enabled = false;
         ChangeState(new DeathState_ZBFast_1());
+        base.OnDeath();
     }
 
     #endregion
-
+    
     public override void OnInit()
     {
         base.OnInit();
         capsuleCollider.enabled = true;
-        ChangeState(new IdleState_ZBFast_1());
+        ChangeState(new PatrolState_ZBFast_1());
     }
 
     public override void OnDesPawn()

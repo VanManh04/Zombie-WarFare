@@ -121,7 +121,7 @@ public class Hero_CloseCombat : Hero
     #endregion
 
     #region State
-    public void ChangeState(IState_HeroCloseCombat _newState)
+    public virtual void ChangeState(IState_HeroCloseCombat _newState)
     {
         if (currentState != null)
             currentState.OnExit(this);

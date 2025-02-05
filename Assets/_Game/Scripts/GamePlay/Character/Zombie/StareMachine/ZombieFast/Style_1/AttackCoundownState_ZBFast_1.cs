@@ -9,7 +9,7 @@
     {
         if (!zombie.HaveHowmTownOrCharacterInAttackCheck())
         {
-            zombie.ChangeState(new AttackCoundownState_ZBFast_1());
+            zombie.ChangeState(new PatrolState_ZBFast_1());
             return;
         }
 

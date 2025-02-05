@@ -9,7 +9,7 @@ public class WeaponBase : MonoBehaviour
     protected string currentAnimName;
 
     [Header("Shoot")]
-    [SerializeField] protected Transform posTarget;
+    [SerializeField] protected Vector3 posTarget;
     [SerializeField] protected float speedShootOneBullet;
     [SerializeField] protected float timeInstanceCasingBulletPrefab;
     [SerializeField] protected int amount;
@@ -35,7 +35,7 @@ public class WeaponBase : MonoBehaviour
         amount = _amount;
         damage = _damage;
     }
-    public void SetUpTarget(Transform _posTarget)
+    public void SetUpTarget(Vector3 _posTarget)
     {
         posTarget = _posTarget;
     }
@@ -71,7 +71,7 @@ public class WeaponBase : MonoBehaviour
         {
             amount--;
             Projectile projectile = Instantiate(projectilePrefab, projecttilepoint.position, projecttilepoint.rotation);
-            projectile.OnInit(posTarget.position,damage);
+            projectile.OnInit(posTarget,damage);
 
             yield return new WaitForSeconds(timeInstanceCasingBulletPrefab);
 
@@ -91,7 +91,7 @@ public class WeaponBase : MonoBehaviour
             amount--;
             //Projectile projectile = Instantiate(projectilePrefab, projecttilepoint.position, projecttilepoint.rotation);
             Projectile projectile = SimplePool.Spawn<Projectile>(PoolType.Projectile, projecttilepoint.position, projecttilepoint.rotation);
-            projectile.OnInit(posTarget.position,damage);
+            projectile.OnInit(posTarget,damage);
 
             yield return new WaitForSeconds(timeInstanceCasingBulletPrefab);
 

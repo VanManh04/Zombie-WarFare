@@ -33,7 +33,7 @@
         base.Attack();
         ChangeAnim(Constants.ANIM_SHOOT);
         //weapon
-        weaponBase.SetUpTarget(zombieTarget.transform);
+        weaponBase.SetUpTarget(zombieTarget.GetTranformCapsual());
         weaponBase.Shoot(.35f);
     }
 
@@ -53,8 +53,8 @@
 
     protected override void OnDeath()
     {
-        base.OnDeath();
         ChangeState(new Hero_AKM_Death());
+        base.OnDeath();
     }
     #endregion
 
@@ -68,7 +68,6 @@
         base.OnInit();
         //setup amount gun
         this.weaponBase.SetUpAmountAnDamage(amountOneCombatDefault,damage);
-        this.ChangeState(new Hero_AKM_Idle());
-        ChangeAnim(Constants.ANIM_IDLE);
+        this.ChangeState(new Hero_AKM_Patrol());
     }
 }

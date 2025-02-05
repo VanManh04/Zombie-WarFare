@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,7 +24,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected float knockBackTimer;
 
     [Header("Idle Info")]
-    [SerializeField] protected Vector2 idleTime;
+    [SerializeField] protected float idleTime;
 
     [Header("Move Info")]
     [SerializeField] protected float speedMove;
@@ -88,7 +89,7 @@ public class Character : MonoBehaviour
     #region Combat
     public bool CanAttackCoundown()
     {
-        if (Time.time > lastTimeAttack + attackCountdown)
+        if (Time.time >= lastTimeAttack + attackCountdown)
             return true;
 
         return false;
@@ -180,10 +181,8 @@ public class Character : MonoBehaviour
     {
         //TODO:....
         //gameObject.SetActive(false);
-    }
-
-    public virtual void ChangeDeathAnim()
-    {
+        StopAllCoroutines();
+        capsuleCollider.enabled = false;
         ChangeAnim(Constants.ANIM_DEATH);
     }
     #endregion
@@ -233,7 +232,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public float GetIdleTime() => Random.Range(idleTime.x, idleTime.y);
+    public float GetIdleTime() => idleTime;
 
     public IEnumerator IEMoveAndRotationToTarget(Vector3 _targetPoint, Quaternion _targetRot, float time)
     {
@@ -296,4 +295,6 @@ public class Character : MonoBehaviour
 
         return randomPointOnLine + randomOffset;
     }
+
+    public Vector3 GetTranformCapsual()=> capsuleCollider.transform.position + capsuleCollider.transform.up * capsuleCollider.center.y;
 }

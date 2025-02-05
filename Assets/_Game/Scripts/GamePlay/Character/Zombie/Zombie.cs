@@ -182,7 +182,7 @@ public class Zombie : Character
         base.ChangeAnim(_name);
     }
 
-    public void ChangeState(IState_Zombie _newState)
+    public virtual void ChangeState(IState_Zombie _newState)
     {
         if (currentState != null)
             currentState.OnExit(this);

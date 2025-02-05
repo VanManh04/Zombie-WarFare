@@ -12,7 +12,7 @@ public class HeroSword_1_RutKiemState : IState_HeroCloseCombat
     {
         timmer -= Time.deltaTime;
         if (timmer <= 0)
-            hero_CloseCombat.ChangeState(new HeroSword_1_IdleState());
+            hero_CloseCombat.ChangeState(new HeroSword_1_PatrolState());
     }
 
     public void OnExit(Hero_CloseCombat hero_CloseCombat)
