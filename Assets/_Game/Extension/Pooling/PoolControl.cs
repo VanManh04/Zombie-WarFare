@@ -33,5 +33,9 @@ public class PoolAmount
 public enum PoolType
 {
     Projectile = 0,
-    CasingBullet = 1
+    CasingBullet = 1,
+    ZombieFast_1 = 2,
+    Zombie_Creep1 = 3,
+    HeroSword_1 = 4,
+    Hero_AKM = 5,
 }

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
 {
+    [SerializeField] Barrier barrier;
+    [SerializeField] Bus bus;
+    [SerializeField] Transform posSpawn_Hero;
+
+    [SerializeField] List<Hero> heros = new List<Hero>();
 
     int level;
 
@@ -61,5 +66,12 @@ public class LevelManager : Singleton<LevelManager>
     public void CollectItem(AddDictionaryItem item)
     {
         //thu thap nhung thang item da hoan thanh
+    }
+
+    public void Spawn_Hero(PoolType poolType)
+    {
+        Hero newHero = SimplePool.Spawn<Hero>(poolType, posSpawn_Hero.position, posSpawn_Hero.rotation);
+        newHero.Setbarrier(barrier);
+        newHero.OnInit();
     }
 }

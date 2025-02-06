@@ -55,7 +55,7 @@ public class Hero_CloseCombat : Hero
     public override void CheckAndSetCanAttackBus()
     {
         base.CheckAndSetCanAttackBus();
-        if (Vector3.Distance(isBarrier.transform.position, attackCheck.transform.position) < attackRadius)
+        if (Vector3.Distance(thisBarrier.transform.position, attackCheck.transform.position) < attackRadius)
             canAttackBarrier = true;
     }
 

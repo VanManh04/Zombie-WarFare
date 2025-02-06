@@ -814,8 +814,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c29f953ff4112489c2d9cbf13c4349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PoolType: 0
   CanFindComponent_Auto: 1
-  characterType: 0
   rb: {fileID: 5031301174555567086}
   capsuleCollider: {fileID: 8543304920331308636}
   animator: {fileID: 8904400281979815517}

@@ -8,10 +8,10 @@ public class Hero : Character
 
     [Header("Barrier")]
     [SerializeField] protected LayerMask whatIsBarrier;
-    [SerializeField] protected Barrier isBarrier;
+    [SerializeField] protected Barrier thisBarrier;
     [SerializeField] protected bool canAttackBarrier;
     public bool CanAttackBarrier => canAttackBarrier;
-    public Barrier IsBarrier => isBarrier;
+    public Barrier ThisBarrier => thisBarrier;
 
     [Header("Target")]
     [SerializeField] protected Zombie zombieTarget;
@@ -146,8 +146,8 @@ public class Hero : Character
     public override void DoDamage_HomeTownTarget()
     {
         base.DoDamage_HomeTownTarget();
-        if (isBarrier != null && isBarrier.gameObject.activeSelf)
-            isBarrier.OnHit(damage);
+        if (thisBarrier != null && thisBarrier.gameObject.activeSelf)
+            thisBarrier.OnHit(damage);
     }
 
     public override void OnHit(float damage)
@@ -183,7 +183,7 @@ public class Hero : Character
         nav_Agent.isStopped = false;
 
         Vector3 _point = transform.position;
-        _point.x = isBarrier.transform.position.x;
+        _point.x = thisBarrier.transform.position.x;
 
         if (nav_Agent.destination != _point)
         {
@@ -198,6 +198,11 @@ public class Hero : Character
         capsuleCollider.enabled = true;
     }
 
+    public void Setbarrier(Barrier barrier)
+    {
+        thisBarrier = barrier;
+    }
+
     public override void OnDesPawn()
     {
         base.OnDesPawn();
@@ -208,11 +213,11 @@ public class Hero : Character
         //Collider[] hitColliders = Physics.OverlapSphere(seeCheck.position, seeRadius, whatIsTheWay);
 
         //if (hitColliders.Length > 0)
-        if (isBarrier == null)
+        if (thisBarrier == null)
             return false;
 
         Vector3 pointBarrier = seeCheck.position;
-        pointBarrier.x = IsBarrier.transform.position.x;
+        pointBarrier.x = ThisBarrier.transform.position.x;
 
         if (Vector3.Distance(seeCheck.transform.position, pointBarrier) < seeRadius)
             return true;
@@ -224,7 +229,7 @@ public class Hero : Character
     public void CheckCanAttackBarrier()
     {
         Vector3 pointBarrier = attackCheck.position;
-        pointBarrier.x = IsBarrier.transform.position.x;
+        pointBarrier.x = ThisBarrier.transform.position.x;
 
         if (Vector3.Distance(attackCheck.position, pointBarrier) < attackRadius)
         {

@@ -9,9 +9,9 @@ public class AKM_47 : WeaponBase
         base.Reload();
     }
 
-    public override void Shoot()
+    public override void Shoot(float _timeDelay)
     {
-        ChangeAnim(Constants.ANIM_SHOOT);
-        base.Shoot(); //.1s .2s
+        ChangeAnim(Constants.ANIM_SHOOT); 
+        base.Shoot(_timeDelay);//.1s .2s
     }
 }

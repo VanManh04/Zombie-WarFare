@@ -6,7 +6,6 @@ public class Hero_AKM_Patrol : IState_HeroGunCombat
     float timer;
     public void OnEnter(Hero_GunCombat hero_GunCombat)
     {
-        hero_GunCombat.OnMoveToPoint(hero_GunCombat.IsBarrier.transform.position);
         ReadyMoveForwatAndAttack = false;
         timer = .8f;
     }
@@ -15,6 +14,7 @@ public class Hero_AKM_Patrol : IState_HeroGunCombat
     {
         if (hero_GunCombat.ZombieTarget == null)
         {
+            hero_GunCombat.OnMoveToPoint(hero_GunCombat.ThisBarrier.transform.position);
 
             hero_GunCombat.GetSetZombie_InSeeRadius();
             if (hero_GunCombat.SeeBarrier())

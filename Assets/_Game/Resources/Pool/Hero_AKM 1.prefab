@@ -10259,7 +10259,7 @@ GameObject:
   - component: {fileID: 3421621679307341930}
   - component: {fileID: 6462667497752121482}
   m_Layer: 6
-  m_Name: Hero_AKM
+  m_Name: Hero_AKM 1
   m_TagString: Hero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10367,7 +10367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5baf6d1e315771e42aa46e213f9b8c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PoolType: 0
+  PoolType: 5
   CanFindComponent_Auto: 1
   rb: {fileID: 9183379785002285533}
   capsuleCollider: {fileID: 2837831642367115652}

@@ -13,7 +13,7 @@ public class UIManager : Singleton<UIManager>
         UICanvas[] prefabs = Resources.LoadAll<UICanvas>("UI/");
         for (int i = 0; i < prefabs.Length; i++)
         {
-            print(prefabs[i].gameObject.name);  
+            //print(prefabs[i].gameObject.name);  
             canvasPrefabs.Add(prefabs[i].GetType(), prefabs[i]);
         }
     }

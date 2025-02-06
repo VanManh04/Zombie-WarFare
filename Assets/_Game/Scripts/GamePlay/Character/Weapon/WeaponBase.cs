@@ -50,11 +50,6 @@ public class WeaponBase : MonoBehaviour
         StartCoroutine(IEInstanceProjcetile(_timeDelay));
     }
 
-    public virtual void Shoot()
-    {
-        StartCoroutine(IEInstanceProjcetile());
-    }
-
     protected void ChangeAnim(string _name)
     {
         if (currentAnimName != _name)
@@ -62,24 +57,6 @@ public class WeaponBase : MonoBehaviour
             animator.ResetTrigger(currentAnimName);
             currentAnimName = _name;
             animator.SetTrigger(currentAnimName);
-        }
-    }
-
-    private IEnumerator IEInstanceProjcetile()
-    {
-        for (int i = 0; i < amountDefault; i++)
-        {
-            amount--;
-            Projectile projectile = Instantiate(projectilePrefab, projecttilepoint.position, projecttilepoint.rotation);
-            projectile.OnInit(posTarget,damage);
-
-            yield return new WaitForSeconds(timeInstanceCasingBulletPrefab);
-
-            // todo spawn catsing bullet
-            CasingBullet casingBullet = Instantiate(casingBulletPrefab, casingBulletPoint.position, Quaternion.identity);
-            casingBullet.OnInit();
-
-            yield return new WaitForSeconds(speedShootOneBullet - timeInstanceCasingBulletPrefab);
         }
     }
 

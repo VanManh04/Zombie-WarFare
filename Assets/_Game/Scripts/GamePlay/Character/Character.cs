@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider),typeof(NavMeshAgent))]
-public class Character : MonoBehaviour
+public class Character : GameUnit
 {
     [SerializeField] private bool CanFindComponent_Auto = true;
-    [SerializeField] protected CharacterType characterType;
     #region Component
     [Header("Component")]
     [SerializeField] protected Rigidbody rb;
