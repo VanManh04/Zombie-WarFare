@@ -6,6 +6,12 @@ public class LevelManager : Singleton<LevelManager>
 {
 
     int level;
+
+    private void Start()
+    {
+        UIManager.Instance.OpenUI<Canvas_Menu>();
+    }
+
     public void OnInit()
     {
         //khoi tao cac thong so truoc khi bat dau man choi

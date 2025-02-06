@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static T ins;
+    private static T instance;
 
-    public static T Ins
+    public static T Instance
     {
         get
         {
-            if (ins == null)
+            if (instance == null)
             {
-                ins = GameObject.FindObjectOfType<T>(); 
-                if (ins == null)
+                instance = GameObject.FindObjectOfType<T>(); 
+                if (instance == null)
                 {
-                    ins = new GameObject(nameof(T)).AddComponent<T>();
+                    instance = new GameObject(nameof(T)).AddComponent<T>();
                 }
             }
-            return ins;
+            return instance;
         }
     }
 }
