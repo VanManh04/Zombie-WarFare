@@ -25,7 +25,7 @@ public class Hero_CloseCombat : Hero
     {
         base.Update();
 
-        if (currentState != null && !IsDeath)
+        if (currentState != null)
             currentState.OnExecute(this);
     }
 

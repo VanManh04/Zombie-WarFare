@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 public class Zombie : Character
 {
     protected IState_Zombie currentState;
@@ -33,6 +34,9 @@ public class Zombie : Character
     protected override void Update()
     {
         base.Update();
+
+        if (currentState != null)
+            currentState.OnExecute(this);
     }
 
     protected override void OnDrawGizmos()
@@ -197,12 +201,16 @@ public class Zombie : Character
     public override void OnInit()
     {
         base.OnInit();
-        canAttackBus = false;
     }
 
     public override void OnDesPawn()
     {
         base.OnDesPawn();
+    }
+
+    internal void SetBus(Bus bus)
+    {
+        busTarget = bus;
     }
 
     #region Get -

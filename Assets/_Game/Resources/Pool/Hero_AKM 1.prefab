@@ -10367,7 +10367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5baf6d1e315771e42aa46e213f9b8c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PoolType: 5
+  PoolType: 7
   CanFindComponent_Auto: 1
   rb: {fileID: 9183379785002285533}
   capsuleCollider: {fileID: 2837831642367115652}
@@ -10377,6 +10377,7 @@ MonoBehaviour:
   knockBackTimer: 0
   idleTime: 0
   speedMove: 1.5
+  speedMoveDefault: 0
   nameCharactor: 
   hp: 100
   whatIsTarget:
@@ -11120,6 +11121,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AKM
       objectReference: {fileID: 0}
+    - target: {fileID: 4849950919391667987, guid: a2a23dce7544e9344abd9357bccd90ff, type: 3}
+      propertyPath: hero_GunCombat
+      value: 
+      objectReference: {fileID: 6462667497752121482}
     - target: {fileID: 6140444086592710898, guid: a2a23dce7544e9344abd9357bccd90ff, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

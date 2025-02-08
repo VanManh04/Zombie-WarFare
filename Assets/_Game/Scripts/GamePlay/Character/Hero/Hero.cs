@@ -158,8 +158,6 @@ public class Hero : Character
     protected override void OnDeath()
     {
         base.OnDeath();
-        ChangeAnim(Constants.ANIM_DEATH);
-        capsuleCollider.enabled = false;
     }
 
     #endregion

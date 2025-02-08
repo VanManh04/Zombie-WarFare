@@ -1,18 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    // Start is called before the first frame update
+    [SerializeField] GameState gameState;
+
+    [Header("Manager")]
+    [SerializeField] LevelManager levelManager;
+    [SerializeField] SpawnZombieManager spawnZombieManager;
+    [SerializeField] NavMeshSurface meshSurface;
+
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        SetPauseGame();
     }
+
+    private void SetPauseGame()
+    {
+        if (gameState == GameState.GamePlay)
+            Time.timeScale = 1;
+        else
+            Time.timeScale = 0;
+    }
+
+    public void ChangeGameState(GameState _gameState) => gameState = _gameState;
+    public GameState GetGameState() => gameState;
 }

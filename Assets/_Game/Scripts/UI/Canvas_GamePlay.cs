@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Canvas_GamePlay : UICanvas
 {
+    public override void Open()
+    {
+        base.Open();
+        GameManager.Instance.ChangeGameState(GameState.GamePlay);
+    }
+
     public void Setting_Button()
     {
         UIManager.Instance.OpenUI<Canvas_Setting>().SetState(this);

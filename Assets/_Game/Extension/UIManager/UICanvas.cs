@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UICanvas : MonoBehaviour
 {
-    [SerializeField] bool isDestroyOnClase=false;
+    [SerializeField] bool isDestroyOnClase = false;
 
     private void Awake()
     {
@@ -46,7 +46,8 @@ public class UICanvas : MonoBehaviour
         if (isDestroyOnClase)
         {
             Destroy(gameObject);
-        }else
+        }
+        else
         {
             gameObject.SetActive(false);
         }

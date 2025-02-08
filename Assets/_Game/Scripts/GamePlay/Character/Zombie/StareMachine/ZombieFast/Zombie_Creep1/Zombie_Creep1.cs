@@ -24,9 +24,6 @@ public class Zombie_Creep1 : Zombie
     protected override void Update()
     {
         base.Update();
-
-        if (currentState != null && !IsDeath)
-            currentState.OnExecute(this);
     }
 
     protected override void OnDrawGizmos()
@@ -78,7 +75,7 @@ public class Zombie_Creep1 : Zombie
 
     protected override void OnDeath()
     {
-        ChangeState(new Zombie_Creep1_Death());
+        ChangeState(new Zombie_Death_Default());
         base.OnDeath();
     }
 

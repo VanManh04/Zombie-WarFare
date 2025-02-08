@@ -2,20 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerBase : MonoBehaviour
+public class TowerBase : GameUnit
 {
-    [SerializeField] float hp;
+    [SerializeField] int hp;
     [SerializeField] bool IsDeath => hp <= 0;
 
-
-    protected virtual void Start()
+    public virtual void OnInit(int _hp)
     {
-        OnInit();
-    }
-
-    public virtual void OnInit()
-    {
-
+        hp = _hp;
     }
 
     public void OnHit(int _damage)
@@ -33,8 +27,13 @@ public class TowerBase : MonoBehaviour
 
     protected virtual void OnDeath()
     {
-        print("Death: "+gameObject.name);
         //Destroy(gameObject);
-        this.gameObject.SetActive(false);
+        
+        SimplePool.Despawn(this);
+    }
+
+    public void OnDespawn()
+    {
+        Destroy(this.gameObject);
     }
 }

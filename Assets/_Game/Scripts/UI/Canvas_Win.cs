@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Canvas_Win : UICanvas
 {
+    public override void Open()
+    {
+        base.Open();
+        GameManager.Instance.ChangeGameState(GameState.Win);
+    }
+
     public void NextLevel_Button()
     {
         print("Next Level");

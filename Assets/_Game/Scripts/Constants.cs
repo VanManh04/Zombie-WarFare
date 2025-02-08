@@ -25,10 +25,9 @@ public class TAG
 
 public enum GameState
 {
-
-}
-
-public enum CharacterType
-{
-
+    Menu,
+    GamePlay,
+    Pause,
+    Win,
+    Lose,
 }

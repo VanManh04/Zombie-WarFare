@@ -33,7 +33,7 @@ public class Hero_GunCombat : Hero
     {
         base.Update();
 
-        if (currentState != null && !IsDeath)
+        if (currentState != null)
             currentState.OnExecute(this);
     }
 

@@ -23,9 +23,6 @@ public class ZombieFast_1 : Zombie
     protected override void Update()
     {
         base.Update();
-
-        if (currentState != null && !IsDeath)
-            currentState.OnExecute(this);
     }
 
     protected override void OnDrawGizmos()
@@ -67,7 +64,7 @@ public class ZombieFast_1 : Zombie
 
     protected override void OnDeath()
     {
-        ChangeState(new DeathState_ZBFast_1());
+        ChangeState(new Zombie_Death_Default());
         base.OnDeath();
     }
 

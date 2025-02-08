@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Canvas_Menu : UICanvas
 {
+    public override void Open()
+    {
+        base.Open();
+        GameManager.Instance.ChangeGameState(GameState.Menu);
+    }
+
     public void Play_Button()
     {
         Close(0f);

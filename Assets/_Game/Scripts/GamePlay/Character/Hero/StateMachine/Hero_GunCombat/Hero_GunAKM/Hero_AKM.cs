@@ -53,7 +53,7 @@
 
     protected override void OnDeath()
     {
-        ChangeState(new Hero_AKM_Death());
+        ChangeState(new HeroGunCombat_Death_Default());
         base.OnDeath();
     }
     #endregion

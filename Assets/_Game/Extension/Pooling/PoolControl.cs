@@ -36,6 +36,10 @@ public enum PoolType
     CasingBullet = 1,
     ZombieFast_1 = 2,
     Zombie_Creep1 = 3,
-    HeroSword_1 = 4,
-    Hero_AKM = 5,
+    Zombie_Creep2 = 4,
+    Zombie_Creep3 = 5,
+    HeroSword_1 = 6,
+    Hero_AKM = 7,
+    Bus = 8,
+    Barrier = 9,
 }

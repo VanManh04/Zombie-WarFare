@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b1fe281dab9dbe4d8a1d0d1dd825cfc, type: 3}
+  m_Name: DataLevel_1 1
+  m_EditorClassIdentifier: 
+  unLock: 0
+  playDone: 0
+  hp_Bus: 2
+  hp_Barrier: 100
+  zombieFastS: 03000000
+  zombieNormalS: 03000000
+  zombieHardS: 03000000
+  zombieBossS: 03000000
+  canSpawm_ZB_Fast: 1
+  timeSpawn_ZB_Fast: {x: 2, y: 2}
+  canSpawm_ZB_Normal: 0
+  timeSpawn_ZB_Normal: {x: 0, y: 0}
+  canSpawm_ZB_Hard: 0
+  timeSpawn_ZB_Hard: {x: 0, y: 0}
+  canSpawm_ZB_Boss: 0
+  timeSpawn_ZB_Boss: {x: 0, y: 0}
+  zombieSpawnEndWaveS: 03000000030000000400000005000000
+  count_ZB_EndWave: 5
+  timeSpawn_ZB_EndWave: {x: 0, y: 0}
+  timeEndWaveZombie: 10

@@ -27,6 +27,7 @@ public class Character : GameUnit
 
     [Header("Move Info")]
     [SerializeField] protected float speedMove;
+    [SerializeField] protected float speedMoveDefault;
 
     [Header("Stats Info")]
     [SerializeField] protected string nameCharactor;
@@ -73,8 +74,16 @@ public class Character : GameUnit
 
     protected virtual void Update()
     {
-        if (Input.GetKeyUp(KeyCode.E))
-            OnDrawGizmos();
+        //if (GameManager.Instance.GetGameState() != GameState.GamePlay)
+        //{
+        //    if (speedMove == speedMoveDefault)
+        //        PauseGame();
+        //}
+        //else
+        //{
+        //    if (speedMove != speedMoveDefault)
+        //        ContinueGame();
+        //}
     }
 
     protected virtual void OnDrawGizmos()
@@ -184,6 +193,11 @@ public class Character : GameUnit
         capsuleCollider.enabled = false;
         ChangeAnim(Constants.ANIM_DEATH);
     }
+    IEnumerator IEWant(float _time)
+    {
+        yield return new WaitForSeconds(_time);
+        SimplePool.Despawn(this);
+    }
     #endregion
 
     #region Move
@@ -216,10 +230,12 @@ public class Character : GameUnit
     public virtual void OnInit()
     {
         lastTimeAttack = Time.time;
+        speedMoveDefault = speedMove;
     }
     public virtual void OnDesPawn()
     {
-
+        //print("Pool");
+        SimplePool.Despawn(this);
     }
     protected virtual void ChangeAnim(string _name)
     {
@@ -296,4 +312,18 @@ public class Character : GameUnit
     }
 
     public Vector3 GetTranformCapsual()=> capsuleCollider.transform.position + capsuleCollider.transform.up * capsuleCollider.center.y;
+
+    public virtual void PauseGame()
+    {
+        speedMove = 0;
+        animator.speed = 0;
+        nav_Agent.speed = speedMove;
+    }
+    
+    public virtual void ContinueGame()
+    {
+        speedMove = speedMoveDefault;
+        animator.speed = 1;
+        nav_Agent.speed = speedMove;
+    }
 }

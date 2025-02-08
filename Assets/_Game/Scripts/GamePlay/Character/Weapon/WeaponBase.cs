@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class WeaponBase : MonoBehaviour
@@ -29,7 +29,7 @@ public class WeaponBase : MonoBehaviour
         animator.speed = speedAnim;
     }
 
-    public void SetUpAmountAnDamage(int _amount,int _damage)
+    public void SetUpAmountAnDamage(int _amount, int _damage)
     {
         amountDefault = _amount;
         amount = _amount;
@@ -66,18 +66,33 @@ public class WeaponBase : MonoBehaviour
         for (int i = 0; i < amountDefault; i++)
         {
             amount--;
-            //Projectile projectile = Instantiate(projectilePrefab, projecttilepoint.position, projecttilepoint.rotation);
-            Projectile projectile = SimplePool.Spawn<Projectile>(PoolType.Projectile, projecttilepoint.position, projecttilepoint.rotation);
-            projectile.OnInit(posTarget,damage);
+            if (hero_GunCombat.ZombieTarget != null)
+            {
+                //Projectile projectile = Instantiate(projectilePrefab, projecttilepoint.position, projecttilepoint.rotation);
+                Projectile projectile = SimplePool.Spawn<Projectile>(PoolType.Projectile, projecttilepoint.position, projecttilepoint.rotation);
+                if (projectile == null)
+                {
+                    Debug.LogError("⚠️ Spawn Projectile Fall.");
+                    amount = -1;
+                    yield break;
+                }
+                projectile.OnInit(posTarget, damage);
 
-            yield return new WaitForSeconds(timeInstanceCasingBulletPrefab);
+                yield return new WaitForSeconds(timeInstanceCasingBulletPrefab);
 
-            // todo spawn catsing bullet
-            //CasingBullet casingBullet = Instantiate(casingBulletPrefab, casingBulletPoint.position, Quaternion.identity);
-            CasingBullet casingBullet = SimplePool.Spawn<CasingBullet>(PoolType.CasingBullet, casingBulletPoint.position, Quaternion.identity);
-            casingBullet.OnInit();
+                // todo spawn catsing bullet
+                //CasingBullet casingBullet = Instantiate(casingBulletPrefab, casingBulletPoint.position, Quaternion.identity);
+                CasingBullet casingBullet = SimplePool.Spawn<CasingBullet>(PoolType.CasingBullet, casingBulletPoint.position, Quaternion.identity);
+                casingBullet.OnInit();
 
-            yield return new WaitForSeconds(speedShootOneBullet - timeInstanceCasingBulletPrefab);
+                yield return new WaitForSeconds(speedShootOneBullet - timeInstanceCasingBulletPrefab);
+            }
+            else
+            {
+                amount = -1;
+                yield break;
+            }
+
         }
     }
 
