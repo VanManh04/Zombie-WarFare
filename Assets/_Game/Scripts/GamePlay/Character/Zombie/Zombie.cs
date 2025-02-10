@@ -3,6 +3,9 @@ using UnityEngine;
 public class Zombie : Character
 {
     protected IState_Zombie currentState;
+    [Header("See Info")]
+    [SerializeField] protected Transform seeCheck;
+    [SerializeField] protected float seeRadius;
 
     [Header("Target")]
     [SerializeField] private LayerMask whatIsBus;
@@ -41,7 +44,9 @@ public class Zombie : Character
 
     protected override void OnDrawGizmos()
     {
-        base.OnDrawGizmos();
+        base.OnDrawGizmos(); 
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(this.seeCheck.position, seeRadius);
     }
 
     #endregion
@@ -73,35 +78,35 @@ public class Zombie : Character
     }
 
     //get tat ca hero trong tam thay va set target
-    //public void GetSetHero_InSeeRadius()
-    //{
-    //    Collider[] hitColliders = Physics.OverlapSphere(seeCheck.position, seeRadius, whatIsTarget);
-    //    if (hitColliders.Length > 0)
-    //    {
-    //        Hero findTarget = null;
-    //        float minDistance = float.MaxValue;
+    public void GetSetHero_InSeeRadius()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(seeCheck.position, seeRadius, whatIsTarget);
+        if (hitColliders.Length > 0)
+        {
+            Hero findTarget = null;
+            float minDistance = float.MaxValue;
 
-    //        foreach (var hit in hitColliders)
-    //        {
-    //            if (hit.transform.position.x < transform.position.x && minDistance > Vector3.Distance(hit.transform.position, transform.position))
-    //            {
-    //                if (hit.TryGetComponent(out Hero hero))
-    //                {
-    //                    if (hero == null)
-    //                        continue;
-    //                    else
-    //                    {
-    //                        findTarget = hero;
-    //                        minDistance = Vector3.Distance(hit.transform.position, transform.position);
-    //                    }
-    //                }
-    //            }
-    //        }
-    //        heroTarget = findTarget;
-    //    }
-    //    else
-    //        heroTarget = null;
-    //}
+            foreach (var hit in hitColliders)
+            {
+                if (hit.transform.position.x < transform.position.x && minDistance > Vector3.Distance(hit.transform.position, transform.position))
+                {
+                    if (hit.TryGetComponent(out Hero hero))
+                    {
+                        if (hero == null)
+                            continue;
+                        else
+                        {
+                            findTarget = hero;
+                            minDistance = Vector3.Distance(hit.transform.position, transform.position);
+                        }
+                    }
+                }
+            }
+            heroTarget = findTarget;
+        }
+        else
+            heroTarget = null;
+    }
     public override bool HaveCharater_InAttackRadius()
     {
         return base.HaveCharater_InAttackRadius();
@@ -165,7 +170,19 @@ public class Zombie : Character
 
     #region Move
 
+    public override void OnMoveToCharacterTarget()
+    {
+        base.OnMoveToCharacterTarget();
+        ChangeAnim(Constants.ANIM_MOVE);
+        nav_Agent.isStopped = false;
 
+        Vector3 _point = heroTarget.transform.position;
+
+        if (nav_Agent.destination != _point)
+        {
+            nav_Agent.SetDestination(_point);
+        }
+    }
 
     public override void OnMoveToPoint(Vector3 _point)
     {

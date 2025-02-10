@@ -728,7 +728,7 @@ GameObject:
   - component: {fileID: 7688126836889667259}
   - component: {fileID: 4601537744128907956}
   m_Layer: 7
-  m_Name: Zombie_Fast_1 1
+  m_Name: Zombie_Fast_1
   m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -748,8 +748,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1015763657105965671}
-  - {fileID: 7725003477793612570}
   - {fileID: 3802727114138904280}
+  - {fileID: 7725003477793612570}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &8543304920331308636
@@ -834,6 +834,8 @@ MonoBehaviour:
   attackCheck: {fileID: 3802727114138904280}
   attackRadius: 0.4
   attackCountdown: 2
+  seeCheck: {fileID: 7725003477793612570}
+  seeRadius: 4
   whatIsBus:
     serializedVersion: 2
     m_Bits: 512
@@ -2306,7 +2308,7 @@ Transform:
   m_GameObject: {fileID: 5900972235471409748}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.70099986, z: 1.182}
+  m_LocalPosition: {x: 0, y: 0.70099986, z: 3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

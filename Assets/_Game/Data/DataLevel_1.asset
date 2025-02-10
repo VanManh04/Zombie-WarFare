@@ -21,14 +21,14 @@ MonoBehaviour:
   zombieHardS: 03000000
   zombieBossS: 03000000
   canSpawm_ZB_Fast: 1
-  timeSpawn_ZB_Fast: {x: 2, y: 2}
+  timeSpawn_ZB_Fast: {x: 4, y: 5}
   canSpawm_ZB_Normal: 0
-  timeSpawn_ZB_Normal: {x: 0, y: 0}
+  timeSpawn_ZB_Normal: {x: 8, y: 8}
   canSpawm_ZB_Hard: 0
   timeSpawn_ZB_Hard: {x: 0, y: 0}
   canSpawm_ZB_Boss: 0
   timeSpawn_ZB_Boss: {x: 0, y: 0}
   zombieSpawnEndWaveS: 03000000030000000400000005000000
-  count_ZB_EndWave: 5
-  timeSpawn_ZB_EndWave: {x: 0, y: 0}
+  count_ZB_EndWave: 0
+  timeSpawn_ZB_EndWave: {x: 2, y: 3}
   timeEndWaveZombie: 10

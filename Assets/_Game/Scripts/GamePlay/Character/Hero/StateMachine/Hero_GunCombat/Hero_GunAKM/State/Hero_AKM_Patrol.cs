@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class Hero_AKM_Patrol : IState_HeroGunCombat
 {
     bool ReadyMoveForwatAndAttack;
@@ -12,49 +10,52 @@ public class Hero_AKM_Patrol : IState_HeroGunCombat
 
     public void OnExecute(Hero_GunCombat hero_GunCombat)
     {
+
         if (hero_GunCombat.ZombieTarget == null)
         {
-            hero_GunCombat.OnMoveToPoint(hero_GunCombat.ThisBarrier.transform.position);
 
             hero_GunCombat.GetSetZombie_InSeeRadius();
-            if (hero_GunCombat.SeeBarrier())
+
+            if (hero_GunCombat.ZombieTarget == null)
             {
-                hero_GunCombat.ChangeState(new Hero_AKM_WaitTarget());
+                if (hero_GunCombat.SeeBarrier())
+                {
+                    hero_GunCombat.ChangeState(new Hero_AKM_WaitTarget());
+                }
+                else
+                    hero_GunCombat.OnMoveToHomeTownTarget();
             }
+
         }
-        else
+
+        if (hero_GunCombat.ZombieTarget != null)
         {
             hero_GunCombat.CheckDirX_SetZombieTarget();
             hero_GunCombat.CheckTargetDeath();
 
             if (hero_GunCombat.ZombieTarget == null)
             {
-                hero_GunCombat.OnStopMove();
+                hero_GunCombat.OnMoveToHomeTownTarget();
                 return;
-            }
-
-            //TODO: MoveTopint + move to rotation
-            if (ReadyMoveForwatAndAttack)
-            {
-                timer -= Time.deltaTime;
-                if (timer <= 0)
-                {
-                    if (hero_GunCombat.HaveCharaterTarget_InAttackRadius())
-                        hero_GunCombat.ChangeState(new Hero_AKM_Shoot());
-                    else
-                        ReadyMoveForwatAndAttack = false;
-                }
             }
             else
             {
-                hero_GunCombat.OnMoveToPoint(hero_GunCombat.ZombieTarget.transform.position);
-                //Debug.Log("Move");
+                //TODO: MoveTopint + move to rotation
 
                 if (hero_GunCombat.HaveCharaterTarget_InAttackRadius())
                 {
-                    //Debug.Log("IE");
-                    ReadyMoveForwatAndAttack = true;
-                    hero_GunCombat.StartCoroutine(hero_GunCombat.IERotationToTarget(hero_GunCombat.ZombieTarget.transform, timer - .3f));
+
+                    if (hero_GunCombat.CheckRotationToTarget_AndRotationIfFalse(hero_GunCombat.ZombieTarget.transform, 2f))
+                    {
+                        if (hero_GunCombat.HaveCharaterTarget_InAttackRadius())
+                            hero_GunCombat.ChangeState(new Hero_AKM_Shoot());
+                    }
+                    //hero_GunCombat.StartCoroutine(hero_GunCombat.IERotationToTarget(hero_GunCombat.ZombieTarget.transform, timer - .3f));
+                    hero_GunCombat.OnStopMove();
+                }
+                else
+                {
+                    hero_GunCombat.OnMoveToCharacterTarget();
                 }
             }
         }

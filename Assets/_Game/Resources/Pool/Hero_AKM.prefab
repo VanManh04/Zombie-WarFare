@@ -4406,7 +4406,7 @@ Transform:
   m_GameObject: {fileID: 4273265012670369143}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8859999, z: 3.86}
+  m_LocalPosition: {x: 0, y: 0.8859999, z: 9.679999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8212,7 +8212,7 @@ Transform:
   m_GameObject: {fileID: 7073684954159759003}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8859999, z: 2.37}
+  m_LocalPosition: {x: 0, y: 0.8859999, z: 6.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10259,7 +10259,7 @@ GameObject:
   - component: {fileID: 3421621679307341930}
   - component: {fileID: 6462667497752121482}
   m_Layer: 6
-  m_Name: Hero_AKM 1
+  m_Name: Hero_AKM
   m_TagString: Hero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10383,18 +10383,19 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
-  damage: 3
+  damage: 100
   attackCheck: {fileID: 9086571268536571349}
-  attackRadius: 2.5
+  attackRadius: 7
   attackCountdown: 2
   seeCheck: {fileID: 6204253178716226127}
-  seeRadius: 4
+  seeRadius: 10
   whatIsBarrier:
     serializedVersion: 2
     m_Bits: 1024
   thisBarrier: {fileID: 0}
   canAttackBarrier: 0
   zombieTarget: {fileID: 0}
+  CanPrint: 0
   weaponBase: {fileID: 7553350274241128070}
   amountOneCombatDefault: 10
 --- !u!1 &8553219278184457251

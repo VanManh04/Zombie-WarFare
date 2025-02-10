@@ -3,8 +3,9 @@
 
 public class Hero_GunCombat : Hero
 {
-    protected IState_HeroGunCombat currentState;
 
+    public bool CanPrint;
+    protected IState_HeroGunCombat currentState;
 
     [Header("Weapon - Gun")]
     [SerializeField] protected WeaponBase weaponBase;

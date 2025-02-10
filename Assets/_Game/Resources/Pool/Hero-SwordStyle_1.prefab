@@ -1204,8 +1204,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 173795977419194825}
-  - {fileID: 3318010441291439431}
   - {fileID: 6939814800764782881}
+  - {fileID: 3318010441291439431}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1821554573764121806
@@ -1313,7 +1313,7 @@ MonoBehaviour:
   attackRadius: 0.75
   attackCountdown: 2
   seeCheck: {fileID: 3318010441291439431}
-  seeRadius: 5
+  seeRadius: 6
   whatIsBarrier:
     serializedVersion: 2
     m_Bits: 1024
@@ -1634,7 +1634,7 @@ Transform:
   m_GameObject: {fileID: 5904390645321328249}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.554, z: 2.61}
+  m_LocalPosition: {x: 0, y: 0.554, z: 5.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

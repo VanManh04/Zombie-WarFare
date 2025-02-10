@@ -21,5 +21,6 @@ public class Hero_AKM_Shoot : IState_HeroGunCombat
     public void OnExit(Hero_GunCombat hero_GunCombat)
     {
         //TODO Stop Anim Shoot
+        Debug.LogError("Done Shoot");
     }
 }

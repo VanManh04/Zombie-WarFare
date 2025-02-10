@@ -25,17 +25,26 @@
         else
         {
             zombie.CheckAndSetCanAttackBus();
-
-            if (zombie.HaveCharater_InAttackRadius())
+            zombie.GetSetHero_InSeeRadius();
+            if (zombie.HeroTarget!=null)
             {
-                if (zombie.CanAttackCoundown())
+                zombie.OnMoveToCharacterTarget();
+                zombie.CheckDirX_SetHeroTarget();
+                zombie.CheckTargetDeath();
+                if (zombie.HaveCharater_InAttackRadius())
                 {
-                    zombie.ChangeState(new AttackState_ZBFast_1());
+                    if (zombie.CanAttackCoundown())
+                    {
+                        zombie.ChangeState(new AttackState_ZBFast_1());
+                    }
+                    else
+                    {
+                        zombie.ChangeState(new AttackCoundownState_ZBFast_1());
+                    }
                 }
-                else
-                {
-                    zombie.ChangeState(new AttackCoundownState_ZBFast_1());
-                }
+            }else
+            {
+                zombie.OnMoveToHomeTownTarget();
             }
         }
     }

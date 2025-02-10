@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider),typeof(NavMeshAgent))]
+[RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider), typeof(NavMeshAgent))]
 public class Character : GameUnit
 {
     [SerializeField] private bool CanFindComponent_Auto = true;
@@ -193,11 +192,6 @@ public class Character : GameUnit
         capsuleCollider.enabled = false;
         ChangeAnim(Constants.ANIM_DEATH);
     }
-    IEnumerator IEWant(float _time)
-    {
-        yield return new WaitForSeconds(_time);
-        SimplePool.Despawn(this);
-    }
     #endregion
 
     #region Move
@@ -205,12 +199,17 @@ public class Character : GameUnit
     public virtual void OnMoveToPoint(Vector3 _point)
     {
         ChangeAnim(Constants.ANIM_MOVE);
-        nav_Agent.isStopped = false; 
+        nav_Agent.isStopped = false;
 
         if (nav_Agent.destination != _point)
         {
             nav_Agent.SetDestination(_point);
         }
+    }
+
+    public virtual void OnMoveToCharacterTarget()
+    {
+
     }
 
     public virtual void OnStopMove()
@@ -267,7 +266,7 @@ public class Character : GameUnit
         ChangeAnim(Constants.ANIM_IDLE);
     }
 
-    public void RotationToTarget (Transform _target)
+    public void RotationToTarget(Transform _target)
     {
         Vector3 directionToTarget = (_target.position - transform.position).normalized;
         Quaternion targetRot = Quaternion.LookRotation(directionToTarget);
@@ -279,7 +278,7 @@ public class Character : GameUnit
     {
         float timeCount = 0;
         Quaternion startRot = transform.rotation;
-        Vector3 directionToTarget = (_target.position - transform.position).normalized; 
+        Vector3 directionToTarget = (_target.position - transform.position).normalized;
         Quaternion _targetRot = Quaternion.LookRotation(directionToTarget);
 
         ChangeAnim(Constants.ANIM_MOVE);
@@ -293,13 +292,44 @@ public class Character : GameUnit
         ChangeAnim(Constants.ANIM_IDLE);
     }
 
+    /// <summary>
+    /// chua xoay maat ve target thi false va xoay ve target
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckRotationToTarget_AndRotationIfFalse(Transform _target, float _speed)
+    {
+        Vector3 direction = _target.position - transform.position;
+        direction.y = 0;
+
+        float angleThreshold = 1f; // sai do goc cho phep
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        float angle = Quaternion.Angle(transform.rotation, targetRotation);
+
+        if (direction != Vector3.zero)
+            return true;
+
+        if (angle > angleThreshold)
+        {
+            ChangeAnim(Constants.ANIM_MOVE);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _speed * Time.deltaTime);
+            print("Dang quay");
+            return false;
+        }
+        else
+        {
+            ChangeAnim(Constants.ANIM_IDLE);
+            print("Quay xong");
+            return true;
+        }
+    }
+
     public Vector3 GetRandomPointInCapsule()
     {
         Transform capsuleTransform = capsuleCollider.transform;
         Vector3 center = capsuleTransform.TransformPoint(capsuleCollider.center);
         float radius = capsuleCollider.radius;
-        float halfHeight = Mathf.Max(0, capsuleCollider.height / 2f - radius); 
-        Vector3 up = capsuleTransform.up; 
+        float halfHeight = Mathf.Max(0, capsuleCollider.height / 2f - radius);
+        Vector3 up = capsuleTransform.up;
 
         Vector3 pointA = center + up * halfHeight;
         Vector3 pointB = center - up * halfHeight;
@@ -311,7 +341,7 @@ public class Character : GameUnit
         return randomPointOnLine + randomOffset;
     }
 
-    public Vector3 GetTranformCapsual()=> capsuleCollider.transform.position + capsuleCollider.transform.up * capsuleCollider.center.y;
+    public Vector3 GetTranformCapsual() => capsuleCollider.transform.position + capsuleCollider.transform.up * capsuleCollider.center.y;
 
     public virtual void PauseGame()
     {
@@ -319,7 +349,7 @@ public class Character : GameUnit
         animator.speed = 0;
         nav_Agent.speed = speedMove;
     }
-    
+
     public virtual void ContinueGame()
     {
         speedMove = speedMoveDefault;

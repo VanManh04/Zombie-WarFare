@@ -168,6 +168,20 @@ public class Hero : Character
         base.OnMoveToPoint(_point);
     }
 
+    public override void OnMoveToCharacterTarget()
+    {
+        base.OnMoveToCharacterTarget();
+        ChangeAnim(Constants.ANIM_MOVE);
+        nav_Agent.isStopped = false;
+
+        Vector3 _point = zombieTarget.transform.position;
+
+        if (nav_Agent.destination != _point)
+        {
+            nav_Agent.SetDestination(_point);
+        }
+    }
+
     public override void OnStopMove()
     {
         base.OnStopMove();

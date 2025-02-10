@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6205369676605551612}
   - component: {fileID: 5621509271927555580}
   m_Layer: 7
-  m_Name: Zombie_Creep1 1
+  m_Name: Zombie_Creep1
   m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,6 +37,7 @@ Transform:
   - {fileID: 2653107609361934546}
   - {fileID: 2653107609653403086}
   - {fileID: 8718172467543056429}
+  - {fileID: 2997350253357640725}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!205 &2547632407910942001
@@ -166,6 +167,8 @@ MonoBehaviour:
   attackCheck: {fileID: 8718172467543056429}
   attackRadius: 0.66
   attackCountdown: 2
+  seeCheck: {fileID: 2997350253357640725}
+  seeRadius: 6
   whatIsBus:
     serializedVersion: 2
     m_Bits: 512
@@ -198,6 +201,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.13, z: 0.625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2547632407910942002}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6512145813052718545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2997350253357640725}
+  m_Layer: 0
+  m_Name: SeeCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2997350253357640725
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6512145813052718545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.13, z: 5.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
