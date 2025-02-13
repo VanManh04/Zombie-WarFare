@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Character : GameUnit
 {
     [SerializeField] private bool CanFindComponent_Auto = true;
+    [SerializeField] Canvas_HealthBar healthBar;
     #region Component
     [Header("Component")]
     [SerializeField] protected Rigidbody rb;
@@ -22,15 +23,16 @@ public class Character : GameUnit
     [SerializeField] protected float knockBackTimer;
 
     [Header("Idle Info")]
-    [SerializeField] protected float idleTime;
+    [SerializeField] protected float startTime;
 
     [Header("Move Info")]
     [SerializeField] protected float speedMove;
-    [SerializeField] protected float speedMoveDefault;
+    protected float speedMoveDefault;
 
     [Header("Stats Info")]
     [SerializeField] protected string nameCharactor;
     [SerializeField] protected float hp;
+    protected float hpDefault;
     protected bool IsNoDamage;
     public bool IsDeath => hp <= 0;
 
@@ -63,7 +65,8 @@ public class Character : GameUnit
 
     protected virtual void Awake()
     {
-
+        speedMoveDefault = speedMove;
+        hpDefault = hp;
     }
 
     protected virtual void Start()
@@ -105,6 +108,11 @@ public class Character : GameUnit
     public void ResetLastTimeAttack() => lastTimeAttack = Time.time;
 
     public virtual void Attack()
+    {
+
+    }
+
+    public virtual void AttackCoundown()
     {
 
     }
@@ -158,7 +166,7 @@ public class Character : GameUnit
                 OnDeath();
             }
 
-            //healthBar.SetNewHp(hp);
+            healthBar.SetNewHp(hp);
             //Instantiate(combatTextPrefabs, transform.position + Vector3.up, Quaternion.identity).OnInit(damage);
         }
     }
@@ -229,7 +237,11 @@ public class Character : GameUnit
     public virtual void OnInit()
     {
         lastTimeAttack = Time.time;
-        speedMoveDefault = speedMove;
+        hp = hpDefault;
+        speedMove = speedMoveDefault;
+        capsuleCollider.enabled = true;
+
+        healthBar.OnInit(hp);
     }
     public virtual void OnDesPawn()
     {
@@ -246,7 +258,7 @@ public class Character : GameUnit
         }
     }
 
-    public float GetIdleTime() => idleTime;
+    public float GetIdleTime() => startTime;
 
     public IEnumerator IEMoveAndRotationToTarget(Vector3 _targetPoint, Quaternion _targetRot, float time)
     {

@@ -3,8 +3,6 @@
 
 public class Hero_GunCombat : Hero
 {
-
-    public bool CanPrint;
     protected IState_HeroGunCombat currentState;
 
     [Header("Weapon - Gun")]

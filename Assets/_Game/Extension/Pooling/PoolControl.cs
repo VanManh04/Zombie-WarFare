@@ -42,4 +42,5 @@ public enum PoolType
     Hero_AKM = 7,
     Bus = 8,
     Barrier = 9,
+    Monster_X=10,
 }

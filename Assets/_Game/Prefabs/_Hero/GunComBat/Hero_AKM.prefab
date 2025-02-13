@@ -10369,15 +10369,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolType: 7
   CanFindComponent_Auto: 1
+  healthBar: {fileID: 0}
   rb: {fileID: 9183379785002285533}
   capsuleCollider: {fileID: 2837831642367115652}
   animator: {fileID: 4221401171059774659}
   nav_Agent: {fileID: 3421621679307341930}
   knockBackDistance: 0
   knockBackTimer: 0
-  idleTime: 0
+  startTime: 0
   speedMove: 1.5
-  speedMoveDefault: 0
   nameCharactor: 
   hp: 100
   whatIsTarget:
@@ -10395,7 +10395,6 @@ MonoBehaviour:
   thisBarrier: {fileID: 0}
   canAttackBarrier: 0
   zombieTarget: {fileID: 0}
-  CanPrint: 0
   weaponBase: {fileID: 7553350274241128070}
   amountOneCombatDefault: 10
 --- !u!1 &8553219278184457251

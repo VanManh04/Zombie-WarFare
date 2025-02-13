@@ -1,11 +1,10 @@
+using UnityEngine;
+
 public class Hero_AKM_Patrol : IState_HeroGunCombat
 {
-    bool ReadyMoveForwatAndAttack;
-    float timer;
     public void OnEnter(Hero_GunCombat hero_GunCombat)
     {
-        ReadyMoveForwatAndAttack = false;
-        timer = .8f;
+
     }
 
     public void OnExecute(Hero_GunCombat hero_GunCombat)
@@ -13,7 +12,7 @@ public class Hero_AKM_Patrol : IState_HeroGunCombat
 
         if (hero_GunCombat.ZombieTarget == null)
         {
-
+            //Debug.Log("Null");
             hero_GunCombat.GetSetZombie_InSeeRadius();
 
             if (hero_GunCombat.ZombieTarget == null)
@@ -30,6 +29,7 @@ public class Hero_AKM_Patrol : IState_HeroGunCombat
 
         if (hero_GunCombat.ZombieTarget != null)
         {
+            //Debug.Log("!= Null");
             hero_GunCombat.CheckDirX_SetZombieTarget();
             hero_GunCombat.CheckTargetDeath();
 
@@ -48,7 +48,10 @@ public class Hero_AKM_Patrol : IState_HeroGunCombat
                     if (hero_GunCombat.CheckRotationToTarget_AndRotationIfFalse(hero_GunCombat.ZombieTarget.transform, 2f))
                     {
                         if (hero_GunCombat.HaveCharaterTarget_InAttackRadius())
+                        {
                             hero_GunCombat.ChangeState(new Hero_AKM_Shoot());
+                            return;
+                        }
                     }
                     //hero_GunCombat.StartCoroutine(hero_GunCombat.IERotationToTarget(hero_GunCombat.ZombieTarget.transform, timer - .3f));
                     hero_GunCombat.OnStopMove();

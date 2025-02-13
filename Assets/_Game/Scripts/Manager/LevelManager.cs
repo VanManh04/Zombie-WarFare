@@ -57,6 +57,8 @@ public class LevelManager : Singleton<LevelManager>
 
     public void LoadLevel(int level)
     {
+        OnDespawn();
+
         levelIndex = level;
         data_Level = data_LevelAlls[levelIndex];
         LoadData_Homtown(data_Level);
@@ -84,9 +86,11 @@ public class LevelManager : Singleton<LevelManager>
     public void OnNextLevel()
     {
         //next 1 level
+        levelIndex += 1;
+
         OnDespawn();
         OnInit();
-        LoadLevel(++levelIndex);
+        LoadLevel(levelIndex);
     }
 
     public void OnRetryLevel()

@@ -90,24 +90,22 @@ public class Hero : Character
 
             foreach (var hit in hitColliders)
             {
-                if (hit.transform.position.x > transform.position.x && minDistance > Vector3.Distance(hit.transform.position, transform.position))
+                if (hit.TryGetComponent(out Zombie zombie) && zombie != null && !zombie.IsDeath)
                 {
-                    if (hit.TryGetComponent(out Zombie zombie))
+                    float distance = Vector3.Distance(zombie.transform.position, transform.position);
+                    if (hit.transform.position.x > transform.position.x && distance < minDistance)
                     {
-                        if (zombie == null)
-                            continue;
-                        else
-                        {
-                            findTarget = zombie;
-                            minDistance = Vector3.Distance(hit.transform.position, transform.position);
-                        }
+                        findTarget = zombie;
+                        minDistance = distance;
                     }
                 }
             }
             zombieTarget = findTarget;
         }
         else
+        {
             zombieTarget = null;
+        }
     }
 
     public override bool HaveCharater_InAttackRadius()
@@ -207,7 +205,6 @@ public class Hero : Character
     public override void OnInit()
     {
         base.OnInit();
-        capsuleCollider.enabled = true;
     }
 
     public void Setbarrier(Barrier barrier)
