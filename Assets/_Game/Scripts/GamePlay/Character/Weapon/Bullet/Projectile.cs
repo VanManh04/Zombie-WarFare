@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Projectile : GameUnit
 {
+    //TODO: nen check theo khoang cach bay tung farme, ve tia raycat tu diem dau toi diem tiep de check xem trung khong
     [SerializeField] private float speedBullet;
     [SerializeField] private int damage;
     private Vector3 posTarget;
@@ -13,7 +14,9 @@ public class Projectile : GameUnit
 
     public void OnInit(Vector3 _posTarget, int _damage)
     {
-        Invoke(nameof(OnDesPawn), 5f);
+        //StartCoroutine khong nen dung cho nhung thang Active deActive qua nhieu, bi sai lech thoi gian nhieu
+        //khong an toan nen su dung update
+        Invoke(nameof(OnDesPawn), 5f); //chay ngam ngay ca khi gameObject ko active
 
         damage = _damage;
 
@@ -47,9 +50,17 @@ public class Projectile : GameUnit
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == TAG.ZOMBIE)
+        //if (other.gameObject.tag == TAG.ZOMBIE)
+        //{
+        //    other.GetComponent<Zombie>()?.OnHit(damage);
+        //    OnDesPawn();
+        //}
+
+        if (other.CompareTag(TAG.ZOMBIE))
         {
-            other.GetComponent<Zombie>()?.OnHit(damage);
+            //cache getComponent
+            //other.GetComponent<Zombie>()?.OnHit(damage);
+            Cache.GenCollectZombie(other)?.OnHit(damage);
             OnDesPawn();
         }
     }

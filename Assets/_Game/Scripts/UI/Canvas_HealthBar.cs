@@ -10,16 +10,19 @@ public class Canvas_HealthBar : MonoBehaviour
     float hp;
     float maxHP;
 
+    Vector3 posCamCaculator;
     void Start()
     {
         _camera = Camera.main;
+        posCamCaculator = _camera.transform.position;
     }
 
     void Update()
     {
         imageFill.fillAmount = Mathf.Lerp(imageFill.fillAmount, hp / maxHP, Time.deltaTime * 5f);
-        transform.Rotate(20,-90,0);
-        //transform.rotation = Quaternion.LookRotation(transform.position - _camera.transform.position);
+        
+        posCamCaculator = new Vector3(transform.position.x, posCamCaculator.y, transform.position.z);
+        transform.rotation = Quaternion.LookRotation(transform.position - posCamCaculator);
 
 
         //transform.position = target.position + offset;

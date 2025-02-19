@@ -5,7 +5,7 @@ public class Zombie_Creep1_Patrol : IState_Zombie
     public void OnEnter(Zombie zombie)
     {
         if (!zombie.HaveCharater_InAttackRadius())
-            zombie.OnMoveToPoint(zombie.BusTarget.transform.position);
+            zombie.OnMoveToHomeTownTarget();
     }
 
     public void OnExecute(Zombie zombie)
@@ -32,7 +32,7 @@ public class Zombie_Creep1_Patrol : IState_Zombie
             zombie.CheckAndSetCanAttackBus();
             zombie.GetSetHero_InSeeRadius();
 
-            if (zombie.HeroTarget != null)
+            if (!zombie.HeroTarget_Null_True())
             {
                 zombie.CheckDirX_SetHeroTarget();
                 zombie.OnMoveToCharacterTarget();

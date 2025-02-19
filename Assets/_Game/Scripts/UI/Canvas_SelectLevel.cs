@@ -7,12 +7,7 @@ public class Canvas_SelectLevel : UICanvas
     [Header("Spawn Button Level")]
     [SerializeField] Transform parentButtonLevel;
     [SerializeField] Button buttonLevelUI;
-    List<GameObject> buttonLevels = new List<GameObject>();
-
-    void Start()
-    {
-        Load_ButtonLevel();
-    }
+    [SerializeField] List<GameObject> buttonLevels = new List<GameObject>();
 
     private void Load_ButtonLevel()
     {
@@ -24,19 +19,20 @@ public class Canvas_SelectLevel : UICanvas
 
             buttonLevels.Add(button.gameObject);
 
-            ButtonLevel buttonLevel = button.GetComponent<ButtonLevel>();
-            buttonLevel.SetTextButtonLevel((i + 1).ToString());
-            buttonLevel.SetUnLockLevel(levels[i].GetUnlockLevel());
-            if (levels[i].GetUnlockLevel())
-                button.onClick.AddListener(() => Play_Button(_tempIndex));
+            LevelDetails LevelDetails = button.GetComponent<LevelDetails>();
+            LevelDetails.SetLevelIndex(i);
+            LevelDetails.SetTextButtonLevel((i + 1).ToString());
+            LevelDetails.SetUnLockLevel(levels[i].GetUnlockLevel());
+            //if (levels[i].GetUnlockLevel())
+            button.onClick.AddListener(() => Event_ShowLevelDetails_ButtonLevel(_tempIndex));
             button.gameObject.SetActive(true);
         }
     }
 
     public void ClearButtonlevel()
     {
-        for (int i = 0;i < buttonLevels.Count;i++) 
-            Destroy(buttonLevels[i]);   
+        for (int i = 0; i < buttonLevels.Count; i++)
+            Destroy(buttonLevels[i]);
 
         buttonLevels.Clear();
     }
@@ -49,12 +45,13 @@ public class Canvas_SelectLevel : UICanvas
         Load_ButtonLevel();
     }
 
-    public void Play_Button(int _indexLevel)
+    public void Event_ShowLevelDetails_ButtonLevel(int _indexLevel)
     {
-        UIManager.Instance.CloseAll();
-        UIManager.Instance.OpenUI<Canvas_GamePlay>();
-        //load level....
-        LevelManager.Instance.LoadLevel(_indexLevel);
+        //UIManager.Instance.CloseUI<Canvas_LevelDetails>(0f);
+        Canvas_LevelDetails canvas_LevelDetails = UIManager.Instance.GetUI<Canvas_LevelDetails>();
+        //canvas_LevelDetails.Close(0f);
+        canvas_LevelDetails.SetUpLevel(_indexLevel, LevelManager.Instance.GetDataLevel);
+        canvas_LevelDetails.Open();
     }
 
     public void Menu_Button()

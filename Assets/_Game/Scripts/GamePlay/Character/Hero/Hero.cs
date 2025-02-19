@@ -17,6 +17,10 @@ public class Hero : Character
     [SerializeField] protected Zombie zombieTarget;
     public Zombie ZombieTarget => zombieTarget;
 
+    [Header("Coin Shopping")]
+    [SerializeField] int coinShopping;
+    public int GetCoinShopping=>coinShopping;
+
     #region Base Unity
 
     protected override void OnValidate()
@@ -90,7 +94,8 @@ public class Hero : Character
 
             foreach (var hit in hitColliders)
             {
-                if (hit.TryGetComponent(out Zombie zombie) && zombie != null && !zombie.IsDeath)
+                Zombie zombie = Cache.GenCollectZombie(hit);
+                if (zombie != null && !zombie.IsDeath)
                 {
                     float distance = Vector3.Distance(zombie.transform.position, transform.position);
                     if (hit.transform.position.x > transform.position.x && distance < minDistance)
@@ -192,7 +197,7 @@ public class Hero : Character
         ChangeAnim(Constants.ANIM_MOVE);
         nav_Agent.isStopped = false;
 
-        Vector3 _point = transform.position;
+        Vector3 _point = TF.position;
         _point.x = thisBarrier.transform.position.x;
 
         if (nav_Agent.destination != _point)
@@ -204,12 +209,11 @@ public class Hero : Character
 
     public override void OnInit()
     {
-        base.OnInit();
-    }
+        thisBarrier = LevelManager.Instance.GetBarrier;
+        if (thisBarrier == null)
+            OnDesPawn();
 
-    public void Setbarrier(Barrier barrier)
-    {
-        thisBarrier = barrier;
+        base.OnInit();
     }
 
     public override void OnDesPawn()
@@ -244,5 +248,15 @@ public class Hero : Character
         {
             canAttackBarrier = true;
         }
+    }
+
+    public bool ZombieTarget_Null_True()
+    {
+        return zombieTarget == null;
+    }
+
+    public Transform GetTranformZombieTarget()
+    {
+        return zombieTarget.transform;
     }
 }

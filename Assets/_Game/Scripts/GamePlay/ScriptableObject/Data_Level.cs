@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,9 +6,9 @@ public class Data_Level : ScriptableObject
 {
     [SerializeField] bool unLock;
     [SerializeField] bool playDone;
-    public bool GetUnlockLevel()=>unLock;
-    public void SetUnlockLevel(bool _unlock)=>unLock=_unlock;
-    public bool GetPlayDone()=>playDone;
+    public bool GetUnlockLevel() => unLock;
+    public void SetUnlockLevel(bool _unlock) => unLock = _unlock;
+    public bool GetPlayDone() => playDone;
     public void SetPlayDone(bool _playDone) => playDone = _playDone;
 
     [Header("Homtown")]
@@ -17,10 +16,10 @@ public class Data_Level : ScriptableObject
     [SerializeField] int hp_Barrier;
 
     [Header("Spawn Play Game")]
-    [SerializeField] List<PoolType> zombieFastS;
-    [SerializeField] List<PoolType> zombieNormalS;
-    [SerializeField] List<PoolType> zombieHardS;
-    [SerializeField] List<PoolType> zombieBossS;
+    [SerializeField] List<EnemyType> zombieFastS;
+    [SerializeField] List<EnemyType> zombieNormalS;
+    [SerializeField] List<EnemyType> zombieHardS;
+    [SerializeField] List<EnemyType> zombieBossS;
 
     [SerializeField] bool canSpawm_ZB_Fast;
     public bool CanSpawm_ZB_Fast => canSpawm_ZB_Fast;
@@ -39,14 +38,14 @@ public class Data_Level : ScriptableObject
     [SerializeField] Vector2 timeSpawn_ZB_Boss;
 
     [Header("End Wave Spawn")]
-    [SerializeField] List<PoolType> zombieSpawnEndWaveS;
+    [SerializeField] List<EnemyType> zombieSpawnEndWaveS;
     [Space(20)]
     [SerializeField] int count_ZB_EndWave;
     [SerializeField] Vector2 timeSpawn_ZB_EndWave;
 
     [SerializeField] float timeEndWaveZombie;
 
-    public int RandomVector2(Vector2 _vector2) => Random.Range((int)_vector2.x,(int) _vector2.y);
+    public int RandomVector2(Vector2 _vector2) => Random.Range((int)_vector2.x, (int)_vector2.y);
 
     public float GetTimeSpawn_ZB_Fast() => RandomVector2(timeSpawn_ZB_Fast);
     public float GetTimeSpawn_ZB_Normal() => RandomVector2(timeSpawn_ZB_Normal);
@@ -59,28 +58,33 @@ public class Data_Level : ScriptableObject
     public PoolType Random_ZB_Fast()
     {
         int index = Random.Range(0, zombieFastS.Count);
-        return zombieFastS[index];
+        PoolType selectedPool = (PoolType)zombieFastS[index];
+        return selectedPool;
     }
     public PoolType Random_ZB_Normal()
     {
         int index = Random.Range(0, zombieNormalS.Count);
-        return zombieNormalS[index];
+        PoolType selectedPool = (PoolType)zombieNormalS[index];
+        return selectedPool;
     }
     public PoolType Random_ZB_Hard()
     {
         int index = Random.Range(0, zombieHardS.Count);
-        return zombieHardS[index];
+        PoolType selectedPool = (PoolType)zombieHardS[index];
+        return selectedPool;
     }
     public PoolType Random_ZB_Boss()
     {
         int index = Random.Range(0, zombieBossS.Count);
-        return zombieBossS[index];
+        PoolType selectedPool = (PoolType)zombieBossS[index];
+        return selectedPool;
     }
 
     public PoolType Random_ZB_EndWave()
     {
         int index = Random.Range(0, zombieSpawnEndWaveS.Count);
-        return zombieSpawnEndWaveS[index];
+        PoolType selectedPool = (PoolType)zombieSpawnEndWaveS[index];
+        return selectedPool;
     }
     public int Get_HpBus() => hp_Bus;
     public int Get_HpBarrier() => hp_Barrier;

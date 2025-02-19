@@ -19,7 +19,7 @@ public class SpawnZombieManager : Singleton<SpawnZombieManager>
 
     public void OnInit()
     {
-        data_Level = LevelManager.Instance.GetLevel;
+        data_Level = LevelManager.Instance.GetDataLevel;
         timerSpawnZB_Fast = data_Level.GetTimeSpawn_ZB_Fast();
         timerSpawnZB_Normal = data_Level.GetTimeSpawn_ZB_Normal();
         timerSpawnZB_Hard = data_Level.GetTimeSpawn_ZB_Hard();
@@ -39,7 +39,6 @@ public class SpawnZombieManager : Singleton<SpawnZombieManager>
             if (timerSpawnZB_Fast <= 0)
             {
                 Zombie newZombie = SimplePool.Spawn<Zombie>(data_Level.Random_ZB_Fast(), GetRandomPositionInBox(), boxRandomPosSpawn.transform.rotation);
-                newZombie.SetBus(LevelManager.Instance.GetBus);
                 newZombie.OnInit();
                 zombies.Add(newZombie);
                 timerSpawnZB_Fast = data_Level.GetTimeSpawn_ZB_Fast();
@@ -52,7 +51,6 @@ public class SpawnZombieManager : Singleton<SpawnZombieManager>
             if (timerSpawnZB_Normal <= 0)
             {
                 Zombie newZombie = SimplePool.Spawn<Zombie>(data_Level.Random_ZB_Normal(), GetRandomPositionInBox(), boxRandomPosSpawn.transform.rotation);
-                newZombie.SetBus(LevelManager.Instance.GetBus);
                 newZombie.OnInit();
                 zombies.Add(newZombie);
                 timerSpawnZB_Normal = data_Level.GetTimeSpawn_ZB_Normal();
@@ -65,7 +63,6 @@ public class SpawnZombieManager : Singleton<SpawnZombieManager>
             if (timerSpawnZB_Hard <= 0)
             {
                 Zombie newZombie = SimplePool.Spawn<Zombie>(data_Level.Random_ZB_Hard(), GetRandomPositionInBox(), boxRandomPosSpawn.transform.rotation);
-                newZombie.SetBus(LevelManager.Instance.GetBus);
                 newZombie.OnInit();
                 zombies.Add(newZombie);
                 timerSpawnZB_Hard = data_Level.GetTimeSpawn_ZB_Hard();
@@ -79,7 +76,6 @@ public class SpawnZombieManager : Singleton<SpawnZombieManager>
             if (timerSpawnZB_Boss <= 0)
             {
                 Zombie newZombie = SimplePool.Spawn<Zombie>(data_Level.Random_ZB_Boss(), GetRandomPositionInBox(), boxRandomPosSpawn.transform.rotation);
-                newZombie.SetBus(LevelManager.Instance.GetBus);
                 newZombie.OnInit();
                 zombies.Add(newZombie);
                 timerSpawnZB_Boss = data_Level.GetTimeSpawn_ZB_Boss();
@@ -108,7 +104,6 @@ public class SpawnZombieManager : Singleton<SpawnZombieManager>
         for (int i = 0; i < count_ZB; i++)
         {
             Zombie newZombie = SimplePool.Spawn<Zombie>(data_Level.Random_ZB_EndWave(), GetRandomPositionInBox(), boxRandomPosSpawn.transform.rotation);
-            newZombie.SetBus(LevelManager.Instance.GetBus);
             newZombie.OnInit();
             zombies.Add(newZombie);
             yield return new WaitForSeconds(data_Level.GetTimeSpawn_ZB_EndWave());

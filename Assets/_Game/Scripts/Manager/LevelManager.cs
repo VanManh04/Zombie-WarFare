@@ -1,20 +1,22 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
 {
+
+    //TODO: Fix Set BUS BARRIER
     [Header("Level")]
     [SerializeField] Data_Level[] data_LevelAlls;
     int levelIndex;
     public Data_Level[] GetArrayDataLevel() => data_LevelAlls;
     [SerializeField] Data_Level data_Level;
-    public Data_Level GetLevel => data_Level;
+    public Data_Level GetDataLevel => data_Level;
 
     [Header("Homtown")]
     [SerializeField] Barrier barrier;
     [SerializeField] Bus bus;
     public Bus GetBus => bus;
+    public Barrier GetBarrier => barrier;
 
     [Header("Spawn Homtown")]
     [SerializeField] Transform posSpawn_Barrier;
@@ -23,29 +25,47 @@ public class LevelManager : Singleton<LevelManager>
     [Header("Spawn Zombie")]
     [SerializeField] SpawnZombieManager spawnZombieManager;
 
+    [Header("Team Hero")]
+    [SerializeField] TeamHero teamHero;
+    public TeamHero TeamHero => teamHero;
+
     [Header("List Spawn Hero")]
     [SerializeField] Transform posSpawn_Hero;
     [SerializeField] List<Hero> heros = new List<Hero>();
+
+    [Header("Icon Hero Info")]
+    [SerializeField] Dictionary<HeroType, Sprite> iconHeros = new Dictionary<HeroType, Sprite>();
+
+    [Header("Coin")]
+    [SerializeField] int coin;
 
 
     void Start()
     {
         //fix setting cho len ben tren tat ca UI
-        UIManager.Instance.OpenUI<Canvas_GamePlay>();
-        UIManager.Instance.OpenUI<Canvas_SelectLevel>();
+        //UIManager.Instance.OpenUI<Canvas_GamePlay>();
+        //UIManager.Instance.OpenUI<Canvas_SelectLevel>();
         UIManager.Instance.CloseAll();
         UIManager.Instance.OpenUI<Canvas_Menu>();
+        AddAlliconToDis();
         OnInit();
     }
 
     public void OnInit()
     {
         //khoi tao cac thong so truoc khi bat dau man choi
+        coin = 10;
         SpawnHomtown_BarrierAndBus();
     }
 
     private void Update()
     {
+        //if (Input.GetKeyUp(KeyCode.E))
+        //    teamHero.AddHeroToList(HeroType.HeroSword_1);
+        //if (Input.GetKeyUp(KeyCode.R))
+        //    teamHero.RemoveHeroToList(HeroType.HeroSword_1);
+        //if (Input.GetKeyUp(KeyCode.T))
+        //    teamHero.ChangeheroList(0,HeroType.Hero_AKM);
 
     }
 
@@ -54,6 +74,7 @@ public class LevelManager : Singleton<LevelManager>
         //bat dau man choi
 
     }
+
 
     public void LoadLevel(int level)
     {
@@ -86,11 +107,11 @@ public class LevelManager : Singleton<LevelManager>
     public void OnNextLevel()
     {
         //next 1 level
-        levelIndex += 1;
+        //levelIndex += 1;
 
         OnDespawn();
         OnInit();
-        LoadLevel(levelIndex);
+        LoadLevel(levelIndex++);
     }
 
     public void OnRetryLevel()
@@ -112,22 +133,27 @@ public class LevelManager : Singleton<LevelManager>
     {
         for (int i = 0; i < heros.Count; i++)
         {
-            Destroy(heros[i].gameObject);
+            //Destroy(heros[i].gameObject);
+            heros[i].OnDesPawn();
         }
+        //SimplePool.CollectAll();
         heros.Clear();
-    }
-
-    public void CollectItem(AddDictionaryItem item)
-    {
-        //thu thap nhung thang item da hoan thanh
     }
 
     public void Spawn_Hero(PoolType poolType)
     {
         Hero newHero = SimplePool.Spawn<Hero>(poolType, posSpawn_Hero.position, posSpawn_Hero.rotation);
-        newHero.Setbarrier(barrier);
         newHero.OnInit();
-        heros.Add(newHero);
+        if (coin >= newHero.GetCoinShopping)
+        {
+            coin -= newHero.GetCoinShopping;
+            heros.Add(newHero);
+        }
+        else
+        {
+            newHero.OnDesPawn();
+            print("Not Coint");
+        }
     }
 
     private void LoadData_Homtown(Data_Level _data_Level)
@@ -155,5 +181,22 @@ public class LevelManager : Singleton<LevelManager>
         }
         else
             barrier = SimplePool.Spawn<Barrier>(PoolType.Barrier, posSpawn_Barrier.position, posSpawn_Barrier.rotation);
+    }
+
+    public void AddCoinOrUpdateCoin(int _coin)
+    {
+        coin += _coin;
+        UIManager.Instance.GetUI<Canvas_GamePlay>().SetCoinText(coin);
+    }
+
+    public Sprite GetIconHero_Key(HeroType _heroType)
+    {
+        return iconHeros[_heroType];
+    }
+
+    public void AddAlliconToDis()
+    {
+        iconHeros[HeroType.HeroSword_1] = Resources.Load<Sprite>("HeroIcons/HeroSword_1");
+        iconHeros[HeroType.Hero_AKM] = Resources.Load<Sprite>("HeroIcons/Hero_AKM");
     }
 }

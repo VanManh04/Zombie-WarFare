@@ -1983,7 +1983,7 @@ MonoBehaviour:
   CanFindComponent_Auto: 1
   healthBar: {fileID: 699463892515896758}
   rb: {fileID: 8541131083763093023}
-  capsuleCollider: {fileID: 7312014062927585861}
+  BoxThisGameObject: {fileID: 7312014062927585861}
   animator: {fileID: 5544161307224636707}
   nav_Agent: {fileID: 1891860481588926388}
   knockBackDistance: 0
@@ -1995,7 +1995,7 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 64
-  damage: 10
+  damage: 20
   attackCheck: {fileID: 2619698573141639529}
   attackRadius: 0.6
   attackCountdown: 2
@@ -2007,6 +2007,7 @@ MonoBehaviour:
   canAttackBus: 0
   busTarget: {fileID: 0}
   heroTarget: {fileID: 0}
+  coinDeath: 5
 --- !u!1 &8544664487170823887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2241,7 +2242,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 6342809657217946238}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e76f57dee224a345a46b45f7c72592d, type: 3}
   m_Name: 

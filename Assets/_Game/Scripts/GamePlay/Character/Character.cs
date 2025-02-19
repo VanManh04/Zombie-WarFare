@@ -5,12 +5,15 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider), typeof(NavMeshAgent))]
 public class Character : GameUnit
 {
+
+    //public Transform tf;//su dung thay cho tranform vi tranform = getComponent
+
     [SerializeField] private bool CanFindComponent_Auto = true;
     [SerializeField] Canvas_HealthBar healthBar;
     #region Component
     [Header("Component")]
     [SerializeField] protected Rigidbody rb;
-    [SerializeField] protected CapsuleCollider capsuleCollider;
+    [SerializeField] protected CapsuleCollider BoxThisGameObject;
     [SerializeField] protected Animator animator;
     [Space(10)]
     [SerializeField] protected NavMeshAgent nav_Agent;
@@ -52,14 +55,15 @@ public class Character : GameUnit
     {
         if (!CanFindComponent_Auto)
             return;
+        //TF = transform;
         rb = GetComponent<Rigidbody>();
-        capsuleCollider = GetComponent<CapsuleCollider>();
+        BoxThisGameObject = GetComponent<CapsuleCollider>();
         animator = GetComponentInChildren<Animator>();
         nav_Agent = GetComponent<NavMeshAgent>();
 
         nav_Agent.speed = speedMove;
 
-        if (rb == null || capsuleCollider == null || animator == null || nav_Agent == null)
+        if (rb == null || BoxThisGameObject == null || animator == null || nav_Agent == null)
             Debug.LogError("Null Component");
     }
 
@@ -180,39 +184,45 @@ public class Character : GameUnit
     {
         float timeCount = 0;
         print("knockback: " + gameObject.name);
-        Vector3 startPoint = transform.position;
-        Vector3 targetPoint = transform.position + character.transform.forward * character.knockBackDistance;
+        Vector3 startPoint = GetComponent<Transform>().position;
+        Vector3 targetPoint = TF.position + character.transform.forward * character.knockBackDistance;
 
         while (timeCount < character.knockBackTimer)
         {
             //loop theo thoi gian
             timeCount += Time.deltaTime;
-            rb.position = Vector3.Lerp(startPoint, new Vector3(targetPoint.x, transform.position.y, targetPoint.z), timeCount / knockBackTimer);
+            rb.position = Vector3.Lerp(startPoint, new Vector3(targetPoint.x, TF.position.y, targetPoint.z), timeCount / knockBackTimer);
             yield return null;
         }
     }
 
     protected virtual void OnDeath()
     {
-        //TODO:....
         //gameObject.SetActive(false);
         StopAllCoroutines();
-        capsuleCollider.enabled = false;
+        BoxThisGameObject.enabled = false;
         ChangeAnim(Constants.ANIM_DEATH);
     }
     #endregion
 
     #region Move
 
+    public void SetDestination_Nav(Vector3 _point)
+    {
+        nav_Agent.SetDestination(_point);
+    }
+
+    public void SetIsStopped_Nav(bool _isStopped)
+    {
+        nav_Agent.isStopped = _isStopped;
+    }
+
     public virtual void OnMoveToPoint(Vector3 _point)
     {
         ChangeAnim(Constants.ANIM_MOVE);
-        nav_Agent.isStopped = false;
+        SetIsStopped_Nav(false);
 
-        if (nav_Agent.destination != _point)
-        {
-            nav_Agent.SetDestination(_point);
-        }
+        SetDestination_Nav(_point);
     }
 
     public virtual void OnMoveToCharacterTarget()
@@ -223,8 +233,8 @@ public class Character : GameUnit
     public virtual void OnStopMove()
     {
         ChangeAnim(Constants.ANIM_IDLE);
-        nav_Agent.velocity = Vector3.zero;
-        nav_Agent.isStopped = true;
+        SetDestination_Nav(TF.position);
+        SetIsStopped_Nav(true);
     }
 
     public virtual void OnMoveToHomeTownTarget()
@@ -239,7 +249,8 @@ public class Character : GameUnit
         lastTimeAttack = Time.time;
         hp = hpDefault;
         speedMove = speedMoveDefault;
-        capsuleCollider.enabled = true;
+
+        BoxThisGameObject.enabled = true;
 
         healthBar.OnInit(hp);
     }
@@ -271,8 +282,8 @@ public class Character : GameUnit
         {
             //loop theo thoi gian
             timeCount += Time.deltaTime;
-            transform.position = Vector3.Lerp(startPoint, _targetPoint, timeCount / time);
-            transform.rotation = Quaternion.Lerp(startRot, _targetRot, timeCount / time);
+            TF.position = Vector3.Lerp(startPoint, _targetPoint, timeCount / time);
+            TF.rotation = Quaternion.Lerp(startRot, _targetRot, timeCount / time);
             yield return null;
         }
         ChangeAnim(Constants.ANIM_IDLE);
@@ -280,17 +291,17 @@ public class Character : GameUnit
 
     public void RotationToTarget(Transform _target)
     {
-        Vector3 directionToTarget = (_target.position - transform.position).normalized;
+        Vector3 directionToTarget = (_target.position - TF.position).normalized;
         Quaternion targetRot = Quaternion.LookRotation(directionToTarget);
 
-        transform.rotation = targetRot;
+        TF.rotation = targetRot;
     }
 
     public IEnumerator IERotationToTarget(Transform _target, float time)
     {
         float timeCount = 0;
-        Quaternion startRot = transform.rotation;
-        Vector3 directionToTarget = (_target.position - transform.position).normalized;
+        Quaternion startRot = TF.rotation;
+        Vector3 directionToTarget = (_target.position - TF.position).normalized;
         Quaternion _targetRot = Quaternion.LookRotation(directionToTarget);
 
         ChangeAnim(Constants.ANIM_MOVE);
@@ -298,7 +309,7 @@ public class Character : GameUnit
         {
             //loop theo thoi gian
             timeCount += Time.deltaTime;
-            transform.rotation = Quaternion.Lerp(startRot, _targetRot, timeCount / time);
+            TF.rotation = Quaternion.Lerp(startRot, _targetRot, timeCount / time);
             yield return null;
         }
         ChangeAnim(Constants.ANIM_IDLE);
@@ -310,12 +321,12 @@ public class Character : GameUnit
     /// <returns></returns>
     public bool CheckRotationToTarget_AndRotationIfFalse(Transform _target, float _speed)
     {
-        Vector3 direction = _target.position - transform.position;
+        Vector3 direction = _target.position - TF.position;
         direction.y = 0;
 
         float angleThreshold = 1f; // sai do goc cho phep
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        float angle = Quaternion.Angle(transform.rotation, targetRotation);
+        float angle = Quaternion.Angle(TF.rotation, targetRotation);
 
         if (direction != Vector3.zero)
             return true;
@@ -323,7 +334,7 @@ public class Character : GameUnit
         if (angle > angleThreshold)
         {
             ChangeAnim(Constants.ANIM_MOVE);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _speed * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(TF.rotation, targetRotation, _speed * Time.deltaTime);
             print("Dang quay");
             return false;
         }
@@ -337,10 +348,10 @@ public class Character : GameUnit
 
     public Vector3 GetRandomPointInCapsule()
     {
-        Transform capsuleTransform = capsuleCollider.transform;
-        Vector3 center = capsuleTransform.TransformPoint(capsuleCollider.center);
-        float radius = capsuleCollider.radius;
-        float halfHeight = Mathf.Max(0, capsuleCollider.height / 2f - radius);
+        Transform capsuleTransform = BoxThisGameObject.transform;
+        Vector3 center = capsuleTransform.TransformPoint(BoxThisGameObject.center);
+        float radius = BoxThisGameObject.radius;
+        float halfHeight = Mathf.Max(0, BoxThisGameObject.height / 2f - radius);
         Vector3 up = capsuleTransform.up;
 
         Vector3 pointA = center + up * halfHeight;
@@ -353,19 +364,5 @@ public class Character : GameUnit
         return randomPointOnLine + randomOffset;
     }
 
-    public Vector3 GetTranformCapsual() => capsuleCollider.transform.position + capsuleCollider.transform.up * capsuleCollider.center.y;
-
-    public virtual void PauseGame()
-    {
-        speedMove = 0;
-        animator.speed = 0;
-        nav_Agent.speed = speedMove;
-    }
-
-    public virtual void ContinueGame()
-    {
-        speedMove = speedMoveDefault;
-        animator.speed = 1;
-        nav_Agent.speed = speedMove;
-    }
+    public Vector3 GetTranformCapsual() => BoxThisGameObject.transform.position + BoxThisGameObject.transform.up * BoxThisGameObject.center.y;
 }

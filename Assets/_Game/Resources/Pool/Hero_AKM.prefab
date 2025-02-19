@@ -10372,7 +10372,7 @@ MonoBehaviour:
   CanFindComponent_Auto: 1
   healthBar: {fileID: 1088418194069947728}
   rb: {fileID: 9183379785002285533}
-  capsuleCollider: {fileID: 2837831642367115652}
+  BoxThisGameObject: {fileID: 2837831642367115652}
   animator: {fileID: 4221401171059774659}
   nav_Agent: {fileID: 3421621679307341930}
   knockBackDistance: 0
@@ -10396,6 +10396,7 @@ MonoBehaviour:
   thisBarrier: {fileID: 0}
   canAttackBarrier: 0
   zombieTarget: {fileID: 0}
+  coinShopping: 10
   weaponBase: {fileID: 7553350274241128070}
   amountOneCombatDefault: 10
 --- !u!1 &8553219278184457251
@@ -11294,7 +11295,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 6820710328371194520}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e76f57dee224a345a46b45f7c72592d, type: 3}
   m_Name: 

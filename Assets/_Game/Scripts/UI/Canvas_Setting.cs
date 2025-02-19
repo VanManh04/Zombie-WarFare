@@ -54,7 +54,7 @@ public class Canvas_Setting : UICanvas
         CloseDirectly();
         //UIManager.Instance.CloseAll();
         UIManager.Instance.OpenUI<Canvas_GamePlay>();
-
         LevelManager.Instance.OnRetryLevel();
+        LevelManager.Instance.AddCoinOrUpdateCoin(0);
     }
 }

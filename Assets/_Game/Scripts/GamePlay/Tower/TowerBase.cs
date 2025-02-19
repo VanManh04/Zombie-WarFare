@@ -34,6 +34,6 @@ public class TowerBase : GameUnit
 
     public void OnDespawn()
     {
-        Destroy(this.gameObject);
+        
     }
 }

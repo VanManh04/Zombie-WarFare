@@ -32,3 +32,17 @@ public enum GameState
     Win,
     Lose,
 }
+public enum EnemyType
+{
+    ZombieFast_1 = PoolType.ZombieFast_1,
+    Zombie_Creep1 = PoolType.Zombie_Creep1,
+    Zombie_Creep2 = PoolType.Zombie_Creep2,
+    Zombie_Creep3 = PoolType.Zombie_Creep3,
+    Monster_X = PoolType.Monster_X,
+}
+
+public enum HeroType
+{
+    HeroSword_1 = PoolType.HeroSword_1,
+    Hero_AKM = PoolType.Hero_AKM,
+}

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 public class Zombie : Character
 {
     protected IState_Zombie currentState;
@@ -16,6 +15,8 @@ public class Zombie : Character
     [SerializeField] private Hero heroTarget;
     public Bus BusTarget => busTarget;
     public Hero HeroTarget => heroTarget;
+
+    [SerializeField] int coinDeath;
 
     #region Base Unity
 
@@ -44,7 +45,7 @@ public class Zombie : Character
 
     protected override void OnDrawGizmos()
     {
-        base.OnDrawGizmos(); 
+        base.OnDrawGizmos();
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(this.seeCheck.position, seeRadius);
     }
@@ -141,7 +142,7 @@ public class Zombie : Character
                         continue;
                     hero.OnHit(this.damage);
                     //Debug.Log("DoDamage: " + hit.gameObject.name);
-                    //TODO: Knockback
+                    //Knockback
                 }
             }
     }
@@ -151,7 +152,7 @@ public class Zombie : Character
         base.DoDamage_HomeTownTarget();
         if (busTarget != null && busTarget.gameObject.activeSelf)
         {
-            //Todo: DODamage
+            // DODamage
             //print("DoDamage Bus");
             busTarget.OnHit(this.damage);
         }
@@ -165,10 +166,28 @@ public class Zombie : Character
     protected override void OnDeath()
     {
         base.OnDeath();
+        LevelManager.Instance.AddCoinOrUpdateCoin(coinDeath);
     }
     #endregion
 
+
     #region Move
+
+    public override void OnMoveToHomeTownTarget()
+    {
+        base.OnMoveToHomeTownTarget();
+
+        ChangeAnim(Constants.ANIM_MOVE);
+        nav_Agent.isStopped = false;
+
+        Vector3 _point = TF.position;
+        _point.x = busTarget.transform.position.x;
+
+        if (nav_Agent.destination != _point)
+        {
+            nav_Agent.SetDestination(_point);
+        }
+    }
 
     public override void OnMoveToCharacterTarget()
     {
@@ -205,8 +224,8 @@ public class Zombie : Character
 
     public virtual void ChangeState(IState_Zombie _newState)
     {
-        if (currentState != null)
-            currentState.OnExit(this);
+        //if (currentState != null)
+        currentState?.OnExit(this);
 
         currentState = _newState;
 
@@ -217,6 +236,9 @@ public class Zombie : Character
 
     public override void OnInit()
     {
+        busTarget = LevelManager.Instance.GetBus;
+        if (busTarget == null)
+            OnDesPawn();
         base.OnInit();
     }
 
@@ -225,14 +247,13 @@ public class Zombie : Character
         base.OnDesPawn();
     }
 
-    internal void SetBus(Bus bus)
+    public bool HeroTarget_Null_True()
     {
-        busTarget = bus;
+        return heroTarget == null;
     }
 
-    #region Get -
-
-
-
-    #endregion
+    public Transform GetTranformHeroTarget()
+    {
+        return heroTarget.transform;
+    }
 }

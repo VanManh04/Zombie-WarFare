@@ -7,13 +7,12 @@ public class MONSTER_X_Patrol : IState_Zombie
     public void OnEnter(Zombie zombie)
     {
         //Debug.Log("Enter: Patrol");
-        zombie.OnMoveToPoint(zombie.BusTarget.transform.position);
+        zombie.OnMoveToHomeTownTarget();
     }
 
     public void OnExecute(Zombie zombie)
     {
         //Debug.Log("Execute: Patrol");
-        //TODO: check attack
         if (zombie.CanAttackBus)
         {
             if (zombie.HaveHowmTownOrCharacterInAttackCheck())
@@ -35,7 +34,7 @@ public class MONSTER_X_Patrol : IState_Zombie
         {
             zombie.CheckAndSetCanAttackBus();
             zombie.GetSetHero_InSeeRadius();
-            if (zombie.HeroTarget != null)
+            if (!zombie.HeroTarget_Null_True())
             {
                 zombie.OnMoveToCharacterTarget();
                 zombie.CheckDirX_SetHeroTarget();

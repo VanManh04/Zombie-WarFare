@@ -9,7 +9,6 @@
     public void OnExecute(Zombie zombie)
     {
         //Debug.Log("Execute: Patrol");
-        //TODO: check attack
         if (zombie.CanAttackBus)
         {
             if (zombie.HaveHowmTownOrCharacterInAttackCheck())
@@ -26,7 +25,7 @@
         {
             zombie.CheckAndSetCanAttackBus();
             zombie.GetSetHero_InSeeRadius();
-            if (zombie.HeroTarget!=null)
+            if (!zombie.HeroTarget_Null_True())
             {
                 zombie.OnMoveToCharacterTarget();
                 zombie.CheckDirX_SetHeroTarget();
@@ -54,42 +53,4 @@
         //Debug.Log("Exit: Patrol");
         zombie.OnStopMove();
     }
-
-    /*Use See
-     * if (zombie.CanAttackBus)
-        {
-            if (zombie.CanAttackCoundown())
-                zombie.ChangeState(new AttackState_ZBFast_1());
-            else
-                zombie.ChangeState(new AttackCoundownState_ZBFast_1());
-        }
-        else
-{
-    zombie.CheckAndSetCanAttackBus();
-
-    if (zombie.HeroTarget == null)
-    {
-        zombie.GetSetHero_InSeeRadius();
-
-        zombie.OnMoveToPoint(zombie.BusTarget.transform.position);
-    }
-    else
-    {
-        zombie.OnMoveToPoint(zombie.HeroTarget.transform.position);
-
-        zombie.CheckDirX_SetHeroTarget();
-
-        if (zombie.HaveCharater_InAttackRadius())
-        {
-            if (zombie.CanAttackCoundown())
-            {
-                zombie.ChangeState(new AttackState_ZBFast_1());
-            }
-            else
-            {
-                zombie.ChangeState(new AttackCoundownState_ZBFast_1());
-            }
-        }
-    }
-}*/
 }

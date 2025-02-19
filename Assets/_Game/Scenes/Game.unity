@@ -925,8 +925,10 @@ MonoBehaviour:
   posSpawn_Barrier: {fileID: 823747006}
   posSpawn_Bus: {fileID: 201373388}
   spawnZombieManager: {fileID: 1106742459}
+  teamHero: {fileID: 11400000, guid: 3c799a91ab0582d4c8a573527b7724fd, type: 2}
   posSpawn_Hero: {fileID: 424221947}
   heros: []
+  coin: 0
 --- !u!1 &1543852694
 GameObject:
   m_ObjectHideFlags: 0

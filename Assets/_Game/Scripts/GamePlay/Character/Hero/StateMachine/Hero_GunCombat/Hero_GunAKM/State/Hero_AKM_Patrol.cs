@@ -9,13 +9,14 @@ public class Hero_AKM_Patrol : IState_HeroGunCombat
 
     public void OnExecute(Hero_GunCombat hero_GunCombat)
     {
-
-        if (hero_GunCombat.ZombieTarget == null)
+        //sua check them ham bool (hero_GunCombat.ZombieTarget == null) de khong bi truy cap lung tung
+        if (hero_GunCombat.ZombieTarget_Null_True())
         {
+            //hero_GunCombat.ZombieTarget.OnInit();
             //Debug.Log("Null");
             hero_GunCombat.GetSetZombie_InSeeRadius();
 
-            if (hero_GunCombat.ZombieTarget == null)
+            if (hero_GunCombat.ZombieTarget_Null_True())
             {
                 if (hero_GunCombat.SeeBarrier())
                 {
@@ -27,25 +28,23 @@ public class Hero_AKM_Patrol : IState_HeroGunCombat
 
         }
 
-        if (hero_GunCombat.ZombieTarget != null)
+        if (!hero_GunCombat.ZombieTarget_Null_True())
         {
             //Debug.Log("!= Null");
             hero_GunCombat.CheckDirX_SetZombieTarget();
             hero_GunCombat.CheckTargetDeath();
 
-            if (hero_GunCombat.ZombieTarget == null)
+            if (hero_GunCombat.ZombieTarget_Null_True())
             {
                 hero_GunCombat.OnMoveToHomeTownTarget();
                 return;
             }
             else
             {
-                //TODO: MoveTopint + move to rotation
-
                 if (hero_GunCombat.HaveCharaterTarget_InAttackRadius())
                 {
 
-                    if (hero_GunCombat.CheckRotationToTarget_AndRotationIfFalse(hero_GunCombat.ZombieTarget.transform, 2f))
+                    if (hero_GunCombat.CheckRotationToTarget_AndRotationIfFalse(hero_GunCombat.GetTranformZombieTarget(), 2f))
                     {
                         if (hero_GunCombat.HaveCharaterTarget_InAttackRadius())
                         {

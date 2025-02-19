@@ -29,6 +29,11 @@ public class WeaponBase : MonoBehaviour
         animator.speed = speedAnim;
     }
 
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
     public void SetUpAmountAnDamage(int _amount, int _damage)
     {
         amountDefault = _amount;
@@ -80,7 +85,7 @@ public class WeaponBase : MonoBehaviour
 
                 yield return new WaitForSeconds(timeInstanceCasingBulletPrefab);
 
-                // todo spawn catsing bullet
+                // spawn catsing bullet
                 //CasingBullet casingBullet = Instantiate(casingBulletPrefab, casingBulletPoint.position, Quaternion.identity);
                 CasingBullet casingBullet = SimplePool.Spawn<CasingBullet>(PoolType.CasingBullet, casingBulletPoint.position, Quaternion.identity);
                 casingBullet.OnInit();
