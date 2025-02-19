@@ -23,8 +23,8 @@ public class Canvas_SelectLevel : UICanvas
             LevelDetails.SetLevelIndex(i);
             LevelDetails.SetTextButtonLevel((i + 1).ToString());
             LevelDetails.SetUnLockLevel(levels[i].GetUnlockLevel());
-            //if (levels[i].GetUnlockLevel())
-            button.onClick.AddListener(() => Event_ShowLevelDetails_ButtonLevel(_tempIndex));
+            if (levels[i].GetUnlockLevel())
+                button.onClick.AddListener(() => Event_ShowLevelDetails_ButtonLevel(_tempIndex));
             button.gameObject.SetActive(true);
         }
     }
