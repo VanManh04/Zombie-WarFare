@@ -50,7 +50,7 @@ public class Canvas_SelectLevel : UICanvas
         //UIManager.Instance.CloseUI<Canvas_LevelDetails>(0f);
         Canvas_LevelDetails canvas_LevelDetails = UIManager.Instance.GetUI<Canvas_LevelDetails>();
         //canvas_LevelDetails.Close(0f);
-        canvas_LevelDetails.SetUpLevel(_indexLevel, LevelManager.Instance.GetDataLevel);
+        canvas_LevelDetails.SetUpLevel(_indexLevel, LevelManager.Instance.GetDataLevel_Index(_indexLevel));
         canvas_LevelDetails.Open();
     }
 

@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class TowerBase : GameUnit
 {
+    [SerializeField] Canvas_HealthBar healthBar;
     [SerializeField] int hp;
     [SerializeField] bool IsDeath => hp <= 0;
 
     public virtual void OnInit(int _hp)
     {
         hp = _hp;
+        healthBar.OnInit(hp);
     }
 
     public void OnHit(int _damage)
@@ -22,6 +24,7 @@ public class TowerBase : GameUnit
             {
                 OnDeath();
             }
+            healthBar.SetNewHp(hp);
         }
     }
 

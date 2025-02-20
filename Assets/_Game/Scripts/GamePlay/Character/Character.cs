@@ -199,6 +199,7 @@ public class Character : GameUnit
     protected virtual void OnDeath()
     {
         //gameObject.SetActive(false);
+        OnStopMove();
         StopAllCoroutines();
         BoxThisGameObject.enabled = false;
         ChangeAnim(Constants.ANIM_DEATH);
@@ -212,15 +213,9 @@ public class Character : GameUnit
         nav_Agent.SetDestination(_point);
     }
 
-    public void SetIsStopped_Nav(bool _isStopped)
-    {
-        nav_Agent.isStopped = _isStopped;
-    }
-
     public virtual void OnMoveToPoint(Vector3 _point)
     {
         ChangeAnim(Constants.ANIM_MOVE);
-        SetIsStopped_Nav(false);
 
         SetDestination_Nav(_point);
     }
@@ -234,7 +229,6 @@ public class Character : GameUnit
     {
         ChangeAnim(Constants.ANIM_IDLE);
         SetDestination_Nav(TF.position);
-        SetIsStopped_Nav(true);
     }
 
     public virtual void OnMoveToHomeTownTarget()

@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1fe281dab9dbe4d8a1d0d1dd825cfc, type: 3}
   m_Name: DataLevel_1 1
   m_EditorClassIdentifier: 
-  unLock: 0
+  unLock: 1
   playDone: 0
-  hp_Bus: 2
+  hp_Bus: 150
   hp_Barrier: 100
   zombieFastS: 03000000
   zombieNormalS: 03000000
   zombieHardS: 03000000
   zombieBossS: 03000000
-  canSpawm_ZB_Fast: 0
+  canSpawm_ZB_Fast: 1
   timeSpawn_ZB_Fast: {x: 2, y: 2}
-  canSpawm_ZB_Normal: 0
-  timeSpawn_ZB_Normal: {x: 0, y: 0}
+  canSpawm_ZB_Normal: 1
+  timeSpawn_ZB_Normal: {x: 7, y: 7}
   canSpawm_ZB_Hard: 0
   timeSpawn_ZB_Hard: {x: 0, y: 0}
   canSpawm_ZB_Boss: 0

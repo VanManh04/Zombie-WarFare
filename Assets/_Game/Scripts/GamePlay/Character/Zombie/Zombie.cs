@@ -69,7 +69,14 @@ public class Zombie : Character
     public void CheckAndSetCanAttackBus()
     {
         if (Vector3.Distance(busTarget.transform.position, attackCheck.transform.position) < attackRadius)
+        {
             canAttackBus = true;
+        }
+    }
+
+    public bool CanTargetHero()
+    {
+        return Mathf.Abs(TF.position.x - busTarget.transform.position.x)>1.6f;
     }
 
     public void CheckDirX_SetHeroTarget()
@@ -180,8 +187,7 @@ public class Zombie : Character
         ChangeAnim(Constants.ANIM_MOVE);
         nav_Agent.isStopped = false;
 
-        Vector3 _point = TF.position;
-        _point.x = busTarget.transform.position.x;
+        Vector3 _point = busTarget.transform.position;
 
         if (nav_Agent.destination != _point)
         {
@@ -193,14 +199,10 @@ public class Zombie : Character
     {
         base.OnMoveToCharacterTarget();
         ChangeAnim(Constants.ANIM_MOVE);
-        nav_Agent.isStopped = false;
 
-        Vector3 _point = heroTarget.transform.position;
+        Vector3 _point = heroTarget.TF.position;
 
-        if (nav_Agent.destination != _point)
-        {
-            nav_Agent.SetDestination(_point);
-        }
+        SetDestination_Nav(_point);
     }
 
     public override void OnMoveToPoint(Vector3 _point)

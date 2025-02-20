@@ -175,14 +175,10 @@ public class Hero : Character
     {
         base.OnMoveToCharacterTarget();
         ChangeAnim(Constants.ANIM_MOVE);
-        nav_Agent.isStopped = false;
 
         Vector3 _point = zombieTarget.transform.position;
 
-        if (nav_Agent.destination != _point)
-        {
-            nav_Agent.SetDestination(_point);
-        }
+        SetDestination_Nav(_point);
     }
 
     public override void OnStopMove()
@@ -200,10 +196,7 @@ public class Hero : Character
         Vector3 _point = TF.position;
         _point.x = thisBarrier.transform.position.x;
 
-        if (nav_Agent.destination != _point)
-        {
-            nav_Agent.SetDestination(_point);
-        }
+        SetDestination_Nav(_point);
     }
     #endregion
 

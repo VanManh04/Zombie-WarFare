@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unLock: 0
   playDone: 0
-  hp_Bus: 4
+  hp_Bus: 100
   hp_Barrier: 100
   zombieFastS: 05000000
   zombieNormalS: 03000000

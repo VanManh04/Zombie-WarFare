@@ -199,4 +199,9 @@ public class LevelManager : Singleton<LevelManager>
         iconHeros[HeroType.HeroSword_1] = Resources.Load<Sprite>("HeroIcons/HeroSword_1");
         iconHeros[HeroType.Hero_AKM] = Resources.Load<Sprite>("HeroIcons/Hero_AKM");
     }
+
+    public Data_Level GetDataLevel_Index(int index)
+    {
+        return data_LevelAlls[index];
+    }
 }

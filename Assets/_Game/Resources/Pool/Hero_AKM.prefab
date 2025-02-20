@@ -10384,7 +10384,7 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
-  damage: 100
+  damage: 10
   attackCheck: {fileID: 9086571268536571349}
   attackRadius: 6
   attackCountdown: 2

@@ -176,7 +176,7 @@ MonoBehaviour:
   canAttackBus: 0
   busTarget: {fileID: 0}
   heroTarget: {fileID: 0}
-  coinDeath: 3
+  coinDeath: 4
 --- !u!1 &4014535147018198553
 GameObject:
   m_ObjectHideFlags: 0

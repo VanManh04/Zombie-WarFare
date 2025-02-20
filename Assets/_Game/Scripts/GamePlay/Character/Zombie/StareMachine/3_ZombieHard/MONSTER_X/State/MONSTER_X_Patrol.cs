@@ -34,7 +34,7 @@ public class MONSTER_X_Patrol : IState_Zombie
         {
             zombie.CheckAndSetCanAttackBus();
             zombie.GetSetHero_InSeeRadius();
-            if (!zombie.HeroTarget_Null_True())
+            if (!zombie.HeroTarget_Null_True() && zombie.CanTargetHero())
             {
                 zombie.OnMoveToCharacterTarget();
                 zombie.CheckDirX_SetHeroTarget();
