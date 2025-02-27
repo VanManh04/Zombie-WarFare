@@ -116,7 +116,7 @@ public class Pool
 
         if (inactives.Count <= 0)
         {
-            unit = GameObject.Instantiate(prefabs, parent);
+            unit = GameObject.Instantiate(prefabs, pos, rot, parent);
         }
         else
         {

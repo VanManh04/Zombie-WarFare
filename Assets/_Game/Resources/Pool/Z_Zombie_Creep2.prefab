@@ -30,10 +30,11 @@ Transform:
   m_GameObject: {fileID: 189803611635864848}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6564658319216014878}
   - {fileID: 2908378255259342910}
   - {fileID: 6288473981529557776}
   - {fileID: 522417785131218206}
@@ -161,6 +162,7 @@ MonoBehaviour:
   speedMove: 1.3
   nameCharactor: 
   hp: 100
+  posSpawnBlood: {fileID: 6564658319216014878}
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 64
@@ -177,6 +179,37 @@ MonoBehaviour:
   busTarget: {fileID: 0}
   heroTarget: {fileID: 0}
   coinDeath: 4
+--- !u!1 &3046601523568352801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6564658319216014878}
+  m_Layer: 0
+  m_Name: SpawnBlood
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6564658319216014878
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046601523568352801}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.125, z: 0.39}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4191406109478200844}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4014535147018198553
 GameObject:
   m_ObjectHideFlags: 0

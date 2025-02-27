@@ -19,7 +19,8 @@ public class Hero : Character
 
     [Header("Coin Shopping")]
     [SerializeField] int coinShopping;
-    public int GetCoinShopping=>coinShopping;
+
+    public int GetCoinShopping => coinShopping;
 
     #region Base Unity
 
@@ -46,7 +47,7 @@ public class Hero : Character
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
-        Gizmos.color = Color.blue;
+        Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(this.seeCheck.position, seeRadius);
     }
 
@@ -79,7 +80,7 @@ public class Hero : Character
 
     public virtual void CheckDirX_SetZombieTarget()
     {
-        if (zombieTarget != null && zombieTarget.transform.position.x < transform.position.x)
+        if (zombieTarget != null && zombieTarget.transform.position.x < TF.position.x)
             zombieTarget = null;
     }
 
@@ -87,24 +88,26 @@ public class Hero : Character
     public virtual void GetSetZombie_InSeeRadius()
     {
         Collider[] hitColliders = Physics.OverlapSphere(seeCheck.position, seeRadius, whatIsTarget);
+
         if (hitColliders.Length > 0)
         {
             Zombie findTarget = null;
             float minDistance = float.MaxValue;
-
             foreach (var hit in hitColliders)
             {
                 Zombie zombie = Cache.GenCollectZombie(hit);
-                if (zombie != null && !zombie.IsDeath)
+                if (zombie == null || zombie.TF.position.x <= TF.position.x)
+                    continue;
+
+                float distance = Vector3.Distance(TF.position, zombie.TF.position);
+
+                if (distance < minDistance)
                 {
-                    float distance = Vector3.Distance(zombie.transform.position, transform.position);
-                    if (hit.transform.position.x > transform.position.x && distance < minDistance)
-                    {
-                        findTarget = zombie;
-                        minDistance = distance;
-                    }
+                    minDistance = distance;
+                    findTarget = zombie;
                 }
             }
+
             zombieTarget = findTarget;
         }
         else
@@ -131,6 +134,7 @@ public class Hero : Character
 
         return haveCharacter || haveBarrier;
     }
+
 
     public override bool HaveCharaterTarget_InAttackRadius()
     {

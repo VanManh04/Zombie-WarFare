@@ -98,8 +98,7 @@ public class Zombie : Character
             {
                 if (hit.transform.position.x < transform.position.x && minDistance > Vector3.Distance(hit.transform.position, transform.position))
                 {
-                    if (hit.TryGetComponent(out Hero hero))
-                    {
+                    Hero hero = Cache.GenCollectHero(hit);
                         if (hero == null)
                             continue;
                         else
@@ -107,7 +106,6 @@ public class Zombie : Character
                             findTarget = hero;
                             minDistance = Vector3.Distance(hit.transform.position, transform.position);
                         }
-                    }
                 }
             }
             heroTarget = findTarget;
@@ -238,6 +236,7 @@ public class Zombie : Character
 
     public override void OnInit()
     {
+        heroTarget = null;
         busTarget = LevelManager.Instance.GetBus;
         if (busTarget == null)
             OnDesPawn();

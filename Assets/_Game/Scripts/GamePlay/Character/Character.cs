@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider), typeof(NavMeshAgent))]
 public class Character : GameUnit
@@ -38,6 +39,8 @@ public class Character : GameUnit
     protected float hpDefault;
     protected bool IsNoDamage;
     public bool IsDeath => hp <= 0;
+
+    [SerializeField] Transform posSpawnBlood;
 
     [Header("Layer Target")]
     [SerializeField] protected LayerMask whatIsTarget;
@@ -169,10 +172,18 @@ public class Character : GameUnit
                 hp = 0;
                 OnDeath();
             }
-
+            SpawnBlood(posSpawnBlood);
             healthBar.SetNewHp(hp);
             //Instantiate(combatTextPrefabs, transform.position + Vector3.up, Quaternion.identity).OnInit(damage);
         }
+    }
+
+    public void SpawnBlood(Transform transform)
+    {
+        BoolType[] values = (BoolType[])System.Enum.GetValues(typeof(BoolType));
+        PoolType randomValue = (PoolType)values[Random.Range(0, values.Length)];
+        BFX_BloodSettings bFX_BloodSettings= SimplePool.Spawn<BFX_BloodSettings>(randomValue, transform.position, transform.rotation);
+        bFX_BloodSettings.OnDesPawn(4f);
     }
 
     /// <summary>

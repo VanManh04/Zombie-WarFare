@@ -45,4 +45,23 @@ public enum HeroType
 {
     HeroSword_1 = PoolType.HeroSword_1,
     Hero_AKM = PoolType.Hero_AKM,
+    HeroSword_2 = PoolType.HeroSword_2,
+}
+
+public enum BoolType
+{
+    Blood_1 = PoolType.Blood_1,
+    Blood_3 = PoolType.Blood_3,
+    Blood_4 = PoolType.Blood_4,
+    Blood_5 = PoolType.Blood_5,
+    Blood_6 = PoolType.Blood_6,
+    Blood_7 = PoolType.Blood_7,
+    Blood_8 = PoolType.Blood_8,
+    Blood_9 = PoolType.Blood_9,
+    Blood_10 = PoolType.Blood_10,
+    Blood_11 = PoolType.Blood_11,
+    Blood_12 = PoolType.Blood_12,
+    Blood_13 = PoolType.Blood_13,
+    Blood_14 = PoolType.Blood_14,
+    Blood_15 = PoolType.Blood_15,
 }

@@ -17,7 +17,6 @@ public class Canvas_LevelDetails : UICanvas
     {
         base.Open();
         GameManager.Instance.ChangeGameState(GameState.Menu);
-        SetLevelText(levelIndex + 1);
     }
 
     public void EditTeam_Button()
@@ -35,18 +34,14 @@ public class Canvas_LevelDetails : UICanvas
         //load level.....
     }
 
-    private void SetLevelText(int _level)
-    {
-        text_Level.text = _level.ToString();
-    }
-
     public void SetUpLevel(int _levelIndex, Data_Level _data_Level)
     {
         levelIndex = _levelIndex;
         data_Level = _data_Level;
-        text_ZBFast.text = "Zombie Fast: " + data_Level.CanSpawm_ZB_Fast.ToString(); 
-        text_ZBNormal.text = "Zombie Normal: " + data_Level.CanSpawm_ZB_Normal.ToString(); 
-        text_ZBHard.text = "Zombie Hard: " + data_Level.CanSpawm_ZB_Hard.ToString(); 
-        text_ZBBoss.text = "Zombie Boss: " + data_Level.CanSpawm_ZB_Boss.ToString(); 
+        text_Level.text = "Level: " + (levelIndex + 1).ToString();
+        text_ZBFast.text = "Zombie Fast: " + data_Level.CanSpawm_ZB_Fast.ToString();
+        text_ZBNormal.text = "Zombie Normal: " + data_Level.CanSpawm_ZB_Normal.ToString();
+        text_ZBHard.text = "Zombie Hard: " + data_Level.CanSpawm_ZB_Hard.ToString();
+        text_ZBBoss.text = "Zombie Boss: " + data_Level.CanSpawm_ZB_Boss.ToString();
     }
 }

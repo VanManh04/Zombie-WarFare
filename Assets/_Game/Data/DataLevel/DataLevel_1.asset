@@ -16,7 +16,7 @@ MonoBehaviour:
   playDone: 1
   hp_Bus: 200
   hp_Barrier: 100
-  zombieFastS: 030000000a000000
+  zombieFastS: 02000000030000000a000000
   zombieNormalS: 04000000
   zombieHardS: 05000000
   zombieBossS: 0a00000003000000

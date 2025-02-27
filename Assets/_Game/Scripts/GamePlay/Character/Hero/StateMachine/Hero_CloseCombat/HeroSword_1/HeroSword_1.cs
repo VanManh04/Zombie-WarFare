@@ -43,19 +43,11 @@ public class HeroSword_1 : Hero_CloseCombat
             if (canAttackBarrier)
                 DoDamage_HomeTownTarget();
         }
-        else if (_skillIndex == 2)
+        else
         {
             ChangeAnim("Attack2");
             //da thang END: 1.199
             Invoke(nameof(DoDamageZombie), 0.498f);
-            if (canAttackBarrier)
-                DoDamage_HomeTownTarget();
-        }
-        else
-        {
-            ChangeAnim("Attack3");
-            //da xoay nguoi END: 1.731
-            Invoke(nameof(DoDamageZombie), 0.6988f);
             if (canAttackBarrier)
                 DoDamage_HomeTownTarget();
         }

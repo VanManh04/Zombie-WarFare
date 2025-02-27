@@ -16,14 +16,12 @@ public class HeroSword_1_AttackCountdownState : IState_HeroCloseCombat
         {
             if (hero_CloseCombat.CanAttackCoundown())
             {
-                int randomSkill = Random.Range(1, 4);
+                int randomSkill = Random.Range(1, 3);
 
                 if (randomSkill == 1)
                     hero_CloseCombat.ChangeState(new HeroSword_1_Attack_1_State());
-                else if (randomSkill == 2)
-                    hero_CloseCombat.ChangeState(new HeroSword_1_Attack_2_State());
                 else
-                    hero_CloseCombat.ChangeState(new HeroSword_1_Attack_3_State());
+                    hero_CloseCombat.ChangeState(new HeroSword_1_Attack_2_State());
             }
 
         }

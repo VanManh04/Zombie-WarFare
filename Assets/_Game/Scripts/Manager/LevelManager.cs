@@ -54,6 +54,7 @@ public class LevelManager : Singleton<LevelManager>
     public void OnInit()
     {
         //khoi tao cac thong so truoc khi bat dau man choi
+        
         coin = 10;
         SpawnHomtown_BarrierAndBus();
     }
@@ -197,6 +198,7 @@ public class LevelManager : Singleton<LevelManager>
     public void AddAlliconToDis()
     {
         iconHeros[HeroType.HeroSword_1] = Resources.Load<Sprite>("HeroIcons/HeroSword_1");
+        iconHeros[HeroType.HeroSword_2] = Resources.Load<Sprite>("HeroIcons/HeroSword_2");
         iconHeros[HeroType.Hero_AKM] = Resources.Load<Sprite>("HeroIcons/Hero_AKM");
     }
 
