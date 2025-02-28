@@ -15,12 +15,26 @@ public class HeroSword_1_PatrolState : IState_HeroCloseCombat
         {
             if (hero_CloseCombat.HaveHowmTownOrCharacterInAttackCheck())
             {
-                int randomSkill = Random.Range(1, 3);
+                if (hero_CloseCombat.poolType == PoolType.HeroSword_1)
+                {
+                    int randomSkill = Random.Range(1, 3);
 
-                if (randomSkill == 1)
-                    hero_CloseCombat.ChangeState(new HeroSword_1_Attack_1_State());
+                    if (randomSkill == 1)
+                        hero_CloseCombat.ChangeState(new HeroSword_1_2_Attack_1_State());
+                    else
+                        hero_CloseCombat.ChangeState(new HeroSword_1_Attack_2_State());
+                }
                 else
-                    hero_CloseCombat.ChangeState(new HeroSword_1_Attack_2_State());
+                {
+                    int randomSkill = Random.Range(1, 4);
+
+                    if (randomSkill == 1)
+                        hero_CloseCombat.ChangeState(new HeroSword_1_2_Attack_1_State());
+                    else if (randomSkill == 2)
+                        hero_CloseCombat.ChangeState(new HeroSword_2_Attack_2_State());
+                    else
+                        hero_CloseCombat.ChangeState(new HeroSword_2_Attack_3_State());
+                }
             }
             else
             {
@@ -50,12 +64,26 @@ public class HeroSword_1_PatrolState : IState_HeroCloseCombat
                     {
                         if (timmer <= 0)
                         {
-                            int randomSkill = Random.Range(1, 3);
+                            if (hero_CloseCombat.poolType == PoolType.HeroSword_1)
+                            {
+                                int randomSkill = Random.Range(1, 3);
 
-                            if (randomSkill == 1)
-                                hero_CloseCombat.ChangeState(new HeroSword_1_Attack_1_State());
+                                if (randomSkill == 1)
+                                    hero_CloseCombat.ChangeState(new HeroSword_1_2_Attack_1_State());
+                                else
+                                    hero_CloseCombat.ChangeState(new HeroSword_1_Attack_2_State());
+                            }
                             else
-                                hero_CloseCombat.ChangeState(new HeroSword_1_Attack_2_State());
+                            {
+                                int randomSkill = Random.Range(1, 4);
+
+                                if (randomSkill == 1)
+                                    hero_CloseCombat.ChangeState(new HeroSword_1_2_Attack_1_State());
+                                else if (randomSkill == 2)
+                                    hero_CloseCombat.ChangeState(new HeroSword_2_Attack_2_State());
+                                else
+                                    hero_CloseCombat.ChangeState(new HeroSword_2_Attack_3_State());
+                            }
 
                             timmer = 10;
                         }

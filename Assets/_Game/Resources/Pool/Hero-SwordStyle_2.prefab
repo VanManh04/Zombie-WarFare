@@ -525,7 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc390659997968f4e87f8cf3f8fb03e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PoolType: 11
+  poolType: 11
   CanFindComponent_Auto: 1
   healthBar: {fileID: 6105644612815386558}
   rb: {fileID: 4577767328578659204}
@@ -1292,7 +1292,7 @@ Animator:
   m_GameObject: {fileID: 1619803971977124785}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 200cda6c09b8a22459aede96fa446df2, type: 2}
+  m_Controller: {fileID: 9100000, guid: a5a9d77a7d5c11d498824e087acdcced, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -816,7 +816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c29f953ff4112489c2d9cbf13c4349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PoolType: 2
+  poolType: 2
   CanFindComponent_Auto: 1
   healthBar: {fileID: 1017811519891577837}
   rb: {fileID: 5031301174555567086}

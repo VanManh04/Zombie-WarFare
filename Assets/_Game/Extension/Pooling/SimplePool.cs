@@ -14,11 +14,11 @@ public static class SimplePool
             return;
         }
 
-        if (!poolInsstance.ContainsKey(prefabs.PoolType) || poolInsstance[prefabs.PoolType] == null)
+        if (!poolInsstance.ContainsKey(prefabs.poolType) || poolInsstance[prefabs.poolType] == null)
         {
             Pool p = new Pool();
             p.Preload(prefabs, amount, parent);
-            poolInsstance[prefabs.PoolType] = p;
+            poolInsstance[prefabs.poolType] = p;
         }
     }
 
@@ -37,12 +37,12 @@ public static class SimplePool
     //tra phan tu vao
     public static void Despawn(GameUnit unit)
     {
-        if (!poolInsstance.ContainsKey(unit.PoolType))
+        if (!poolInsstance.ContainsKey(unit.poolType))
         {
-            Debug.LogError(unit.PoolType + " Is Not Reload !!!");
+            Debug.LogError(unit.poolType + " Is Not Reload !!!");
         }
 
-        poolInsstance[unit.PoolType].Despawn(unit);
+        poolInsstance[unit.poolType].Despawn(unit);
     }
 
     //thu thap phan tu

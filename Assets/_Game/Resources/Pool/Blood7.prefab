@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b8a788ff17aab40b283e664f0304da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PoolType: 17
+  poolType: 17
   AnimationSpeed: 1
   GroundHeight: 0
   LightIntensityMultiplier: 1

@@ -1325,7 +1325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc390659997968f4e87f8cf3f8fb03e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PoolType: 6
+  poolType: 6
   CanFindComponent_Auto: 1
   healthBar: {fileID: 4073160611195831080}
   rb: {fileID: 1821554573764121806}

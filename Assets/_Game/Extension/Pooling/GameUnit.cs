@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameUnit : MonoBehaviour
 {
-    public PoolType PoolType;
+    public PoolType poolType;
     private Transform tf;
     public Transform TF
     {

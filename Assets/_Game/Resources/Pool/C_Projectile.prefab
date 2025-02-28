@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf3ed07ea775f9408e6564952499969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PoolType: 0
+  poolType: 0
   speedBullet: 6
   damage: 0
 --- !u!136 &3182637998583727280

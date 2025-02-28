@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e8b2d68a568f04e8ae08a473de6247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PoolType: 9
+  poolType: 9
   healthBar: {fileID: 8485855577596220709}
   hp: 0
 --- !u!65 &3141516147498700131
