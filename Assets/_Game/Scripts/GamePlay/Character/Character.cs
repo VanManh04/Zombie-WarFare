@@ -1,7 +1,12 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.Rendering.DebugUI;
+
+public enum Team
+{
+    Hero = 0,
+    Zombie = 1,
+}
 
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider), typeof(NavMeshAgent))]
 public class Character : GameUnit
@@ -9,8 +14,10 @@ public class Character : GameUnit
 
     //public Transform tf;//su dung thay cho tranform vi tranform = getComponent
 
+    [SerializeField] private Team team;
     [SerializeField] private bool CanFindComponent_Auto = true;
-    [SerializeField] Canvas_HealthBar healthBar;
+    [SerializeField] HealthBar healthBar;
+    [SerializeField] PopUpTextFX text_damageOnHit;
     #region Component
     [Header("Component")]
     [SerializeField] protected Rigidbody rb;
@@ -174,7 +181,17 @@ public class Character : GameUnit
             }
             SpawnBlood(posSpawnBlood);
             healthBar.SetNewHp(hp);
-            //Instantiate(combatTextPrefabs, transform.position + Vector3.up, Quaternion.identity).OnInit(damage);
+
+            if (team == Team.Hero)
+            {
+                PopUpTextFX popUpTextFX = SimplePool.Spawn<PopUpTextFX>(PoolType.PopUpText_Zombie, healthBar.transform.position, Quaternion.identity);
+                popUpTextFX.SetText(damage.ToString());
+            }
+            else
+            {
+                PopUpTextFX popUpTextFX = SimplePool.Spawn<PopUpTextFX>(PoolType.PopUpText_Hero, healthBar.transform.position, Quaternion.identity);
+                popUpTextFX.SetText(damage.ToString());
+            }
         }
     }
 
@@ -182,7 +199,7 @@ public class Character : GameUnit
     {
         BoolType[] values = (BoolType[])System.Enum.GetValues(typeof(BoolType));
         PoolType randomValue = (PoolType)values[Random.Range(0, values.Length)];
-        BFX_BloodSettings bFX_BloodSettings= SimplePool.Spawn<BFX_BloodSettings>(randomValue, transform.position, transform.rotation);
+        BFX_BloodSettings bFX_BloodSettings = SimplePool.Spawn<BFX_BloodSettings>(randomValue, transform.position, transform.rotation);
         bFX_BloodSettings.OnDesPawn(4f);
     }
 

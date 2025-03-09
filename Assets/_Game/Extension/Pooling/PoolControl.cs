@@ -59,4 +59,8 @@ public enum PoolType
     Blood_13=23,
     Blood_14=24,
     Blood_15=25,
+    PopUpText_Cooldown =26,
+    PopUpText_NotCoint =27,
+    PopUpText_Hero=28,
+    PopUpText_Zombie=29,
 }

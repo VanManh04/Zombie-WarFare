@@ -7,7 +7,7 @@ public class Projectile : GameUnit
     [SerializeField] private int damage;
     private Vector3 posTarget;
     Vector3 direction;
-
+    float timer, timeLeft;
     //[Header("Raycat")]
     //[SerializeField] float distanceRaycat;
     //[SerializeField] LayerMask layerZombie;
@@ -16,8 +16,8 @@ public class Projectile : GameUnit
     {
         //StartCoroutine khong nen dung cho nhung thang Active deActive qua nhieu, bi sai lech thoi gian nhieu
         //khong an toan nen su dung update
-        Invoke(nameof(OnDesPawn), 5f); //chay ngam ngay ca khi gameObject ko active
-
+        //Invoke(nameof(OnDesPawn), 5f); //chay ngam ngay ca khi gameObject ko active
+        timeLeft = 5f;
         damage = _damage;
 
         posTarget = GetRandomPointAroundTarget(_posTarget, .4f);
@@ -33,11 +33,16 @@ public class Projectile : GameUnit
     public void OnDesPawn()
     {
         //Destroy(gameObject);
+        timeLeft = 5f;
         SimplePool.Despawn(this);
     }
 
     void Update()
     {
+        timer += Time.deltaTime;
+        if(timer > timeLeft)
+            OnDesPawn();
+
         transform.position += direction * speedBullet * Time.deltaTime;
     }
 
@@ -62,7 +67,8 @@ public class Projectile : GameUnit
             //other.GetComponent<Zombie>()?.OnHit(damage);
             Cache.GenCollectZombie(other)?.OnHit(damage);
             OnDesPawn();
-        }
+        }else
+            OnDesPawn();
     }
     public Vector3 GetRandomPointAroundTarget(Vector3 posRandom, float _radius)
     {

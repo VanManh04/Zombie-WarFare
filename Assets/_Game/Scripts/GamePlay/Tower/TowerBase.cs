@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TowerBase : GameUnit
 {
-    [SerializeField] Canvas_HealthBar healthBar;
+    [SerializeField] HealthBar healthBar;
     [SerializeField] int hp;
     [SerializeField] bool IsDeath => hp <= 0;
 

@@ -3,6 +3,28 @@ using UnityEngine;
 
 public class Canvas_LevelDetails : UICanvas
 {
+    //them anim
+    [SerializeField] Animator anim;
+    public void FadeInLevelDetails()
+    {
+        if (anim != null)
+            anim.SetTrigger(Constants.ANIM_UI_FadeIn);
+        else
+            print("none Animator");
+
+        //print("FadeIn");
+    }
+
+    public void FadeOutLevelDetails()
+    {
+        if (anim != null)
+            anim.SetTrigger(Constants.ANIM_UI_FadeOut);
+        else
+            print("none Animator");
+        //print("FadeOut");
+    }
+
+    //logic 
     [SerializeField] int levelIndex;
     [SerializeField] Data_Level data_Level;
 
@@ -13,24 +35,44 @@ public class Canvas_LevelDetails : UICanvas
     [SerializeField] TextMeshProUGUI text_ZBNormal;
     [SerializeField] TextMeshProUGUI text_ZBHard;
     [SerializeField] TextMeshProUGUI text_ZBBoss;
+
+    private void Awake()
+    {
+        if (anim != null)
+            anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+    }
+
     public override void Open()
     {
+        FadeInLevelDetails();
         base.Open();
         GameManager.Instance.ChangeGameState(GameState.Menu);
+    }
+    public void Close_Anim()
+    {
+        FadeOutLevelDetails();
+        
+        DelayMethod(.31f,CloseDirectly);
     }
 
     public void EditTeam_Button()
     {
-        Close(0f);
+        Close_Anim();
         UIManager.Instance.OpenUI<Canvas_EditTeam>();
     }
 
     public void Play_Button()
     {
+        FadeIn_Main();
         LevelManager.Instance.LoadLevel(levelIndex);
+        DelayMethod(.4f, Play_Button_Logic);
+    }
+
+    private static void Play_Button_Logic()
+    {
         UIManager.Instance.CloseAll();
         UIManager.Instance.OpenUI<Canvas_GamePlay>();
-        LevelManager.Instance.AddCoinOrUpdateCoin(0);
+        LevelManager.Instance.UpdateCoin();
         //load level.....
     }
 

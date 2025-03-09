@@ -15,6 +15,11 @@ public class Constants
     public const string ANIM_ATTACKCOUNDOWN = "AttackCoundown";
     public const string ANIM_SKILL_1 = "Skill_1";
     public const string ANIM_SKILL_2 = "Skill_2";
+
+
+    public const string ANIM_UI_FadeInOut = "Fade_InOut";
+    public const string ANIM_UI_FadeIn = "FadeIn";
+    public const string ANIM_UI_FadeOut = "FadeOut";
 }
 
 public class TAG

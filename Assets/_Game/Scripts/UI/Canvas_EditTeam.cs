@@ -7,6 +7,20 @@ using UnityEngine.UI;
 
 public class Canvas_EditTeam : UICanvas
 {
+    [SerializeField] Animator anim;
+
+    public override void FadeIn_Main()
+    {
+        anim.SetTrigger(Constants.ANIM_UI_FadeIn);
+    }
+
+    public override void FadeOut_Main()
+    {
+        anim.SetTrigger(Constants.ANIM_UI_FadeOut);
+    }
+
+
+
     [Header("Team Hero")]
     [SerializeField] TeamHero teamHero;
 
@@ -28,6 +42,8 @@ public class Canvas_EditTeam : UICanvas
 
     private void Awake()
     {
+        if (anim != null)
+            anim.updateMode = AnimatorUpdateMode.UnscaledTime;
         OnInit();
     }
 
@@ -91,6 +107,7 @@ public class Canvas_EditTeam : UICanvas
 
     public override void Open()
     {
+        FadeIn_Main();
         base.Open();
         GameManager.Instance.ChangeGameState(GameState.Menu);
     }
@@ -118,11 +135,31 @@ public class Canvas_EditTeam : UICanvas
 
     public void CloseUIHeroChange()
     {
+        anim.SetTrigger("FadeOut_ListHero_child");
+
+        DelayMethod(.4f, CloseUIHeroChange_Logic);
+    }
+
+    public void CloseUIHeroChange_Logic()
+    {
+
         UIHeroChange.gameObject.SetActive(false);
     }
 
     public void OpenUIHeroChange()
     {
+        OpenUIHeroChange_Logic();
+        anim.SetTrigger("FadeIn_ListHero_child");
+        //DelayMethod(.56f, OpenUIHeroChange_Logic);
+
+    }
+    public void OpenUIHeroChange_Logic()
+    {
         UIHeroChange.gameObject.SetActive(true);
+    }
+    public void Close_Button()
+    {
+        FadeOut_Main();
+        DelayMethod(.4f, CloseDirectly);
     }
 }

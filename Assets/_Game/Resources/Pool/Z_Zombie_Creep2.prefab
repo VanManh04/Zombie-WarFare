@@ -150,8 +150,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 4
+  team: 1
   CanFindComponent_Auto: 1
   healthBar: {fileID: 7001485018344237107}
+  text_damageOnHit: {fileID: 2868269182229563551, guid: a4eb4700b625f1d4a85639749adffa09, type: 3}
   rb: {fileID: 501354100912887282}
   BoxThisGameObject: {fileID: 6764031748854885625}
   animator: {fileID: 325419121924191055}
@@ -496,7 +498,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e76f57dee224a345a46b45f7c72592d, type: 3}
+  m_Script: {fileID: 11500000, guid: 74c35e78b7e4f874cabd89980deebb10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &8812925697576540216 stripped

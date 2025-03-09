@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,6 +40,7 @@ public class Canvas_SelectLevel : UICanvas
 
     public override void Open()
     {
+        FadeOut_Main();
         base.Open();
         GameManager.Instance.ChangeGameState(GameState.Menu);
         ClearButtonlevel();
@@ -55,6 +57,12 @@ public class Canvas_SelectLevel : UICanvas
     }
 
     public void Menu_Button()
+    {
+        FadeIn_Main();
+        DelayMethod(.4f,DelayMenu_Button);
+    }
+
+    public void DelayMenu_Button()
     {
         UIManager.Instance.CloseAll();
         UIManager.Instance.OpenUI<Canvas_Menu>();

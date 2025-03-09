@@ -3,12 +3,43 @@ using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
+    //them anim
+    [SerializeField] Animator anim;
+    public void FadeIn_Main()
+    {
+        if (anim != null)
+            anim.SetTrigger(Constants.ANIM_UI_FadeIn);
+        else
+            print("none Animator");
+
+        //print("FadeIn");
+    }
+    public void FadeOut_Main()
+    {
+        if (anim != null)
+            anim.SetTrigger(Constants.ANIM_UI_FadeOut);
+        else
+            print("none Animator");
+        //print("FadeOut");
+    }
+    public void FadeInOut()
+    {
+        if (anim != null)
+            anim.SetTrigger(Constants.ANIM_UI_FadeInOut);
+        else
+            print("none Animator");
+        //print("FadeOut");
+    }
+
     Dictionary<System.Type, UICanvas> canvasActives = new Dictionary<System.Type, UICanvas>();
     Dictionary<System.Type, UICanvas> canvasPrefabs = new Dictionary<System.Type, UICanvas>();
     [SerializeField] Transform parent;
 
     private void Awake()
     {
+        if (anim != null)
+            anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+
         //load ui prefab tu resource
         UICanvas[] prefabs = Resources.LoadAll<UICanvas>("UI/");
         for (int i = 0; i < prefabs.Length; i++)

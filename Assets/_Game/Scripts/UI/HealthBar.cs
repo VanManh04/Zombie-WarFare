@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Canvas_HealthBar : MonoBehaviour
+public class HealthBar : MonoBehaviour
 {
     [SerializeField] Image imageFill;
 

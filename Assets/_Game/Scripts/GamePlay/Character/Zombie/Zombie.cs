@@ -171,7 +171,7 @@ public class Zombie : Character
     protected override void OnDeath()
     {
         base.OnDeath();
-        LevelManager.Instance.AddCoinOrUpdateCoin(coinDeath);
+        LevelManager.Instance.AddCoin(coinDeath);
     }
     #endregion
 

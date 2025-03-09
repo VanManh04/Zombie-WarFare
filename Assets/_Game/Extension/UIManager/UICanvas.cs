@@ -1,11 +1,21 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class UICanvas : MonoBehaviour
 {
+    //them anim
+
+    public virtual void FadeInOut_Main() => UIManager.Instance.FadeInOut();
+    public virtual void FadeIn_Main() => UIManager.Instance.FadeIn_Main();
+    public virtual void FadeOut_Main() => UIManager.Instance.FadeOut_Main();
+
+
     [SerializeField] bool isDestroyOnClase = false;
 
     private void Awake()
     {
+
         //xu ly tai tho
         RectTransform rect = GetComponent<RectTransform>();
         float ratio = (float)Screen.width / (float)Screen.height;
@@ -61,5 +71,16 @@ public class UICanvas : MonoBehaviour
             Application.Quit();
 #endif
 
+    }
+
+    protected void DelayMethod(float delay, Action callback)
+    {
+        StartCoroutine(DelayCoroutine(delay, callback));
+    }
+
+    private IEnumerator DelayCoroutine(float delay, Action callback)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        callback?.Invoke(); // goi phuong thuc sau khi delay
     }
 }

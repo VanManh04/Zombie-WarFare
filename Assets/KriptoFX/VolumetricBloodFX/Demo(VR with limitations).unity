@@ -3161,6 +3161,7 @@ GameObject:
   - component: {fileID: 1115255541}
   - component: {fileID: 1115255540}
   - component: {fileID: 1115255543}
+  - component: {fileID: 1115255544}
   m_Layer: 0
   m_Name: VR note
   m_TagString: Untagged
@@ -3268,6 +3269,19 @@ MonoBehaviour:
   BloodAttach: {fileID: 0}
   BloodFX: []
   direction: {x: 0, y: 0, z: 0}
+--- !u!114 &1115255544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115255539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a58a8755f3dede4989d0f089b43a0ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolAmounts: []
 --- !u!1 &1338160223
 GameObject:
   m_ObjectHideFlags: 0

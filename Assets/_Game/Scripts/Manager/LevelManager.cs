@@ -12,6 +12,10 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] Data_Level data_Level;
     public Data_Level GetDataLevel => data_Level;
 
+    [Header("Data Coundown Spawn hero")]
+    [SerializeField] Data_CoundownSpawnHero data_CoundownSpawnHero;
+    public Data_CoundownSpawnHero GetData_CoundownSpawnHero => data_CoundownSpawnHero;
+
     [Header("Homtown")]
     [SerializeField] Barrier barrier;
     [SerializeField] Bus bus;
@@ -80,6 +84,7 @@ public class LevelManager : Singleton<LevelManager>
     public void LoadLevel(int level)
     {
         OnDespawn();
+        OnInit();
 
         levelIndex = level;
         data_Level = data_LevelAlls[levelIndex];
@@ -113,6 +118,7 @@ public class LevelManager : Singleton<LevelManager>
         OnDespawn();
         OnInit();
         LoadLevel(levelIndex++);
+        UpdateCoin();
     }
 
     public void OnRetryLevel()
@@ -121,11 +127,13 @@ public class LevelManager : Singleton<LevelManager>
         OnDespawn();
         OnInit();
         LoadLevel(levelIndex);
+        UpdateCoin();
     }
 
     public void OnDespawn()
     {
         //reset tat ca cac thong so cua man choi
+        coin = 0;
         spawnZombieManager.OnDespawn();
         DeleteAll_Hero();
     }
@@ -137,11 +145,10 @@ public class LevelManager : Singleton<LevelManager>
             //Destroy(heros[i].gameObject);
             heros[i].OnDesPawn();
         }
-        //SimplePool.CollectAll();
         heros.Clear();
     }
 
-    public void Spawn_Hero(PoolType poolType)
+    public bool Spawn_Hero(PoolType poolType)
     {
         Hero newHero = SimplePool.Spawn<Hero>(poolType, posSpawn_Hero.position, posSpawn_Hero.rotation);
         newHero.OnInit();
@@ -149,11 +156,13 @@ public class LevelManager : Singleton<LevelManager>
         {
             coin -= newHero.GetCoinShopping;
             heros.Add(newHero);
+            return true;
         }
         else
         {
             newHero.OnDesPawn();
-            print("Not Coint");
+            //print("Not Coint");
+            return false;
         }
     }
 
@@ -184,9 +193,13 @@ public class LevelManager : Singleton<LevelManager>
             barrier = SimplePool.Spawn<Barrier>(PoolType.Barrier, posSpawn_Barrier.position, posSpawn_Barrier.rotation);
     }
 
-    public void AddCoinOrUpdateCoin(int _coin)
+    public void AddCoin(int _coin)
     {
         coin += _coin;
+        UIManager.Instance.GetUI<Canvas_GamePlay>().SetCoinText(coin);
+    }
+    public void UpdateCoin()
+    {
         UIManager.Instance.GetUI<Canvas_GamePlay>().SetCoinText(coin);
     }
 
