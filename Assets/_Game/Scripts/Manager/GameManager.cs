@@ -1,3 +1,4 @@
+using System;
 using Unity.AI.Navigation;
 using UnityEngine;
 
@@ -9,10 +10,11 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] LevelManager levelManager;
     [SerializeField] SpawnZombieManager spawnZombieManager;
     [SerializeField] NavMeshSurface meshSurface;
-
+    
     void Start()
     {
         //Application.targetFrameRate = 60;
+        
     }
 
     void Update()

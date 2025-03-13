@@ -68,7 +68,11 @@ public class Canvas_GamePlay : UICanvas
         {
             Button_TeamHero button_TeamHero = Instantiate(buttonSpawnHeroUI, parentButtonSpawnHero);
             HeroType heroType = teamHero.GetIndex(i);
+            PoolType poolType = (PoolType)heroType;
+            Hero hero = LevelManager.Instance.SpawnHero_DontAddList(poolType);
             //setup
+            hero.OnDesPawn();
+            button_TeamHero.SetupText("Coin: "+hero.GetCoinShopping.ToString());
             button_TeamHero.SetupIcon(LevelManager.Instance.GetIconHero_Key(heroType));
             button_TeamHero.SetupHeroType(heroType);
 

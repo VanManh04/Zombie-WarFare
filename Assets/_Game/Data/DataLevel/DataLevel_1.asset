@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: DataLevel_1
   m_EditorClassIdentifier: 
   unLock: 1
-  playDone: 1
+  playDone: 0
   hp_Bus: 200
   hp_Barrier: 100
-  zombieFastS: 02000000030000000a000000
+  zombieFastS: 020000000300000005000000
   zombieNormalS: 04000000
-  zombieHardS: 05000000
+  zombieHardS: 0a000000
   zombieBossS: 0a00000003000000
   canSpawm_ZB_Fast: 1
-  timeSpawn_ZB_Fast: {x: 3, y: 3}
+  timeSpawn_ZB_Fast: {x: 5, y: 10}
   canSpawm_ZB_Normal: 0
   timeSpawn_ZB_Normal: {x: 8, y: 8}
   canSpawm_ZB_Hard: 1
   timeSpawn_ZB_Hard: {x: 10, y: 10}
   canSpawm_ZB_Boss: 0
   timeSpawn_ZB_Boss: {x: 0, y: 0}
-  zombieSpawnEndWaveS: 03000000030000000400000005000000
-  count_ZB_EndWave: 0
-  timeSpawn_ZB_EndWave: {x: 2, y: 3}
-  timeEndWaveZombie: 10
+  zombieSpawnEndWaveS: 
+  count_ZB_EndWave: 1000
+  timeSpawn_ZB_EndWave: {x: 1, y: 3}
+  timeEndWaveZombie: 10000

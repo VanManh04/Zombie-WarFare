@@ -23,6 +23,7 @@ public class Projectile : GameUnit
         posTarget = GetRandomPointAroundTarget(_posTarget, .4f);
         if (posTarget == null)
         {
+            
             gameObject.SetActive(false);
             return;
         }
@@ -60,7 +61,6 @@ public class Projectile : GameUnit
         //    other.GetComponent<Zombie>()?.OnHit(damage);
         //    OnDesPawn();
         //}
-
         if (other.CompareTag(TAG.ZOMBIE))
         {
             //cache getComponent

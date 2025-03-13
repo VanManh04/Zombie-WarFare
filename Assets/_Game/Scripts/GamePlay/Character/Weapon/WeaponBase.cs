@@ -75,7 +75,7 @@ public class WeaponBase : MonoBehaviour
             {
                 //Projectile projectile = Instantiate(projectilePrefab, projecttilepoint.position, projecttilepoint.rotation);
                 Projectile projectile = SimplePool.Spawn<Projectile>(PoolType.Projectile, projecttilepoint.position, projecttilepoint.rotation);
-                if (projectile == null)
+                if (posTarget == null)
                 {
                     Debug.LogError("⚠️ Spawn Projectile Fall.");
                     amount = -1;

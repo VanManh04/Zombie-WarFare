@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,9 +47,6 @@ public class LevelManager : Singleton<LevelManager>
 
     void Start()
     {
-        //fix setting cho len ben tren tat ca UI
-        //UIManager.Instance.OpenUI<Canvas_GamePlay>();
-        //UIManager.Instance.OpenUI<Canvas_SelectLevel>();
         UIManager.Instance.CloseAll();
         UIManager.Instance.OpenUI<Canvas_Menu>();
         AddAlliconToDis();
@@ -146,6 +144,12 @@ public class LevelManager : Singleton<LevelManager>
             heros[i].OnDesPawn();
         }
         heros.Clear();
+    }
+
+    public Hero SpawnHero_DontAddList(PoolType poolType)
+    {
+        Hero newHero = SimplePool.Spawn<Hero>(poolType, posSpawn_Hero.position, posSpawn_Hero.rotation);
+        return newHero;
     }
 
     public bool Spawn_Hero(PoolType poolType)

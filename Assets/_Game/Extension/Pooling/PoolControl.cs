@@ -63,4 +63,5 @@ public enum PoolType
     PopUpText_NotCoint =27,
     PopUpText_Hero=28,
     PopUpText_Zombie=29,
+    Cyber_Monsters_2 = 30,
 }

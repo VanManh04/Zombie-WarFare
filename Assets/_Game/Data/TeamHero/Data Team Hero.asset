@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97e3131462acab44998d6b2bcd47c755, type: 3}
   m_Name: Data Team Hero
   m_EditorClassIdentifier: 
-  countHero: 3
-  listHeroTeam: 060000000700000006000000
+  countHero: 2
+  listHeroTeam: 0600000007000000

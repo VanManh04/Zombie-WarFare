@@ -44,6 +44,7 @@ public enum EnemyType
     Zombie_Creep2 = PoolType.Zombie_Creep2,
     Zombie_Creep3 = PoolType.Zombie_Creep3,
     Monster_X = PoolType.Monster_X,
+    Cyber_Monsters_2 = PoolType.Cyber_Monsters_2,
 }
 
 public enum HeroType

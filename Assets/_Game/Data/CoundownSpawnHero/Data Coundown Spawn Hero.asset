@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Data Coundown Spawn Hero
   m_EditorClassIdentifier: 
   heroTypes: 060000000b00000007000000
-  timeSpawn: 010000000000000003000000
+  timeSpawn: 010000000300000005000000
